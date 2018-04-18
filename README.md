@@ -8,6 +8,7 @@ Clone the repository & make sure submodules are included
 
 ```
 $ git clone https://github.com/jakevdp/jakevdp.github.io-source.git
+$ git add submodule 
 $ git submodule update --init --recursive
 ```
 
