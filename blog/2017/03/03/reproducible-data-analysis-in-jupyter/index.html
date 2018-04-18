@@ -422,7 +422,7 @@ article .meta a.comments_btn:hover {
 		    <ul class="nav navbar-nav navbar-right">
                             <li><a href="/pages/about.html" title="About">About</a></li>
                             <li><a href="/archives.html" title="Archive">Archive</a></li>
-                            <li><a class="nodec icon-rss" href="/feeds/all.atom.xml" title="jakevdp.github.io RSS feed" rel="me"></a></li>
+                            <li><a class="nodec icon-rss" href="/feeds/all.atom.xml" title="lj020326.github.io RSS feed" rel="me"></a></li>
                     </ul>
                 </nav>
             </div>
@@ -2100,7 +2100,7 @@ Alternatively, below you can find the videos with some description and links to 
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
     mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
     mathjaxscript[(window.opera ? "innerHTML" : "text")] =
         "MathJax.Hub.Config({" +
         "    config: ['MMLorHTML.js']," +
@@ -2117,6 +2117,7 @@ Alternatively, below you can find the videos with some description and links to 
         "        preview: 'TeX'," +
         "    }, " +
         "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
         "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
         "    } " +
         "}); ";
