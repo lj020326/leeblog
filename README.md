@@ -7,17 +7,18 @@ This repository contains the source for http://jakevdp.github.io/.
 Clone the repository & make sure submodules are included
 
 ```
-$ git clone https://github.com/jakevdp/jakevdp.github.io-source.git
-$ git add submodule 
+$ git clone https://github.com/lj020326/lj020326.github.io-source.git
+$ git submodule add https://github.com/getpelican/pelican-plugins.git plugins/pelican-plugins
+$ git submodule add git://github.com/danielfrg/pelican-ipynb.git plugins/ipynb
 $ git submodule update --init --recursive
 ```
 
 Install the required packages:
 
 ```
-$ conda create -n pelican-blog python=3.5 jupyter notebook
-$ source activate pelican-blog
-$ pip install pelican Markdown ghp-import
+$ virtualenv python=3.5 venv
+$ source activate venv
+$ pip install -r requirements.txt
 ```
 
 Build the html and serve locally:
