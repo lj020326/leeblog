@@ -58,7 +58,7 @@ LINKEDIN_USERNAME = 'leejjohnson'
 STACKOVERFLOW_ADDRESS = 'https://stackexchange.com/users/3319937/purplemouse'
 AUTHOR_WEBSITE = 'https://epgtec.com'
 AUTHOR_BLOG = 'http://lj020326.github.io'
-AUTHOR_CV = "http://lj020326.github.io/docs/CV.pdf"
+AUTHOR_CV = "http://lj020326.github.io/downloads/docs/CV.pdf"
 SHOW_ARCHIVES = True
 SHOW_FEED = False  # Need to address large feeds
 
