@@ -20,6 +20,5 @@ FEED_USE_SUMMARY = True  # from the feed_summary plugin
 
 DELETE_OUTPUT_DIRECTORY = True
 
-#DISQUS_SITENAME = "lj020326-github-io.disqus.com"
 DISQUS_SITENAME = "lj020326-github-io"
 GOOGLE_ANALYTICS = "UA-117727381-1"
