@@ -1423,7 +1423,7 @@ I most often see this manifest itself with the following issue:</p>
 <p>Fundamentally the problem is usually rooted in the fact that the <strong>Jupyter kernels are disconnected from Jupyter's shell</strong>; in other words, the installer points to a different Python version than is being used in the notebook.
 In the simplest contexts this issue does not arise, but when it does, debugging the problem requires knowledge of the intricacies of the operating system, the intricacies of Python package installation, and the intricacies of Jupyter itself.
 In other words, the Jupyter notebook, like all abstractions, is leaky.</p>
-<p>In the wake of several discussions on this topic with colleagues, some online (<a href="https://twitter.com/amuellerml/status/932637063748444160">exhibit A</a>, <a href="https://twitter.com/jakevdp/status/922846245848150016">exhibit B</a>) and some off, I decided to treat this issue in depth here.
+<p>In the wake of several discussions on this topic with colleagues, some online (<a href="https://twitter.com/amuellerml/status/932637063748444160">exhibit A</a>, <a href="https://twitter.com/lj020326/status/922846245848150016">exhibit B</a>) and some off, I decided to treat this issue in depth here.
 This post will address a couple things:</p>
 <ul>
 <li><p><strong>First</strong>, I'll provide a quick, bare-bones answer to the general question, <em>how can I install a Python package so it works with my jupyter notebook, using pip and/or conda?</em>.</p>
@@ -1454,7 +1454,7 @@ Other package managers exist (including platform-specific tools like <a href="ht
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="pip-vs.-conda">pip vs. conda<a class="anchor-link" href="#pip-vs.-conda">&#182;</a></h3><p>First, a few words on <code>pip</code> vs. <code>conda</code>.
 For many users, the choice between pip and conda can be a confusing one.
-I wrote <a href="https://jakevdp.github.io/blog/2016/08/25/conda-myths-and-misconceptions/">way more than you ever want to know</a> about these in a post last year, but the essential difference between the two is this:</p>
+I wrote <a href="https://lj020326.github.io/blog/2016/08/25/conda-myths-and-misconceptions/">way more than you ever want to know</a> about these in a post last year, but the essential difference between the two is this:</p>
 <ul>
 <li><em>pip</em> installs <strong>python</strong> packages in <strong>any environment</strong>.</li>
 <li><em>conda</em> installs <strong>any</strong> package in <strong>conda environments</strong>.</li>
@@ -1511,7 +1511,7 @@ For day-to-day Python usage, you should isolate your packages from the system Py
 Solving package specifications: .
 
 # All requested packages already installed.
-# packages in environment at /Users/jakevdp/anaconda/envs/python3.6:
+# packages in environment at /Users/lj020326/anaconda/envs/python3.6:
 #
 numpy                     1.13.3           py36h2cdce51_0  
 </pre>
@@ -1561,7 +1561,7 @@ numpy                     1.13.3           py36h2cdce51_0
 Solving package specifications: .
 
 # All requested packages already installed.
-# packages in environment at /Users/jakevdp/anaconda:
+# packages in environment at /Users/lj020326/anaconda:
 #
 numpy                     1.13.3           py36h2cdce51_0  
 </pre>
@@ -1614,7 +1614,7 @@ I'll discuss why this is needed momentarily.</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Requirement already satisfied: numpy in /Users/jakevdp/anaconda/envs/python3.6/lib/python3.6/site-packages
+<pre>Requirement already satisfied: numpy in /Users/lj020326/anaconda/envs/python3.6/lib/python3.6/site-packages
 </pre>
 </div>
 </div>
@@ -1657,7 +1657,7 @@ I'll discuss why this is needed momentarily.</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Requirement already satisfied: numpy in /Users/jakevdp/anaconda/lib/python3.6/site-packages
+<pre>Requirement already satisfied: numpy in /Users/lj020326/anaconda/lib/python3.6/site-packages
 </pre>
 </div>
 </div>
@@ -1736,7 +1736,7 @@ Understanding why that matters depends on a basic understanding of a few differe
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>/Users/jakevdp/anaconda/envs/python3.6/bin:/Users/jakevdp/anaconda/envs/python3.6/bin:/Users/jakevdp/anaconda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+<pre>/Users/lj020326/anaconda/envs/python3.6/bin:/Users/lj020326/anaconda/envs/python3.6/bin:/Users/lj020326/anaconda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 </pre>
 </div>
 </div>
@@ -1749,7 +1749,7 @@ Understanding why that matters depends on a basic understanding of a few differe
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><code>$PATH</code> lists the directories, in order, that will be searched for any executable: for example, if I type <code>python</code> on my system with the above <code>$PATH</code>, it will first look for <code>/Users/jakevdp/anaconda/envs/python3.6/bin/python</code>, and if that doesn't exist it will look for <code>/Users/jakevdp/anaconda/bin/python</code>, and so on.</p>
+<p><code>$PATH</code> lists the directories, in order, that will be searched for any executable: for example, if I type <code>python</code> on my system with the above <code>$PATH</code>, it will first look for <code>/Users/lj020326/anaconda/envs/python3.6/bin/python</code>, and if that doesn't exist it will look for <code>/Users/lj020326/anaconda/bin/python</code>, and so on.</p>
 <p>(Parenthetical note: why is the first entry of <code>$PATH</code> repeated twice here? Because every time you launch <code>jupyter notebook</code>, Jupyter prepends the location of the <code>jupyter</code> executable to the beginning of the <code>$PATH</code>. In this case, the location was already at the beginning of the path, and the result is that the entry is duplicated. Duplicate entries add clutter, but cause no harm).</p>
 <p>If you want to know what is actually executed when you type <code>python</code>, you can use the <code>type</code> shell command:</p>
 
@@ -1778,7 +1778,7 @@ Understanding why that matters depends on a basic understanding of a few differe
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>python is /Users/jakevdp/anaconda/envs/python3.6/bin/python
+<pre>python is /Users/lj020326/anaconda/envs/python3.6/bin/python
 </pre>
 </div>
 </div>
@@ -1898,9 +1898,9 @@ Understanding why that matters depends on a basic understanding of a few differe
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>python is /Users/jakevdp/anaconda/envs/python3.6/bin/python
-python is /Users/jakevdp/anaconda/envs/python3.6/bin/python
-python is /Users/jakevdp/anaconda/bin/python
+<pre>python is /Users/lj020326/anaconda/envs/python3.6/bin/python
+python is /Users/lj020326/anaconda/envs/python3.6/bin/python
+python is /Users/lj020326/anaconda/bin/python
 python is /usr/bin/python
 </pre>
 </div>
@@ -1932,9 +1932,9 @@ python is /usr/bin/python
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>conda is /Users/jakevdp/anaconda/envs/python3.6/bin/conda
-conda is /Users/jakevdp/anaconda/envs/python3.6/bin/conda
-conda is /Users/jakevdp/anaconda/bin/conda
+<pre>conda is /Users/lj020326/anaconda/envs/python3.6/bin/conda
+conda is /Users/lj020326/anaconda/envs/python3.6/bin/conda
+conda is /Users/lj020326/anaconda/bin/conda
 </pre>
 </div>
 </div>
@@ -1965,9 +1965,9 @@ conda is /Users/jakevdp/anaconda/bin/conda
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>pip is /Users/jakevdp/anaconda/envs/python3.6/bin/pip
-pip is /Users/jakevdp/anaconda/envs/python3.6/bin/pip
-pip is /Users/jakevdp/anaconda/bin/pip
+<pre>pip is /Users/lj020326/anaconda/envs/python3.6/bin/pip
+pip is /Users/lj020326/anaconda/envs/python3.6/bin/pip
+pip is /Users/lj020326/anaconda/bin/pip
 </pre>
 </div>
 </div>
@@ -2021,14 +2021,14 @@ The list of paths searched by Python on import is found in <code>sys.path</code>
 
 <div class="output_text output_subarea output_execute_result">
 <pre>[&#39;&#39;,
- &#39;/Users/jakevdp/anaconda/lib/python36.zip&#39;,
- &#39;/Users/jakevdp/anaconda/lib/python3.6&#39;,
- &#39;/Users/jakevdp/anaconda/lib/python3.6/lib-dynload&#39;,
- &#39;/Users/jakevdp/anaconda/lib/python3.6/site-packages&#39;,
- &#39;/Users/jakevdp/anaconda/lib/python3.6/site-packages/schemapi-0.3.0.dev0+791c7f6-py3.6.egg&#39;,
- &#39;/Users/jakevdp/anaconda/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg&#39;,
- &#39;/Users/jakevdp/anaconda/lib/python3.6/site-packages/IPython/extensions&#39;,
- &#39;/Users/jakevdp/.ipython&#39;]</pre>
+ &#39;/Users/lj020326/anaconda/lib/python36.zip&#39;,
+ &#39;/Users/lj020326/anaconda/lib/python3.6&#39;,
+ &#39;/Users/lj020326/anaconda/lib/python3.6/lib-dynload&#39;,
+ &#39;/Users/lj020326/anaconda/lib/python3.6/site-packages&#39;,
+ &#39;/Users/lj020326/anaconda/lib/python3.6/site-packages/schemapi-0.3.0.dev0+791c7f6-py3.6.egg&#39;,
+ &#39;/Users/lj020326/anaconda/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg&#39;,
+ &#39;/Users/lj020326/anaconda/lib/python3.6/site-packages/IPython/extensions&#39;,
+ &#39;/Users/lj020326/.ipython&#39;]</pre>
 </div>
 
 </div>
@@ -2073,7 +2073,7 @@ You can find out which location has been used using the <code>__path__</code> at
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[&#39;/Users/jakevdp/anaconda/lib/python3.6/site-packages/numpy&#39;]</pre>
+<pre>[&#39;/Users/lj020326/anaconda/lib/python3.6/site-packages/numpy&#39;]</pre>
 </div>
 
 </div>
@@ -2120,14 +2120,14 @@ The important thing to realize is that each Python executable has <strong>its ow
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>/Users/jakevdp/anaconda/envs/python3.6/bin/python
-[&#39;&#39;, &#39;/Users/jakevdp/anaconda/envs/python3.6/lib/python36.zip&#39;, &#39;/Users/jakevdp/anaconda/envs/python3.6/lib/python3.6&#39;, &#39;/Users/jakevdp/anaconda/envs/python3.6/lib/python3.6/lib-dynload&#39;, &#39;/Users/jakevdp/anaconda/envs/python3.6/lib/python3.6/site-packages&#39;]
+<pre>/Users/lj020326/anaconda/envs/python3.6/bin/python
+[&#39;&#39;, &#39;/Users/lj020326/anaconda/envs/python3.6/lib/python36.zip&#39;, &#39;/Users/lj020326/anaconda/envs/python3.6/lib/python3.6&#39;, &#39;/Users/lj020326/anaconda/envs/python3.6/lib/python3.6/lib-dynload&#39;, &#39;/Users/lj020326/anaconda/envs/python3.6/lib/python3.6/site-packages&#39;]
 
 /usr/bin/python
 [&#39;&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python27.zip&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-darwin&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac/lib-scriptpackages&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-tk&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-old&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload&#39;, &#39;/Library/Python/2.7/site-packages&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/PyObjC&#39;]
 
-/Users/jakevdp/anaconda/bin/python
-[&#39;&#39;, &#39;/Users/jakevdp/anaconda/lib/python36.zip&#39;, &#39;/Users/jakevdp/anaconda/lib/python3.6&#39;, &#39;/Users/jakevdp/anaconda/lib/python3.6/lib-dynload&#39;, &#39;/Users/jakevdp/anaconda/lib/python3.6/site-packages&#39;, &#39;/Users/jakevdp/anaconda/lib/python3.6/site-packages/schemapi-0.3.0.dev0+791c7f6-py3.6.egg&#39;, &#39;/Users/jakevdp/anaconda/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg&#39;]
+/Users/lj020326/anaconda/bin/python
+[&#39;&#39;, &#39;/Users/lj020326/anaconda/lib/python36.zip&#39;, &#39;/Users/lj020326/anaconda/lib/python3.6&#39;, &#39;/Users/lj020326/anaconda/lib/python3.6/lib-dynload&#39;, &#39;/Users/lj020326/anaconda/lib/python3.6/site-packages&#39;, &#39;/Users/lj020326/anaconda/lib/python3.6/site-packages/schemapi-0.3.0.dev0+791c7f6-py3.6.egg&#39;, &#39;/Users/lj020326/anaconda/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg&#39;]
 
 </pre>
 </div>
@@ -2174,7 +2174,7 @@ The important thing to realize is that each Python executable has <strong>its ow
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>pip is /Users/jakevdp/anaconda/envs/python3.6/bin/pip
+<pre>pip is /Users/lj020326/anaconda/envs/python3.6/bin/pip
 </pre>
 </div>
 </div>
@@ -2216,11 +2216,11 @@ The important thing to realize is that each Python executable has <strong>its ow
 <div class="output_subarea output_stream output_stdout output_text">
 <pre># conda environments:
 #
-python2.7                /Users/jakevdp/anaconda/envs/python2.7
-python3.5                /Users/jakevdp/anaconda/envs/python3.5
-python3.6             *  /Users/jakevdp/anaconda/envs/python3.6
-rstats                   /Users/jakevdp/anaconda/envs/rstats
-root                     /Users/jakevdp/anaconda
+python2.7                /Users/lj020326/anaconda/envs/python2.7
+python3.5                /Users/lj020326/anaconda/envs/python3.5
+python3.6             *  /Users/lj020326/anaconda/envs/python3.6
+rstats                   /Users/lj020326/anaconda/envs/rstats
+root                     /Users/lj020326/anaconda
 
 </pre>
 </div>
@@ -2276,11 +2276,11 @@ For Python kernels, this will point to a particular Python version, but Jupyter 
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Available kernels:
-  python3       /Users/jakevdp/anaconda/envs/python3.6/lib/python3.6/site-packages/ipykernel/resources
-  conda-root    /Users/jakevdp/Library/Jupyter/kernels/conda-root
-  python2.7     /Users/jakevdp/Library/Jupyter/kernels/python2.7
-  python3.5     /Users/jakevdp/Library/Jupyter/kernels/python3.5
-  python3.6     /Users/jakevdp/Library/Jupyter/kernels/python3.6
+  python3       /Users/lj020326/anaconda/envs/python3.6/lib/python3.6/site-packages/ipykernel/resources
+  conda-root    /Users/lj020326/Library/Jupyter/kernels/conda-root
+  python2.7     /Users/lj020326/Library/Jupyter/kernels/python2.7
+  python3.5     /Users/lj020326/Library/Jupyter/kernels/python3.5
+  python3.6     /Users/lj020326/Library/Jupyter/kernels/python3.6
 </pre>
 </div>
 </div>
@@ -2304,7 +2304,7 @@ For example:</p>
 <div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>cat /Users/jakevdp/Library/Jupyter/kernels/conda-root/kernel.json
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>cat /Users/lj020326/Library/Jupyter/kernels/conda-root/kernel.json
 </pre></div>
 
 </div>
@@ -2323,7 +2323,7 @@ For example:</p>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>{
  &#34;argv&#34;: [
-  &#34;/Users/jakevdp/anaconda/bin/python&#34;,
+  &#34;/Users/lj020326/anaconda/bin/python&#34;,
   &#34;-m&#34;,
   &#34;ipykernel_launcher&#34;,
   &#34;-f&#34;,
@@ -2395,7 +2395,7 @@ In other words, there is no guarantee that the <code>python</code>, <code>pip</c
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>python is /Users/jakevdp/anaconda/envs/python3.6/bin/python
+<pre>python is /Users/lj020326/anaconda/envs/python3.6/bin/python
 </pre>
 </div>
 </div>
@@ -2437,7 +2437,7 @@ In other words, there is no guarantee that the <code>python</code>, <code>pip</c
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;/Users/jakevdp/anaconda/bin/python&#39;</pre>
+<pre>&#39;/Users/lj020326/anaconda/bin/python&#39;</pre>
 </div>
 
 </div>
@@ -2455,13 +2455,13 @@ This is why a simple <code>!pip install</code> or <code>!conda install</code> do
 <p>As noted above, we can get around this by explicitly identifying where we want packages to be installed.</p>
 <p>For <strong>conda</strong>, you can set the prefix manually in the shell command:</p>
 
-<pre><code>$ conda install --yes --prefix /Users/jakevdp/anaconda numpy</code></pre>
+<pre><code>$ conda install --yes --prefix /Users/lj020326/anaconda numpy</code></pre>
 <p>or, to automatically use the correct prefix (using syntax available in the notebook)</p>
 
 <pre><code>!conda install --yes --prefix {sys.prefix} numpy</code></pre>
 <p>For <strong>pip</strong>, you can specify the Python executable explicitly:</p>
 
-<pre><code>$ /Users/jakevdp/anaconda/bin/python -m pip install numpy</code></pre>
+<pre><code>$ /Users/lj020326/anaconda/bin/python -m pip install numpy</code></pre>
 <p>or, to automatically use the correct executable (again using notebook shell syntax)</p>
 
 <pre><code>!{sys.executable} -m pip install numpy</code></pre>
@@ -2550,7 +2550,7 @@ Even though it's more verbose, I think forcing users to be explicit would be a u
 <h4 id="Explicit-invocation">Explicit invocation<a class="anchor-link" href="#Explicit-invocation">&#182;</a></h4><p>For symmetry with <code>pip</code>, it would be nice if <code>python -m conda install</code> could be expected to work in the same way the <code>pip</code> counterpart does.
 You can call <code>conda</code> this way in the root environment, but the conda Python package (as opposed to the conda executable) cannot currently be installed anywhere but the root environment:</p>
 
-<pre><code>(myenv) jakevdp$ conda install conda
+<pre><code>(myenv) lj020326$ conda install conda
 Fetching package metadata ...........
 
 InstallError: Error: 'conda' can only be installed into the root environment</code></pre>
@@ -2638,7 +2638,7 @@ That said, such a symmetry would certainly be a help to users.</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Requirement already satisfied: numpy in /Users/jakevdp/anaconda/lib/python3.6/site-packages
+<pre>Requirement already satisfied: numpy in /Users/lj020326/anaconda/lib/python3.6/site-packages
 </pre>
 </div>
 </div>
@@ -2762,7 +2762,7 @@ This is a bit more involved than the <code>pip</code> magic, because it must fir
 Solving package specifications: .
 
 # All requested packages already installed.
-# packages in environment at /Users/jakevdp/anaconda:
+# packages in environment at /Users/lj020326/anaconda:
 #
 numpy                     1.13.3           py36h2cdce51_0  
 </pre>
@@ -2813,7 +2813,7 @@ And, finally, thanks for all that you do for the open source community.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><em>This post was written within a Jupyter notebook; you can view a static version <a href="http://nbviewer.jupyter.org/url/jakevdp.github.com/downloads/notebooks/JupyterInstallation.ipynb">here</a> or download the full notebook <a href="http://jakevdp.github.com/downloads/notebooks/JupyterInstallation.ipynb">here</a>.</em></p>
+<p><em>This post was written within a Jupyter notebook; you can view a static version <a href="http://nbviewer.jupyter.org/url/lj020326.github.com/downloads/notebooks/JupyterInstallation.ipynb">here</a> or download the full notebook <a href="http://lj020326.github.com/downloads/notebooks/JupyterInstallation.ipynb">here</a>.</em></p>
 
 </div>
 </div>

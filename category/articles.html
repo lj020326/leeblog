@@ -477,7 +477,7 @@ I most often see this manifest itself with the following issue:</p>
 <p>Fundamentally the problem is usually rooted in the fact that the <strong>Jupyter kernels are disconnected from Jupyter's shell</strong>; in other words, the installer points to a different Python version than is being used in the notebook.
 In the simplest contexts this issue does not arise, but when it does, debugging the problem requires knowledge of the intricacies of the operating system, the intricacies of Python package installation, and the intricacies of Jupyter itself.
 In other words, the Jupyter notebook, like all abstractions, is leaky.</p>
-<p>In the wake of several discussions on this topic with colleagues, some online (<a href="https://twitter.com/amuellerml/status/932637063748444160">exhibit A</a>, <a href="https://twitter.com/jakevdp/status/922846245848150016">exhibit B</a>) and some off, I decided to treat this issue in depth here.
+<p>In the wake of several discussions on this topic with colleagues, some online (<a href="https://twitter.com/amuellerml/status/932637063748444160">exhibit A</a>, <a href="https://twitter.com/lj020326/status/922846245848150016">exhibit B</a>) and some off, I decided to treat this issue in depth here.
 This post will address a couple things:</p>
 <ul>
 <li><p><strong>First</strong>, I'll provide a quick, bare-bones answer to the general question, <em>how can I install a Python package so it works with my jupyter notebook, using pip and/or conda?</em>.</p>
@@ -518,7 +518,7 @@ Other package managers exist (including platform-specific tools like <a href="ht
 
 <p>This week, Twitter upped their single-tweet character limit from 140 to 280, purportedly based on this <a href="https://blog.twitter.com/engineering/en_us/topics/insights/2017/Our-Discovery-of-Cramming.html">interesting analysis of tweet lengths</a> published on Twitter's engineering blog.
 The gist of the analysis is this: English language tweets display a roughly log-normal distribution of character counts, except near the 140-character limit, at which the distribution spikes:</p>
-<p><img src="http://jakevdp.github.io/images/tweet_lengths.png" width=500></p>
+<p><img src="http://lj020326.github.io/images/tweet_lengths.png" width=500></p>
 <p>The analysis takes this as evidence that twitter users often "cram" their longer thoughts into the 140 character limit, and suggest that a 280-character limit would more naturally accommodate the distribution of people's desired tweet lengths.</p>
 <p>This immediately brought to mind another character limit that many Python programmers face in their day-to-day lives: the 79-character line limit suggested by Python's <a href="https://www.python.org/dev/peps/pep-0008/#maximum-line-length">PEP8 style guide</a>:</p>
 <blockquote><p>Limit all lines to a maximum of 79 characters.</p>
@@ -1566,7 +1566,7 @@ h6:hover .anchor-link {
 
 <p>I've found one of the best ways to grow in my scientific coding is to spend time comparing the efficiency of various approaches to implementing particular algorithms that I find useful, in order to build an intuition of the performance of the building blocks of the scientific Python ecosystem.</p>
 <p>In this vein, today I want to take a look at an operation that is in many ways fundamental to data-driven exploration: the group-by, otherwise known as the <a href="https://www.jstatsoft.org/article/view/v040i01">split-apply-combine</a> pattern.
-An architypical example of a summation group-by is shown in this figure, borrowed from the <a href="http://nbviewer.jupyter.org/github/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/03.08-Aggregation-and-Grouping.ipynb">Aggregation and Grouping</a> section of the <a href="https://github.com/jakevdp/PythonDataScienceHandbook">Python Data Science Handbook</a>:</p>
+An architypical example of a summation group-by is shown in this figure, borrowed from the <a href="http://nbviewer.jupyter.org/github/lj020326/PythonDataScienceHandbook/blob/master/notebooks/03.08-Aggregation-and-Grouping.ipynb">Aggregation and Grouping</a> section of the <a href="https://github.com/lj020326/PythonDataScienceHandbook">Python Data Science Handbook</a>:</p>
 
 
 
@@ -1575,7 +1575,7 @@ An architypical example of a summation group-by is shown in this figure, borrowe
 
 
 
-<p><img src="https://jakevdp.github.io/figures/split-apply-combine.svg" alt="split-apply-combine diagram"></p>
+<p><img src="https://lj020326.github.io/figures/split-apply-combine.svg" alt="split-apply-combine diagram"></p>
 
 
 
