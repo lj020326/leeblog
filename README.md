@@ -1,6 +1,6 @@
 # Source for http://jakevdp.github.io
 
-This repository contains the source for http://jakevdp.github.io/.
+This repository contains the source for http://lj020326.github.io/.
 
 ## Building the Blog
 
