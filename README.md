@@ -21,16 +21,22 @@ $ source activate venv
 $ pip install -r requirements.txt
 ```
 
-Build the html and serve locally:
+Make, test and/or publish your contents
 
 ```
-$ make html
-$ make serve
-$ open http://localhost:8000
+# Generate Site
+make html
+
+# Start test webserver on localhost
+# Then, go to address localhost:8000 in your browser.
+make serve
+
+# Instead of repeating the above 2 steps 
+# you can run "Generate + test"
+# This will automatically regenerate html instantly after any changes made to src.
+make devserver
+
+# Deploy to github page
+make github
 ```
 
-Deploy to github pages
-
-```
-$ make publish-to-github
-```
