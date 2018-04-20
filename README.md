@@ -1,4 +1,4 @@
-# Source for http://jakevdp.github.io
+# Source for http://lj020326.github.io
 
 This repository contains the source for http://lj020326.github.io/.
 
