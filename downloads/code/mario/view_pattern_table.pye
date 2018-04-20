@@ -2,7 +2,7 @@
 
    usage: view_pattern_table.py <filename>
 
-By Jake Vanderplas, 2013 <http://lj020326.github.com>
+By Jake Vanderplas, 2013 <http://jakevdp.github.com>
 License: GPL.
 Feel free to use and distribute, but keep this attribution intact.
 """

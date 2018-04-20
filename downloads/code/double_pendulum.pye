@@ -8,7 +8,7 @@ http://www.physics.usyd.edu.au/~wheat/dpend_html/solve_dpend.c
 
 author: Jake Vanderplas
 email: vanderplas@astro.washington.edu
-website: http://lj020326.github.com
+website: http://jakevdp.github.com
 license: BSD
 Please feel free to use and modify this, but keep the above information. Thanks!
 """
@@ -18,9 +18,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.integrate as integrate
 import matplotlib.animation as animation
-
-plt.xkcd()  # XKCD-style requires matplotlib 1.3+
-
 
 class DoublePendulum:
     """Double Pendulum Class
@@ -152,6 +149,6 @@ ani = animation.FuncAnimation(fig, animate, frames=300,
 # the video can be embedded in html5.  You may need to adjust this for
 # your system: for more information, see
 # http://matplotlib.sourceforge.net/api/animation_api.html
-#ani.save('double_pendulum_xkcd.mp4', fps=30, extra_args=['-vcodec', 'libx264'])
+#ani.save('double_pendulum.mp4', fps=30, extra_args=['-vcodec', 'libx264'])
 
 plt.show()

@@ -8,7 +8,7 @@ http://www.physics.usyd.edu.au/~wheat/dpend_html/solve_dpend.c
 
 author: Jake Vanderplas
 email: vanderplas@astro.washington.edu
-website: http://jakevdp.github.com
+website: http://lj020326.github.com
 license: BSD
 Please feel free to use and modify this, but keep the above information. Thanks!
 """
