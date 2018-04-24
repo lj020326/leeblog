@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Journal</title><link href="http://lj020326.github.io/" rel="alternate"></link><link href="http://lj020326.github.io/feeds/all.atom.xml" rel="self"></link><id>http://lj020326.github.io/</id><updated>2018-04-24T12:00:00-04:00</updated><entry><title>Merging Excel Worksheets using Pandas</title><link href="http://lj020326.github.io/blog/2018/04/24/merging-excel-sheets-using-pandas/" rel="alternate"></link><published>2018-04-24T12:00:00-04:00</published><updated>2018-04-24T12:00:00-04:00</updated><author><name>Lee Johnson</name></author><id>tag:lj020326.github.io,2018-04-24:blog/2018/04/24/merging-excel-sheets-using-pandas/</id><summary type="html">
 
-&lt;p&gt;I recently wanted to see how many songs were common between 2 of my iTunes playlists.&lt;/p&gt;
-&lt;p&gt;Here I'll take a look at some of the basic questions you can answer with this data.
-Later I hope to find the time to dig deeper and ask some more interesting and creative questions – stay tuned!&lt;/p&gt;
+&lt;p&gt;In my prior post, I loaded 2 playlists in an iTunes text export format into pandas dataframes to match into 1 single dataframe.&lt;/p&gt;
+&lt;p&gt;Here I repeat the last step of the prior post assuming that the 2 text files were first imported into excel.&lt;/p&gt;
 </summary><category term="jupyter"></category><category term="pandas"></category><category term="excel"></category><category term="merge"></category><category term="join"></category></entry><entry><title>Merging Itunes Playlists using Pandas</title><link href="http://lj020326.github.io/blog/2018/04/24/merging-itunes-playlists-using-pandas/" rel="alternate"></link><published>2018-04-24T12:00:00-04:00</published><updated>2018-04-24T12:00:00-04:00</updated><author><name>Lee Johnson</name></author><id>tag:lj020326.github.io,2018-04-24:blog/2018/04/24/merging-itunes-playlists-using-pandas/</id><summary type="html">
 
 &lt;p&gt;I recently wanted to see how many songs were common between 2 of my iTunes playlists.&lt;/p&gt;
