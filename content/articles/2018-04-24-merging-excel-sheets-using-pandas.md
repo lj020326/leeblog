@@ -1,4 +1,4 @@
-Title: Merging Itunes Playlists using Pandas
+Title: Merging Excel Worksheets using Pandas
 date: 2018-04-24 12:00
 comments: true
 slug: merging-excel-sheets-using-pandas
