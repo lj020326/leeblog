@@ -1437,7 +1437,7 @@ Later I hope to find the time to dig deeper and ask some more interesting and cr
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.interactiveshell</span> <span class="kn">import</span> <span class="n">InteractiveShell</span>
@@ -1449,25 +1449,6 @@ Later I hope to find the time to dig deeper and ask some more interesting and cr
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<style>.container { width:100% !important; }</style>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -1483,7 +1464,7 @@ Later I hope to find the time to dig deeper and ask some more interesting and cr
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -1520,7 +1501,7 @@ Later I hope to find the time to dig deeper and ask some more interesting and cr
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Import-Itunes-Playlist-Data">Import Itunes Playlist Data<a class="anchor-link" href="#Import-Itunes-Playlist-Data">&#182;</a></h2><p>We'll start by exporting the itunes playlist data (for howto export itunes playlists <a href="https://support.apple.com/kb/PH19491?locale=en_US">itunes</a>).
 I chose the text export option rather than xml.</p>
-<p>After exporting, I opened and save the file in excel.
+<p>After exporting, I opened and saved the file in excel.
 I now have 2 playlist excel files as seen in the example below.</p>
 <p>Note that I could directly import the text formatted file.
 I use excel here to simply demonstrate that excel based imports will also work.</p>
@@ -1531,7 +1512,7 @@ I use excel here to simply demonstrate that excel based imports will also work.<
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">all_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;data/Top80_sPop&amp;Rock.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;data/TopAlt&amp;Electronic.xlsx&#39;</span><span class="p">]</span>
@@ -1560,14 +1541,14 @@ I use excel here to simply demonstrate that excel based imports will also work.<
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2018-04-24 11:28:35,058 - INFO - ## data/Top80_sPop&amp;Rock.xlsx: df.head()=
+<pre>2018-04-24 14:06:03,348 - INFO - ## data/Top80_sPop&amp;Rock.xlsx: df.head()=
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[28]:</div>
+<div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -1636,7 +1617,7 @@ I use excel here to simply demonstrate that excel based imports will also work.<
       <td>2.0</td>
       <td>2017-12-27 10:16:00</td>
       <td>100</td>
-      <td>C:\data\lee\itunes\Music\Billy Joel\Greatest H...</td>
+      <td>C:\Users\Lee\itunes\Music\Billy Joel\Greatest ...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1660,7 +1641,7 @@ I use excel here to simply demonstrate that excel based imports will also work.<
       <td>3.0</td>
       <td>2018-01-20 08:18:00</td>
       <td>100</td>
-      <td>C:\data\lee\itunes\Music\Billy Joel\Greatest H...</td>
+      <td>C:\Users\Lee\itunes\Music\Billy Joel\Greatest ...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1684,7 +1665,7 @@ I use excel here to simply demonstrate that excel based imports will also work.<
       <td>7.0</td>
       <td>2018-01-08 18:35:00</td>
       <td>100</td>
-      <td>C:\data\lee\itunes\Music\Compilations\The Very...</td>
+      <td>C:\Users\Lee\itunes\Music\Compilations\The Ver...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1708,7 +1689,7 @@ I use excel here to simply demonstrate that excel based imports will also work.<
       <td>6.0</td>
       <td>2018-01-06 12:45:00</td>
       <td>100</td>
-      <td>C:\data\lee\itunes\Music\Journey\Greatest Hits...</td>
+      <td>C:\Users\Lee\itunes\Music\Journey\Greatest Hit...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1732,7 +1713,7 @@ I use excel here to simply demonstrate that excel based imports will also work.<
       <td>NaN</td>
       <td>NaT</td>
       <td>100</td>
-      <td>C:\data\lee\itunes\Music\Visage\New Wave Hits ...</td>
+      <td>C:\Users\Lee\itunes\Music\Visage\New Wave Hits...</td>
     </tr>
   </tbody>
 </table>
@@ -1748,15 +1729,15 @@ I use excel here to simply demonstrate that excel based imports will also work.<
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2018-04-24 11:28:35,094 - INFO - ## data/Top80_sPop&amp;Rock.xlsx: df.shape=(678, 31)
-2018-04-24 11:28:35,154 - INFO - ## data/TopAlt&amp;Electronic.xlsx: df.head()=
+<pre>2018-04-24 14:06:03,391 - INFO - ## data/Top80_sPop&amp;Rock.xlsx: df.shape=(678, 31)
+2018-04-24 14:06:03,461 - INFO - ## data/TopAlt&amp;Electronic.xlsx: df.head()=
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[28]:</div>
+<div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -1825,7 +1806,7 @@ I use excel here to simply demonstrate that excel based imports will also work.<
       <td>10.0</td>
       <td>2018-01-08 19:45:00</td>
       <td>100</td>
-      <td>C:\data\lee\itunes\Music\Fitz &amp; The Tantrums\M...</td>
+      <td>C:\Users\Lee\itunes\Music\Fitz &amp; The Tantrums\...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1849,7 +1830,7 @@ I use excel here to simply demonstrate that excel based imports will also work.<
       <td>13.0</td>
       <td>2017-09-28 18:59:00</td>
       <td>100</td>
-      <td>C:\data\lee\itunes\Music\Morrissey\Unknown Alb...</td>
+      <td>C:\Users\Lee\itunes\Music\Morrissey\Unknown Al...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1873,7 +1854,7 @@ I use excel here to simply demonstrate that excel based imports will also work.<
       <td>NaN</td>
       <td>NaT</td>
       <td>100</td>
-      <td>C:\data\lee\itunes\Music\Twenty One Pilots\Sui...</td>
+      <td>C:\Users\Lee\itunes\Music\Twenty One Pilots\Su...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1897,7 +1878,7 @@ I use excel here to simply demonstrate that excel based imports will also work.<
       <td>NaN</td>
       <td>NaT</td>
       <td>100</td>
-      <td>C:\data\lee\itunes\Music\Visage\New Wave Hits ...</td>
+      <td>C:\Users\Lee\itunes\Music\Visage\New Wave Hits...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1921,7 +1902,7 @@ I use excel here to simply demonstrate that excel based imports will also work.<
       <td>23.0</td>
       <td>2017-10-30 18:33:00</td>
       <td>80</td>
-      <td>C:\data\lee\itunes\Music\ABBA\The Essential Co...</td>
+      <td>C:\Users\Lee\itunes\Music\ABBA\The Essential C...</td>
     </tr>
   </tbody>
 </table>
@@ -1937,7 +1918,7 @@ I use excel here to simply demonstrate that excel based imports will also work.<
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2018-04-24 11:28:35,193 - INFO - ## data/TopAlt&amp;Electronic.xlsx: df.shape=(186, 31)
+<pre>2018-04-24 14:06:03,503 - INFO - ## data/TopAlt&amp;Electronic.xlsx: df.shape=(186, 31)
 </pre>
 </div>
 </div>
@@ -1958,7 +1939,7 @@ I use excel here to simply demonstrate that excel based imports will also work.<
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Stack the DataFrames on top of each other</span>
@@ -1983,14 +1964,14 @@ I use excel here to simply demonstrate that excel based imports will also work.<
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2018-04-24 11:40:38,368 - INFO - ## vertical_stack.head()=
+<pre>2018-04-24 14:06:09,217 - INFO - ## vertical_stack.head()=
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[35]:</div>
+<div class="prompt output_prompt">Out[6]:</div>
 
 
 
@@ -2059,7 +2040,7 @@ I use excel here to simply demonstrate that excel based imports will also work.<
       <td>2.0</td>
       <td>2017-12-27 10:16:00</td>
       <td>100</td>
-      <td>C:\data\lee\itunes\Music\Billy Joel\Greatest H...</td>
+      <td>C:\Users\Lee\itunes\Music\Billy Joel\Greatest ...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -2083,7 +2064,7 @@ I use excel here to simply demonstrate that excel based imports will also work.<
       <td>3.0</td>
       <td>2018-01-20 08:18:00</td>
       <td>100</td>
-      <td>C:\data\lee\itunes\Music\Billy Joel\Greatest H...</td>
+      <td>C:\Users\Lee\itunes\Music\Billy Joel\Greatest ...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -2107,7 +2088,7 @@ I use excel here to simply demonstrate that excel based imports will also work.<
       <td>7.0</td>
       <td>2018-01-08 18:35:00</td>
       <td>100</td>
-      <td>C:\data\lee\itunes\Music\Compilations\The Very...</td>
+      <td>C:\Users\Lee\itunes\Music\Compilations\The Ver...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -2131,7 +2112,7 @@ I use excel here to simply demonstrate that excel based imports will also work.<
       <td>6.0</td>
       <td>2018-01-06 12:45:00</td>
       <td>100</td>
-      <td>C:\data\lee\itunes\Music\Journey\Greatest Hits...</td>
+      <td>C:\Users\Lee\itunes\Music\Journey\Greatest Hit...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -2155,7 +2136,7 @@ I use excel here to simply demonstrate that excel based imports will also work.<
       <td>NaN</td>
       <td>NaT</td>
       <td>100</td>
-      <td>C:\data\lee\itunes\Music\Visage\New Wave Hits ...</td>
+      <td>C:\Users\Lee\itunes\Music\Visage\New Wave Hits...</td>
     </tr>
   </tbody>
 </table>
@@ -2171,7 +2152,7 @@ I use excel here to simply demonstrate that excel based imports will also work.<
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2018-04-24 11:40:38,404 - INFO - vertical_stack.shape=(864, 31)
+<pre>2018-04-24 14:06:09,256 - INFO - vertical_stack.shape=(864, 31)
 </pre>
 </div>
 </div>
@@ -2192,7 +2173,7 @@ Note that I refer to the term "composite key" when there multiple keys used to i
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">df_playlist1</span><span class="o">=</span><span class="n">list_of_playlists</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -2219,14 +2200,14 @@ Note that I refer to the term "composite key" when there multiple keys used to i
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2018-04-24 11:38:36,923 - INFO - ## merged_df.head()=
+<pre>2018-04-24 14:06:12,375 - INFO - ## merged_df.head()=
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[33]:</div>
+<div class="prompt output_prompt">Out[7]:</div>
 
 
 
@@ -2295,7 +2276,7 @@ Note that I refer to the term "composite key" when there multiple keys used to i
       <td>NaN</td>
       <td>NaT</td>
       <td>100</td>
-      <td>C:\data\lee\itunes\Music\Visage\New Wave Hits ...</td>
+      <td>C:\Users\Lee\itunes\Music\Visage\New Wave Hits...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -2319,7 +2300,7 @@ Note that I refer to the term "composite key" when there multiple keys used to i
       <td>1.0</td>
       <td>2018-01-06 20:21:00</td>
       <td>80</td>
-      <td>C:\data\lee\itunes\Music\Altered Images\New Wa...</td>
+      <td>C:\Users\Lee\itunes\Music\Altered Images\New W...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -2343,7 +2324,7 @@ Note that I refer to the term "composite key" when there multiple keys used to i
       <td>6.0</td>
       <td>2018-03-07 11:58:00</td>
       <td>80</td>
-      <td>C:\data\lee\itunes\Music\The B-52's\B-52's\03 ...</td>
+      <td>C:\Users\Lee\itunes\Music\The B-52's\B-52's\03...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -2367,7 +2348,7 @@ Note that I refer to the term "composite key" when there multiple keys used to i
       <td>1.0</td>
       <td>2018-01-02 01:37:00</td>
       <td>80</td>
-      <td>C:\data\lee\itunes\Music\Compilations\The Best...</td>
+      <td>C:\Users\Lee\itunes\Music\Compilations\The Bes...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -2391,7 +2372,7 @@ Note that I refer to the term "composite key" when there multiple keys used to i
       <td>4.0</td>
       <td>2018-01-06 22:59:00</td>
       <td>80</td>
-      <td>C:\data\lee\itunes\Music\The Cars\Complete Gre...</td>
+      <td>C:\Users\Lee\itunes\Music\The Cars\Complete Gr...</td>
     </tr>
   </tbody>
 </table>
@@ -2407,7 +2388,7 @@ Note that I refer to the term "composite key" when there multiple keys used to i
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2018-04-24 11:38:36,961 - INFO - merged_df.shape=(72, 60)
+<pre>2018-04-24 14:06:12,414 - INFO - merged_df.shape=(72, 60)
 </pre>
 </div>
 </div>
@@ -2458,7 +2439,7 @@ Note that I refer to the term "composite key" when there multiple keys used to i
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">functools</span>
@@ -2483,14 +2464,14 @@ Note that I refer to the term "composite key" when there multiple keys used to i
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2018-04-24 11:43:55,403 - INFO - ## merged_df.head()=
+<pre>2018-04-24 14:06:17,095 - INFO - ## merged_df.head()=
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[37]:</div>
+<div class="prompt output_prompt">Out[8]:</div>
 
 
 
@@ -2559,7 +2540,7 @@ Note that I refer to the term "composite key" when there multiple keys used to i
       <td>NaN</td>
       <td>NaT</td>
       <td>100</td>
-      <td>C:\data\lee\itunes\Music\Visage\New Wave Hits ...</td>
+      <td>C:\Users\Lee\itunes\Music\Visage\New Wave Hits...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -2583,7 +2564,7 @@ Note that I refer to the term "composite key" when there multiple keys used to i
       <td>1.0</td>
       <td>2018-01-06 20:21:00</td>
       <td>80</td>
-      <td>C:\data\lee\itunes\Music\Altered Images\New Wa...</td>
+      <td>C:\Users\Lee\itunes\Music\Altered Images\New W...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -2607,7 +2588,7 @@ Note that I refer to the term "composite key" when there multiple keys used to i
       <td>6.0</td>
       <td>2018-03-07 11:58:00</td>
       <td>80</td>
-      <td>C:\data\lee\itunes\Music\The B-52's\B-52's\03 ...</td>
+      <td>C:\Users\Lee\itunes\Music\The B-52's\B-52's\03...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -2631,7 +2612,7 @@ Note that I refer to the term "composite key" when there multiple keys used to i
       <td>1.0</td>
       <td>2018-01-02 01:37:00</td>
       <td>80</td>
-      <td>C:\data\lee\itunes\Music\Compilations\The Best...</td>
+      <td>C:\Users\Lee\itunes\Music\Compilations\The Bes...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -2655,7 +2636,7 @@ Note that I refer to the term "composite key" when there multiple keys used to i
       <td>4.0</td>
       <td>2018-01-06 22:59:00</td>
       <td>80</td>
-      <td>C:\data\lee\itunes\Music\The Cars\Complete Gre...</td>
+      <td>C:\Users\Lee\itunes\Music\The Cars\Complete Gr...</td>
     </tr>
   </tbody>
 </table>
@@ -2671,7 +2652,7 @@ Note that I refer to the term "composite key" when there multiple keys used to i
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2018-04-24 11:43:55,454 - INFO - merged_df.shape=(72, 60)
+<pre>2018-04-24 14:06:17,132 - INFO - merged_df.shape=(72, 60)
 </pre>
 </div>
 </div>
@@ -2692,7 +2673,7 @@ Note that I refer to the term "composite key" when there multiple keys used to i
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">df_playlist1</span><span class="o">=</span><span class="n">list_of_playlists</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -2722,14 +2703,14 @@ Note that I refer to the term "composite key" when there multiple keys used to i
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2018-04-24 12:02:40,510 - INFO - ## merged_df.head()=
+<pre>2018-04-24 14:06:20,719 - INFO - ## merged_df.head()=
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[39]:</div>
+<div class="prompt output_prompt">Out[9]:</div>
 
 
 
@@ -2894,7 +2875,7 @@ Note that I refer to the term "composite key" when there multiple keys used to i
       <td>NaN</td>
       <td>NaT</td>
       <td>100.0</td>
-      <td>C:\data\lee\itunes\Music\Visage\New Wave Hits ...</td>
+      <td>C:\Users\Lee\itunes\Music\Visage\New Wave Hits...</td>
     </tr>
   </tbody>
 </table>
@@ -2910,7 +2891,7 @@ Note that I refer to the term "composite key" when there multiple keys used to i
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2018-04-24 12:02:40,553 - INFO - merged_df.shape=(797, 60)
+<pre>2018-04-24 14:06:20,756 - INFO - merged_df.shape=(797, 60)
 </pre>
 </div>
 </div>
@@ -2936,13 +2917,13 @@ We now find out how many duplicate records exist based on the composite key we u
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">df_dupes1</span> <span class="o">=</span> <span class="n">df_playlist1</span><span class="p">[</span><span class="n">df_playlist1</span><span class="o">.</span><span class="n">duplicated</span><span class="p">([</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="bp">False</span><span class="p">)]</span>
 <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;df_dupes1.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">df_dupes1</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 
-<span class="n">df_dupes1</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span>
+<span class="n">df_dupes1</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2959,14 +2940,14 @@ We now find out how many duplicate records exist based on the composite key we u
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2018-04-24 12:23:02,012 - INFO - df_dupes1.shape=(76, 31)
+<pre>2018-04-24 14:06:23,911 - INFO - df_dupes1.shape=(76, 31)
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[47]:</div>
+<div class="prompt output_prompt">Out[10]:</div>
 
 
 
@@ -3035,7 +3016,7 @@ We now find out how many duplicate records exist based on the composite key we u
       <td>4.0</td>
       <td>2018-03-19 08:46:00</td>
       <td>60</td>
-      <td>C:\data\lee\itunes\Music\Dead Kennedys\Just Ca...</td>
+      <td>C:\Users\Lee\itunes\Music\Dead Kennedys\Just C...</td>
     </tr>
     <tr>
       <th>310</th>
@@ -3059,7 +3040,7 @@ We now find out how many duplicate records exist based on the composite key we u
       <td>1.0</td>
       <td>2018-01-11 23:59:00</td>
       <td>40</td>
-      <td>C:\data\lee\itunes\Music\Dead Kennedys\Milking...</td>
+      <td>C:\Users\Lee\itunes\Music\Dead Kennedys\Milkin...</td>
     </tr>
     <tr>
       <th>20</th>
@@ -3083,7 +3064,7 @@ We now find out how many duplicate records exist based on the composite key we u
       <td>1.0</td>
       <td>2018-01-14 10:37:00</td>
       <td>80</td>
-      <td>C:\data\lee\itunes\Music\Depeche Mode\Best Of ...</td>
+      <td>C:\Users\Lee\itunes\Music\Depeche Mode\Best Of...</td>
     </tr>
     <tr>
       <th>127</th>
@@ -3107,7 +3088,7 @@ We now find out how many duplicate records exist based on the composite key we u
       <td>2.0</td>
       <td>2018-02-23 13:33:00</td>
       <td>60</td>
-      <td>C:\data\lee\itunes\Music\Depeche Mode\Violator...</td>
+      <td>C:\Users\Lee\itunes\Music\Depeche Mode\Violato...</td>
     </tr>
     <tr>
       <th>29</th>
@@ -3131,7 +3112,7 @@ We now find out how many duplicate records exist based on the composite key we u
       <td>5.0</td>
       <td>2015-09-28 19:58:00</td>
       <td>80</td>
-      <td>C:\data\lee\itunes\Music\Various Artists\101 S...</td>
+      <td>C:\Users\Lee\itunes\Music\Various Artists\101 ...</td>
     </tr>
     <tr>
       <th>358</th>
@@ -3155,7 +3136,7 @@ We now find out how many duplicate records exist based on the composite key we u
       <td>2.0</td>
       <td>2018-01-06 21:49:00</td>
       <td>40</td>
-      <td>C:\data\lee\itunes\Music\Compilations\The Best...</td>
+      <td>C:\Users\Lee\itunes\Music\Compilations\The Bes...</td>
     </tr>
     <tr>
       <th>36</th>
@@ -3179,7 +3160,7 @@ We now find out how many duplicate records exist based on the composite key we u
       <td>1.0</td>
       <td>2018-01-02 01:44:00</td>
       <td>80</td>
-      <td>C:\data\lee\itunes\Music\Compilations\The Best...</td>
+      <td>C:\Users\Lee\itunes\Music\Compilations\The Bes...</td>
     </tr>
     <tr>
       <th>37</th>
@@ -3203,7 +3184,7 @@ We now find out how many duplicate records exist based on the composite key we u
       <td>3.0</td>
       <td>2018-01-17 18:53:00</td>
       <td>80</td>
-      <td>C:\data\lee\itunes\Music\Men At Work\Like, Omi...</td>
+      <td>C:\Users\Lee\itunes\Music\Men At Work\Like, Om...</td>
     </tr>
     <tr>
       <th>45</th>
@@ -3227,7 +3208,7 @@ We now find out how many duplicate records exist based on the composite key we u
       <td>5.0</td>
       <td>2018-01-08 15:01:00</td>
       <td>80</td>
-      <td>C:\data\lee\itunes\Music\Various Artists\101 S...</td>
+      <td>C:\Users\Lee\itunes\Music\Various Artists\101 ...</td>
     </tr>
     <tr>
       <th>485</th>
@@ -3251,1235 +3232,11 @@ We now find out how many duplicate records exist based on the composite key we u
       <td>2.0</td>
       <td>2018-01-09 18:04:00</td>
       <td>40</td>
-      <td>C:\data\lee\itunes\Music\Compilations\Like, Om...</td>
-    </tr>
-    <tr>
-      <th>509</th>
-      <td>Never Say Never</td>
-      <td>Romeo Void</td>
-      <td>NaN</td>
-      <td>New Wave Hits Of The '80s, Vol. 06</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>2018-01-08 15:49:00</td>
-      <td>1.0</td>
-      <td>2018-03-23 18:25:00</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\Romeo Void\New Wave H...</td>
-    </tr>
-    <tr>
-      <th>510</th>
-      <td>Never Say Never</td>
-      <td>Romeo Void</td>
-      <td>NaN</td>
-      <td>New Wave Women</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, New Wave, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>4.0</td>
-      <td>2018-03-12 16:31:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\Romeo Void\New Wave W...</td>
-    </tr>
-    <tr>
-      <th>263</th>
-      <td>Drive</td>
-      <td>The Cars</td>
-      <td>Ric Ocasek</td>
-      <td>Complete Greatest Hits</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, Electronic, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>5.0</td>
-      <td>2018-01-09 15:38:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Cars\Complete Gre...</td>
-    </tr>
-    <tr>
-      <th>270</th>
-      <td>Drive</td>
-      <td>The Cars</td>
-      <td>Ric Ocasek</td>
-      <td>Just What I Needed - Anthology (CD 2)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2.0</td>
-      <td>2018-03-25 13:33:00</td>
-      <td>1.0</td>
-      <td>2018-03-29 18:06:00</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Cars\Just What I ...</td>
-    </tr>
-    <tr>
-      <th>96</th>
-      <td>Good Times Roll</td>
-      <td>The Cars</td>
-      <td>Ric Ocasek</td>
-      <td>Complete Greatest Hits</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, Electronic, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>15.0</td>
-      <td>2018-01-09 15:15:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>60</td>
-      <td>C:\data\lee\itunes\Music\The Cars\Complete Gre...</td>
-    </tr>
-    <tr>
-      <th>264</th>
-      <td>Good Times Roll</td>
-      <td>The Cars</td>
-      <td>Ric Ocasek</td>
-      <td>Just What I Needed - Anthology (CD 1)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2.0</td>
-      <td>2018-03-14 07:38:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Cars\Just What I ...</td>
-    </tr>
-    <tr>
-      <th>262</th>
-      <td>It's All I Can Do</td>
-      <td>The Cars</td>
-      <td>Ric Ocasek</td>
-      <td>Complete Greatest Hits</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, Electronic, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>12.0</td>
-      <td>2018-03-22 16:49:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Cars\Complete Gre...</td>
-    </tr>
-    <tr>
-      <th>266</th>
-      <td>It's All I Can Do</td>
-      <td>The Cars</td>
-      <td>Ric Ocasek</td>
-      <td>Just What I Needed - Anthology (CD 1)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>2018-01-09 16:28:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Cars\Just What I ...</td>
-    </tr>
-    <tr>
-      <th>98</th>
-      <td>Magic</td>
-      <td>The Cars</td>
-      <td>Ric Ocasek</td>
-      <td>Complete Greatest Hits</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, Electronic, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>12.0</td>
-      <td>2018-03-22 14:27:00</td>
-      <td>1.0</td>
-      <td>2018-01-06 22:27:00</td>
-      <td>60</td>
-      <td>C:\data\lee\itunes\Music\The Cars\Complete Gre...</td>
-    </tr>
-    <tr>
-      <th>271</th>
-      <td>Magic</td>
-      <td>The Cars</td>
-      <td>Ric Ocasek</td>
-      <td>Just What I Needed - Anthology (CD 2)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>3.0</td>
-      <td>2018-03-30 10:19:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Cars\Just What I ...</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>Tonight She Comes</td>
-      <td>The Cars</td>
-      <td>Ric Ocasek</td>
-      <td>Complete Greatest Hits</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, Electronic, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>20.0</td>
-      <td>2018-03-12 18:44:00</td>
-      <td>1.0</td>
-      <td>2014-03-11 13:47:00</td>
-      <td>80</td>
-      <td>C:\data\lee\itunes\Music\The Cars\Complete Gre...</td>
-    </tr>
-    <tr>
-      <th>272</th>
-      <td>Tonight She Comes</td>
-      <td>The Cars</td>
-      <td>Ric Ocasek</td>
-      <td>Just What I Needed - Anthology (CD 2)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2.0</td>
-      <td>2018-03-19 09:50:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Cars\Just What I ...</td>
-    </tr>
-    <tr>
-      <th>543</th>
-      <td>American Nights</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>Born To Be Bad</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\Born To ...</td>
-    </tr>
-    <tr>
-      <th>560</th>
-      <td>American Nights</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>Live In Japan</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>2018-03-25 15:15:00</td>
-      <td>1.0</td>
-      <td>2018-01-11 22:42:00</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\Live In ...</td>
-    </tr>
-    <tr>
-      <th>575</th>
-      <td>Johnny Guitar</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Mercury Albums Anthology (disc 2)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>2018-03-24 14:30:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Merc...</td>
-    </tr>
-    <tr>
-      <th>590</th>
-      <td>Johnny Guitar</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>Queens Of Noise</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td></td>
-      <td>1.0</td>
-      <td>2018-01-08 16:39:00</td>
-      <td>1.0</td>
-      <td>2018-01-09 18:55:00</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\Queens O...</td>
-    </tr>
-    <tr>
-      <th>519</th>
-      <td>Little Lost Girls</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>And Now ... The Runaways</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td></td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\And Now ...</td>
-    </tr>
-    <tr>
-      <th>555</th>
-      <td>Little Lost Girls</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>Little Lost Girls</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\Little L...</td>
-    </tr>
-    <tr>
-      <th>576</th>
-      <td>Little Sister</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Mercury Albums Anthology (disc 2)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Merc...</td>
-    </tr>
-    <tr>
-      <th>599</th>
-      <td>Little Sister</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>Waitin' For The Night</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>3.0</td>
-      <td>2018-03-23 17:54:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\Waitin' ...</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>204</th>
-      <td>Take It Or Leave It</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>Queens Of Noise</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td></td>
-      <td>4.0</td>
-      <td>2018-03-23 09:23:00</td>
-      <td>1.0</td>
-      <td>2018-01-09 18:17:00</td>
-      <td>60</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\Queens O...</td>
-    </tr>
-    <tr>
-      <th>522</th>
-      <td>Take It Or Leave It</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Best Of The Runaways</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>vtwin88cube</td>
-      <td>3.0</td>
-      <td>2018-03-22 14:17:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
-    </tr>
-    <tr>
-      <th>523</th>
-      <td>Take It Or Leave It</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Best Of The Runaways</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
-    </tr>
-    <tr>
-      <th>517</th>
-      <td>Takeover</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>And Now ... The Runaways</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td></td>
-      <td>1.0</td>
-      <td>2018-01-08 17:05:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\And Now ...</td>
-    </tr>
-    <tr>
-      <th>553</th>
-      <td>Takeover</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>Little Lost Girls</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>2018-01-08 16:49:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\Little L...</td>
-    </tr>
-    <tr>
-      <th>541</th>
-      <td>Thunder</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>Born To Be Bad</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>4.0</td>
-      <td>2018-03-14 08:07:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\Born To ...</td>
-    </tr>
-    <tr>
-      <th>562</th>
-      <td>Thunder</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Mercury Album Anthology (disc 1)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>2018-03-25 13:02:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Merc...</td>
-    </tr>
-    <tr>
-      <th>593</th>
-      <td>Thunder</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2.0</td>
-      <td>2018-03-24 14:39:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Runa...</td>
-    </tr>
-    <tr>
-      <th>579</th>
-      <td>Trash Can Murders</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Mercury Albums Anthology (disc 2)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>2018-01-08 14:01:00</td>
-      <td>2.0</td>
-      <td>2018-01-09 19:08:00</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Merc...</td>
-    </tr>
-    <tr>
-      <th>605</th>
-      <td>Trash Can Murders</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>Waitin' For The Night</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>3.0</td>
-      <td>2018-03-25 14:36:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\Waitin' ...</td>
-    </tr>
-    <tr>
-      <th>525</th>
-      <td>Wait For Me</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Best Of The Runaways</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>vtwin88cube</td>
-      <td>1.0</td>
-      <td>2018-03-22 09:18:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
-    </tr>
-    <tr>
-      <th>526</th>
-      <td>Wait For Me</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Best Of The Runaways</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>2018-01-09 13:15:00</td>
-      <td>1.0</td>
-      <td>2018-02-13 12:45:00</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
-    </tr>
-    <tr>
-      <th>537</th>
-      <td>Wait For Me</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Best Of The Runaways: 20th Century Masters...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
-    </tr>
-    <tr>
-      <th>578</th>
-      <td>Wait For Me</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Mercury Albums Anthology (disc 2)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>2018-02-20 20:03:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Merc...</td>
-    </tr>
-    <tr>
-      <th>602</th>
-      <td>Wait For Me</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>Waitin' For The Night</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>1.0</td>
-      <td>2018-02-12 19:27:00</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\Waitin' ...</td>
-    </tr>
-    <tr>
-      <th>529</th>
-      <td>Waitin' For The Night</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Best Of The Runaways</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>vtwin88cube</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>1.0</td>
-      <td>2018-02-16 13:27:00</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
-    </tr>
-    <tr>
-      <th>530</th>
-      <td>Waitin' For The Night</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Best Of The Runaways</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>1.0</td>
-      <td>2018-03-29 18:06:00</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
-    </tr>
-    <tr>
-      <th>538</th>
-      <td>Waitin' For The Night</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Best Of The Runaways: 20th Century Masters...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>2018-03-31 17:47:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
-    </tr>
-    <tr>
-      <th>607</th>
-      <td>Waitin' For The Night</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>Waitin' For The Night</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\Waitin' ...</td>
-    </tr>
-    <tr>
-      <th>580</th>
-      <td>Waitin' For the Night</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Mercury Albums Anthology (disc 2)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2.0</td>
-      <td>2018-03-22 16:10:00</td>
-      <td>1.0</td>
-      <td>2018-01-11 22:43:00</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Merc...</td>
-    </tr>
-    <tr>
-      <th>584</th>
-      <td>Waitin' For the Night</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>Neon Angels</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>2018-01-08 15:18:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\Neon Ang...</td>
-    </tr>
-    <tr>
-      <th>527</th>
-      <td>Wasted</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Best Of The Runaways</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>vtwin88cube</td>
-      <td>3.0</td>
-      <td>2018-03-04 17:18:00</td>
-      <td>1.0</td>
-      <td>2018-01-09 19:35:00</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
-    </tr>
-    <tr>
-      <th>528</th>
-      <td>Wasted</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Best Of The Runaways</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
-    </tr>
-    <tr>
-      <th>536</th>
-      <td>Wasted</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Best Of The Runaways: 20th Century Masters...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
-    </tr>
-    <tr>
-      <th>577</th>
-      <td>Wasted</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Mercury Albums Anthology (disc 2)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>2018-03-24 14:19:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Merc...</td>
-    </tr>
-    <tr>
-      <th>600</th>
-      <td>Wasted</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>Waitin' For The Night</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>2.0</td>
-      <td>2018-03-23 18:30:00</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\Waitin' ...</td>
-    </tr>
-    <tr>
-      <th>545</th>
-      <td>Wild Thing</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>Born To Be Bad</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2.0</td>
-      <td>2018-03-25 14:45:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\Born To ...</td>
-    </tr>
-    <tr>
-      <th>557</th>
-      <td>Wild Thing</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>Live In Japan</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>2018-03-22 11:15:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\Live In ...</td>
-    </tr>
-    <tr>
-      <th>524</th>
-      <td>You Drive Me Wild</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Best Of The Runaways</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>vtwin88cube</td>
-      <td>1.0</td>
-      <td>2018-01-09 12:15:00</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
-    </tr>
-    <tr>
-      <th>591</th>
-      <td>You Drive Me Wild</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>The Runaways</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaT</td>
-      <td>1.0</td>
-      <td>2018-01-09 18:13:00</td>
-      <td>40</td>
-      <td>C:\data\lee\itunes\Music\The Runaways\The Runa...</td>
+      <td>C:\Users\Lee\itunes\Music\Compilations\Like, O...</td>
     </tr>
   </tbody>
 </table>
-<p>76 rows × 31 columns</p>
+<p>10 rows × 31 columns</p>
 </div>
 </div>
 
@@ -4503,7 +3260,7 @@ We now find out how many duplicate records exist based on the composite key we u
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">df_playlist1_uniq</span><span class="o">=</span><span class="n">df_playlist1</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">])</span>
@@ -4525,7 +3282,7 @@ We now find out how many duplicate records exist based on the composite key we u
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2018-04-24 12:33:28,628 - INFO - df_playlist1_uniq.shape=(634, 31)
+<pre>2018-04-24 14:06:29,114 - INFO - df_playlist1_uniq.shape=(634, 31)
 </pre>
 </div>
 </div>
@@ -4545,7 +3302,7 @@ We now find out how many duplicate records exist based on the composite key we u
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">all_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;data/Top80_sPop&amp;Rock.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;data/TopAlt&amp;Electronic.xlsx&#39;</span><span class="p">]</span>
@@ -4592,15 +3349,15 @@ We now find out how many duplicate records exist based on the composite key we u
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2018-04-24 12:52:31,276 - INFO - ## data/Top80_sPop&amp;Rock.xlsx: df.shape=(634, 31)
-2018-04-24 12:52:31,338 - INFO - ## data/TopAlt&amp;Electronic.xlsx: df.shape=(185, 31)
-2018-04-24 12:52:31,359 - INFO - inner_df.shape=(67, 60)
-2018-04-24 12:52:31,364 - INFO - merged_df.shape=(752, 60)
-2018-04-24 12:52:31,365 - INFO - Rows in dataset1=634
-2018-04-24 12:52:31,368 - INFO - Rows in dataset2=185
-2018-04-24 12:52:31,371 - INFO - Rows in intersection=67
-2018-04-24 12:52:31,371 - INFO - Rows in union=752
-2018-04-24 12:52:31,374 - INFO - (Rows in union==Rows in merged) = True
+<pre>2018-04-24 14:06:31,750 - INFO - ## data/Top80_sPop&amp;Rock.xlsx: df.shape=(634, 31)
+2018-04-24 14:06:31,811 - INFO - ## data/TopAlt&amp;Electronic.xlsx: df.shape=(185, 31)
+2018-04-24 14:06:31,831 - INFO - inner_df.shape=(67, 60)
+2018-04-24 14:06:31,834 - INFO - merged_df.shape=(752, 60)
+2018-04-24 14:06:31,836 - INFO - Rows in dataset1=634
+2018-04-24 14:06:31,841 - INFO - Rows in dataset2=185
+2018-04-24 14:06:31,842 - INFO - Rows in intersection=67
+2018-04-24 14:06:31,845 - INFO - Rows in union=752
+2018-04-24 14:06:31,846 - INFO - (Rows in union==Rows in merged) = True
 </pre>
 </div>
 </div>
