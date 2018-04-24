@@ -1,0 +1,4757 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="author" content="Lee Johnson">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <title>Merging Itunes Playlists using Pandas | Tech Journal</title>
+
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" title="Tech Journal blog atom feed" href="/feeds/all.atom.xml" />
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="/theme/css/icons.css"/>
+        <style>.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #60a0b0; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #007020; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .cm { color: #60a0b0; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #007020 } /* Comment.Preproc */
+.highlight .c1 { color: #60a0b0; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #60a0b0; background-color: #fff0f0 } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #808080 } /* Generic.Output */
+.highlight .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0040D0 } /* Generic.Traceback */
+.highlight .kc { color: #007020; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #007020; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #007020; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #007020 } /* Keyword.Pseudo */
+.highlight .kr { color: #007020; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #902000 } /* Keyword.Type */
+.highlight .m { color: #40a070 } /* Literal.Number */
+.highlight .s { color: #4070a0 } /* Literal.String */
+.highlight .na { color: #4070a0 } /* Name.Attribute */
+.highlight .nb { color: #007020 } /* Name.Builtin */
+.highlight .nc { color: #0e84b5; font-weight: bold } /* Name.Class */
+.highlight .no { color: #60add5 } /* Name.Constant */
+.highlight .nd { color: #555555; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #d55537; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #007020 } /* Name.Exception */
+.highlight .nf { color: #06287e } /* Name.Function */
+.highlight .nl { color: #002070; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #062873; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #bb60d5 } /* Name.Variable */
+.highlight .ow { color: #007020; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mf { color: #40a070 } /* Literal.Number.Float */
+.highlight .mh { color: #40a070 } /* Literal.Number.Hex */
+.highlight .mi { color: #40a070 } /* Literal.Number.Integer */
+.highlight .mo { color: #40a070 } /* Literal.Number.Oct */
+.highlight .sb { color: #4070a0 } /* Literal.String.Backtick */
+.highlight .sc { color: #4070a0 } /* Literal.String.Char */
+.highlight .sd { color: #4070a0; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #4070a0 } /* Literal.String.Double */
+.highlight .se { color: #4070a0; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #4070a0 } /* Literal.String.Heredoc */
+.highlight .si { color: #70a0d0; font-style: italic } /* Literal.String.Interpol */
+.highlight .sx { color: #c65d09 } /* Literal.String.Other */
+.highlight .sr { color: #235388 } /* Literal.String.Regex */
+.highlight .s1 { color: #4070a0 } /* Literal.String.Single */
+.highlight .ss { color: #517918 } /* Literal.String.Symbol */
+.highlight .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #bb60d5 } /* Name.Variable.Class */
+.highlight .vg { color: #bb60d5 } /* Name.Variable.Global */
+.highlight .vi { color: #bb60d5 } /* Name.Variable.Instance */
+.highlight .il { color: #40a070 } /* Literal.Number.Integer.Long */</style>
+        <style>body {
+  margin: 0;
+  padding: 0;
+  font: 15px 'Source Sans Pro', sans-serif;
+  line-height: 1.6em;
+  color: #222;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: #007EE5;
+  text-decoration: none;
+}
+a:hover {
+  color: #007EE5;
+  text-decoration: none;
+}
+header.main-header {
+  background: none repeat scroll 0% 0% #205F29;
+  margin-bottom: 0px;
+}
+header.main-header a {
+  color: #fff;
+}
+header.main-header .container {
+  max-width: 1000px;
+}
+header.main-header .container nav a:hover {
+  background-color: #5C881C;
+}
+article {
+  margin: 0;
+}
+article header.about {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+article header {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+article header h1 {
+  margin-bottom: 2px;
+  font-weight: 700;
+  color: #000;
+}
+article header time {
+  color: #9E9E9E;
+  font-size: 0.85em;
+  float: right;
+}
+article header time.left {
+  color: #9E9E9E;
+  font-size: 0.85em;
+  float: left;
+}
+article div.social-links ul {
+  padding: 0px;
+}
+article div.social-links li {
+  display: inline;
+  font-size: 20px;
+}
+article div.social-links li a {
+  color: #000;
+  padding: 10px;
+}
+article div.social-links li a:hover {
+  color: #666;
+  text-decoration: none;
+}
+article p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  line-height: 1.6em;
+}
+article p.note {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  padding: 0.533em 0.733em;
+}
+article p.update {
+  background-color: #FEEFB3;
+  border: 1px solid #e6e68a;
+  padding: 0.533em 0.733em;
+}
+article p.alert {
+  background-color: #ffe2e2;
+  border: 1px solid #ffb2b2;
+  padding: 0.533em 0.733em;
+}
+article ul,
+article ol {
+  margin-top: 0px;
+  margin-bottom: 25px;
+}
+article li {
+  font-size: 16px;
+  line-height: 1.6em;
+}
+article a:hover {
+  text-decoration: underline;
+}
+article blockquote {
+  border-left: 2px solid #c7c7cc;
+  color: #666;
+  margin: 30px 0;
+  padding: 0 0 0 25px;
+}
+article img {
+  max-width: 100%;
+}
+article code {
+  color: #333;
+  background-color: #EEE;
+  border-radius: 0;
+  font-size: 13px;
+}
+article .meta {
+  font-size: 11px;
+}
+article .meta a:hover {
+  text-decoration: none;
+}
+article .meta div {
+  margin-bottom: 20px;
+  display: block;
+}
+article .meta a.tag {
+  margin: 0 10px 10px 0;
+  padding: 1px 12px;
+  display: inline-block;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.05);
+}
+article .meta a.tag:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+article .meta a.read_more,
+article .meta a.comments_btn {
+  font-size: 14px;
+  font-weight: 800;
+  padding: 10px 20px;
+  color: #205F29;
+  background: #FFF;
+  border: 1px solid #205F29;
+}
+article .meta a.read_more:hover,
+article .meta a.comments_btn:hover {
+  color: #FFF;
+  background: #5C881C;
+}
+.index {
+  max-width: 700px;
+}
+.index article header h2 {
+  font-size: 36px;
+  margin-bottom: 2px;
+  font-weight: 700;
+}
+.index article header h2 a {
+  color: #000;
+}
+.index article header h2 a:hover {
+  color: #007EE5;
+  text-decoration: none;
+}
+.index .separator {
+  padding: 40px 0 0 0;
+  margin: 0 0 40px 0;
+  height: 10px;
+  border-bottom: solid 1px #CCC;
+}
+.index .pagination {
+  display: block;
+  margin-bottom: 100px;
+}
+.index .pagination .left {
+  text-align: right;
+}
+.index .pagination .right {
+  text-align: left;
+}
+.index .pagination a {
+  display: inline-block;
+  border: 2px solid #5C881C;
+  margin: 0 5px;
+  padding: 8px 20px;
+  font-weight: bold;
+  color: #5C881C;
+}
+.index .pagination a:hover {
+  color: #FFF;
+  background: #5C881C;
+}
+.post {
+  max-width: 700px;
+}
+.post h2:before {
+  content: "# ";
+  font-weight: bold;
+  color: #DDD;
+}
+.post h3:before {
+  content: "## ";
+  font-weight: bold;
+  color: #DDD;
+}
+.post h4:before {
+  content: "### ";
+  font-weight: bold;
+  color: #DDD;
+}
+.post article .meta {
+  margin: 50px 0 100px;
+}
+.list {
+  max-width: 700px;
+}
+.list ul.double-list {
+  margin: 0 auto 60px;
+  padding: 0;
+  list-style-type: none;
+}
+.list ul.double-list li {
+  padding: 5px 0;
+}
+.list ul.double-list li h2 {
+  font-size: 1em;
+  display: inline;
+  font-weight: normal;
+}
+.list ul.double-list li span {
+  font-family: sans-serif;
+  text-transform: uppercase;
+  text-align: right;
+  float: right;
+  padding-top: 3px;
+  font-size: 12px;
+  color: #999;
+}
+.full-width-content {
+  padding-top: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: -20px;
+  margin-right: -20px;
+}
+.col-xs-1,
+.col-sm-1,
+.col-md-1,
+.col-lg-1,
+.col-xs-2,
+.col-sm-2,
+.col-md-2,
+.col-lg-2,
+.col-xs-3,
+.col-sm-3,
+.col-md-3,
+.col-lg-3,
+.col-xs-4,
+.col-sm-4,
+.col-md-4,
+.col-lg-4,
+.col-xs-5,
+.col-sm-5,
+.col-md-5,
+.col-lg-5,
+.col-xs-6,
+.col-sm-6,
+.col-md-6,
+.col-lg-6,
+.col-xs-7,
+.col-sm-7,
+.col-md-7,
+.col-lg-7,
+.col-xs-8,
+.col-sm-8,
+.col-md-8,
+.col-lg-8,
+.col-xs-9,
+.col-sm-9,
+.col-md-9,
+.col-lg-9,
+.col-xs-10,
+.col-sm-10,
+.col-md-10,
+.col-lg-10,
+.col-xs-11,
+.col-sm-11,
+.col-md-11,
+.col-lg-11,
+.col-xs-12,
+.col-sm-12,
+.col-md-12,
+.col-lg-12 {
+  padding-right: 0px;
+  padding-left: 0px;
+}</style>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <!--<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>-->
+        <script type="text/javascript" async
+          src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
+        </script>
+        <script type="text/javascript">
+        init_mathjax = function() {
+            if (window.MathJax) {
+                // MathJax loaded
+                MathJax.Hub.Config({
+                    tex2jax: {
+                        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+                    },
+                    displayAlign: 'left', // Change this to 'center' to center equations.
+                    "HTML-CSS": {
+                        styles: {'.MathJax_Display': {"margin": 0}}
+                    }
+                });
+                MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+            }
+        }
+        init_mathjax();
+        </script>
+
+    </head>
+
+    <body>
+        <header class="navbar navbar-inverse bs-docs-nav">
+            <div class="container-fluid">
+                <div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#theNavbar">
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span> 
+		  </button>
+                  <a class="navbar-brand" href="/" title="Home" class="title">Tech Journal</a>
+                </div>
+                <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation" id="theNavbar">
+		    <ul class="nav navbar-nav navbar-right">
+                            <li><a href="/pages/about.html" title="About">About</a></li>
+                            <li><a href="/archives.html" title="Archive">Archive</a></li>
+                            <li><a class="nodec icon-rss" href="/feeds/all.atom.xml" title="lj020326.github.io RSS feed" rel="me"></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <div id="wrap">
+<div class="container post">
+    <article>
+        <header>
+            <h1>Merging Itunes Playlists using Pandas</h1>
+            <time datetime="article.date.isoformat()" pubdate>Tue 24 April 2018</time>
+        </header>
+
+        <div class="article_content">
+            <style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI colors. */
+.ansibold {
+  font-weight: bold;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  border-left-width: 1px;
+  padding-left: 5px;
+  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #90CAF9;
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected {
+  border-color: #ababab;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  div.cell.selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected.jupyter-soft-selected {
+  border-left-width: 0;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  padding: 0.4em;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
+  /* .CodeMirror-lines */
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+.rendered_html pre,
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+.rendered_html td,
+
+
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+<style type="text/css">
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+
+<p>I recently wanted to see how many songs were common between 2 of my playlists.</p>
+<p>Here I'll take a look at some of the basic questions you can answer with this data.
+Later I hope to find the time to dig deeper and ask some more interesting and creative questions – stay tuned!</p>
+
+
+<p>For those who aren't familiar, this post is composed in the form of a <a href="https://jupyter.org/">Jupyter Notebook</a>, which is an open document format that combines text, code, data, and graphics and is viewable through the web browser – if you have not used it before I encourage you to try it out!</p>
+<p>You can download the notebook containing this post <a href="http://lj020326.github.io/downloads/notebooks/MergeItunesPlaylists.ipynb">here</a>, open it with Jupyter, and start asking your own questions of the data.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Setup-notebook-output-options">Setup notebook output options<a class="anchor-link" href="#Setup-notebook-output-options">&#182;</a></h2><p>Set notebook output formatting options:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.interactiveshell</span> <span class="kn">import</span> <span class="n">InteractiveShell</span>
+<span class="n">InteractiveShell</span><span class="o">.</span><span class="n">ast_node_interactivity</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span>
+<span class="n">InteractiveShell</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;INFO&#39;</span>
+
+<span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;&quot;</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.container { width:100% !important; }</style>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Import-standard-libraries">Import standard libraries<a class="anchor-link" href="#Import-standard-libraries">&#182;</a></h2><p>Some standard Python package imports:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+<span class="n">log</span><span class="o">.</span><span class="n">handlers</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">ch</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+<span class="n">ch</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ch</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="c1"># log.setLevel(logging.DEBUG)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.width&#39;</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="c1"># pd.set_option(&#39;max_colwidth&#39;,200)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">reset_option</span><span class="p">(</span><span class="s1">&#39;max_colwidth&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Import-Itunes-Playlist-Data">Import Itunes Playlist Data<a class="anchor-link" href="#Import-Itunes-Playlist-Data">&#182;</a></h2><p>We'll start by exporting the itunes playlist data (for howto export itunes playlists <a href="https://support.apple.com/kb/PH19491?locale=en_US">itunes</a>).
+I chose the text export option rather than xml.</p>
+<p>After exporting - I have 2 playlist files as seen in the example below.</p>
+<p>We now load the 2 playlists into list_of_playlists.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">all_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;data/Top80_sPop&amp;Rock.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;data/TopAlt&amp;Electronic.xlsx&#39;</span><span class="p">]</span>
+<span class="n">list_of_playlists</span><span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">file_</span> <span class="ow">in</span> <span class="n">all_files</span><span class="p">:</span>
+    <span class="n">xls_file</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelFile</span><span class="p">(</span><span class="n">file_</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">xls_file</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1">## load first sheet - there should only be one</span>
+<span class="c1">#     df = pd.read_csv(file_,index_col=None, header=0)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;## </span><span class="si">%s</span><span class="s2">: df.head()=&quot;</span> <span class="o">%</span> <span class="n">file_</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;## </span><span class="si">%s</span><span class="s2">: df.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">file_</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
+    <span class="n">list_of_playlists</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2018-04-24 11:28:35,058 - INFO - ## data/Top80_sPop&amp;Rock.xlsx: df.head()=
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[28]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Artist</th>
+      <th>Composer</th>
+      <th>Album</th>
+      <th>Grouping</th>
+      <th>Work</th>
+      <th>Movement Number</th>
+      <th>Movement Count</th>
+      <th>Movement Name</th>
+      <th>Genre</th>
+      <th>...</th>
+      <th>Volume Adjustment</th>
+      <th>Kind</th>
+      <th>Equalizer</th>
+      <th>Comments</th>
+      <th>Plays</th>
+      <th>Last Played</th>
+      <th>Skips</th>
+      <th>Last Skipped</th>
+      <th>My Rating</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Just The Way You Are</td>
+      <td>Billy Joel</td>
+      <td>Billy Joel</td>
+      <td>Greatest Hits Vol.I</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>154.0</td>
+      <td>2018-04-07 09:49:00</td>
+      <td>2.0</td>
+      <td>2017-12-27 10:16:00</td>
+      <td>100</td>
+      <td>C:\data\lee\itunes\Music\Billy Joel\Greatest H...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>She's Got A Way</td>
+      <td>Billy Joel</td>
+      <td>Billy Joel</td>
+      <td>Greatest Hits Vol.II</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>144.0</td>
+      <td>2018-03-25 14:02:00</td>
+      <td>3.0</td>
+      <td>2018-01-20 08:18:00</td>
+      <td>100</td>
+      <td>C:\data\lee\itunes\Music\Billy Joel\Greatest H...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Thunderstruck</td>
+      <td>Brian Johnson</td>
+      <td>NaN</td>
+      <td>The Very Best of AC/DC</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>96.0</td>
+      <td>2018-02-07 11:01:00</td>
+      <td>7.0</td>
+      <td>2018-01-08 18:35:00</td>
+      <td>100</td>
+      <td>C:\data\lee\itunes\Music\Compilations\The Very...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Don't Stop Believin'</td>
+      <td>Journey</td>
+      <td>Jonathan Cain/Neal Schon/Steve Perry</td>
+      <td>Greatest Hits (Limited Gold Edition)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>Encoded from Original CD album.  Lame v3.98.2 ...</td>
+      <td>86.0</td>
+      <td>2018-02-09 07:07:00</td>
+      <td>6.0</td>
+      <td>2018-01-06 12:45:00</td>
+      <td>100</td>
+      <td>C:\data\lee\itunes\Music\Journey\Greatest Hits...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Fade To Grey</td>
+      <td>Visage</td>
+      <td>NaN</td>
+      <td>New Wave Hits Of The '80s, Vol. 3</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Rock, 80s, Alternative</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>62.0</td>
+      <td>2018-04-09 19:23:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>100</td>
+      <td>C:\data\lee\itunes\Music\Visage\New Wave Hits ...</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 31 columns</p>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2018-04-24 11:28:35,094 - INFO - ## data/Top80_sPop&amp;Rock.xlsx: df.shape=(678, 31)
+2018-04-24 11:28:35,154 - INFO - ## data/TopAlt&amp;Electronic.xlsx: df.head()=
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[28]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Artist</th>
+      <th>Composer</th>
+      <th>Album</th>
+      <th>Grouping</th>
+      <th>Work</th>
+      <th>Movement Number</th>
+      <th>Movement Count</th>
+      <th>Movement Name</th>
+      <th>Genre</th>
+      <th>...</th>
+      <th>Volume Adjustment</th>
+      <th>Kind</th>
+      <th>Equalizer</th>
+      <th>Comments</th>
+      <th>Plays</th>
+      <th>Last Played</th>
+      <th>Skips</th>
+      <th>Last Skipped</th>
+      <th>My Rating</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>The Walker</td>
+      <td>Fitz &amp; The Tantrums</td>
+      <td>NaN</td>
+      <td>More Than Just a Dream (Deluxe Version)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Alternative</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>176.0</td>
+      <td>2017-12-05 10:46:00</td>
+      <td>10.0</td>
+      <td>2018-01-08 19:45:00</td>
+      <td>100</td>
+      <td>C:\data\lee\itunes\Music\Fitz &amp; The Tantrums\M...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Jack The Ripper</td>
+      <td>Morrissey</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Alternative, Punk</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>436.0</td>
+      <td>2018-03-12 19:59:00</td>
+      <td>13.0</td>
+      <td>2017-09-28 18:59:00</td>
+      <td>100</td>
+      <td>C:\data\lee\itunes\Music\Morrissey\Unknown Alb...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Heathens</td>
+      <td>Twenty One Pilots</td>
+      <td>NaN</td>
+      <td>Suicide Squad: The Album</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Indie Rock, Alternative</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>176.0</td>
+      <td>2017-11-21 14:29:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>100</td>
+      <td>C:\data\lee\itunes\Music\Twenty One Pilots\Sui...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Fade To Grey</td>
+      <td>Visage</td>
+      <td>NaN</td>
+      <td>New Wave Hits Of The '80s, Vol. 3</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Rock, 80s, Alternative</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>62.0</td>
+      <td>2018-04-09 19:23:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>100</td>
+      <td>C:\data\lee\itunes\Music\Visage\New Wave Hits ...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Take A Chance On Me</td>
+      <td>ABBA</td>
+      <td>NaN</td>
+      <td>The Essential Collection (CD 1/2)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Disco/Dance/Electronica/Pop</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>96.0</td>
+      <td>2017-11-21 14:37:00</td>
+      <td>23.0</td>
+      <td>2017-10-30 18:33:00</td>
+      <td>80</td>
+      <td>C:\data\lee\itunes\Music\ABBA\The Essential Co...</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 31 columns</p>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2018-04-24 11:28:35,193 - INFO - ## data/TopAlt&amp;Electronic.xlsx: df.shape=(186, 31)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Vertically-Stack-the-Playlist-Data">Vertically Stack the Playlist Data<a class="anchor-link" href="#Vertically-Stack-the-Playlist-Data">&#182;</a></h2><p>For our first example - I will load the playlists in list_of_playlists into dataframes and stack vertically.</p>
+<p>When we concatenate DataFrames, we need to specify the axis. axis=0 tells pandas to stack the second DataFrame under the first one. It will automatically detect whether the column names are the same and will stack accordingly. To stack the data vertically, we need to make sure we have the same columns and associated column format in both datasets.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Stack the DataFrames on top of each other</span>
+<span class="n">vertical_stack</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">list_of_playlists</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;## vertical_stack.head()=&quot;</span><span class="p">)</span>
+<span class="n">vertical_stack</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;vertical_stack.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">vertical_stack</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2018-04-24 11:40:38,368 - INFO - ## vertical_stack.head()=
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[35]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Artist</th>
+      <th>Composer</th>
+      <th>Album</th>
+      <th>Grouping</th>
+      <th>Work</th>
+      <th>Movement Number</th>
+      <th>Movement Count</th>
+      <th>Movement Name</th>
+      <th>Genre</th>
+      <th>...</th>
+      <th>Volume Adjustment</th>
+      <th>Kind</th>
+      <th>Equalizer</th>
+      <th>Comments</th>
+      <th>Plays</th>
+      <th>Last Played</th>
+      <th>Skips</th>
+      <th>Last Skipped</th>
+      <th>My Rating</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Just The Way You Are</td>
+      <td>Billy Joel</td>
+      <td>Billy Joel</td>
+      <td>Greatest Hits Vol.I</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>154.0</td>
+      <td>2018-04-07 09:49:00</td>
+      <td>2.0</td>
+      <td>2017-12-27 10:16:00</td>
+      <td>100</td>
+      <td>C:\data\lee\itunes\Music\Billy Joel\Greatest H...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>She's Got A Way</td>
+      <td>Billy Joel</td>
+      <td>Billy Joel</td>
+      <td>Greatest Hits Vol.II</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>144.0</td>
+      <td>2018-03-25 14:02:00</td>
+      <td>3.0</td>
+      <td>2018-01-20 08:18:00</td>
+      <td>100</td>
+      <td>C:\data\lee\itunes\Music\Billy Joel\Greatest H...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Thunderstruck</td>
+      <td>Brian Johnson</td>
+      <td>NaN</td>
+      <td>The Very Best of AC/DC</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>96.0</td>
+      <td>2018-02-07 11:01:00</td>
+      <td>7.0</td>
+      <td>2018-01-08 18:35:00</td>
+      <td>100</td>
+      <td>C:\data\lee\itunes\Music\Compilations\The Very...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Don't Stop Believin'</td>
+      <td>Journey</td>
+      <td>Jonathan Cain/Neal Schon/Steve Perry</td>
+      <td>Greatest Hits (Limited Gold Edition)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>Encoded from Original CD album.  Lame v3.98.2 ...</td>
+      <td>86.0</td>
+      <td>2018-02-09 07:07:00</td>
+      <td>6.0</td>
+      <td>2018-01-06 12:45:00</td>
+      <td>100</td>
+      <td>C:\data\lee\itunes\Music\Journey\Greatest Hits...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Fade To Grey</td>
+      <td>Visage</td>
+      <td>NaN</td>
+      <td>New Wave Hits Of The '80s, Vol. 3</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Rock, 80s, Alternative</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>62.0</td>
+      <td>2018-04-09 19:23:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>100</td>
+      <td>C:\data\lee\itunes\Music\Visage\New Wave Hits ...</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 31 columns</p>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2018-04-24 11:40:38,404 - INFO - vertical_stack.shape=(864, 31)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Merge-into-one-dataframe-based-on-keys.">Merge into one dataframe based on keys.<a class="anchor-link" href="#Merge-into-one-dataframe-based-on-keys.">&#182;</a></h2><p>We can also merge the list dataframe into one dataframe based on common unique keys.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">df_playlist1</span><span class="o">=</span><span class="n">list_of_playlists</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">df_playlist2</span><span class="o">=</span><span class="n">list_of_playlists</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_playlist1</span><span class="p">,</span> <span class="n">df_playlist2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span>
+
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;## merged_df.head()=&quot;</span><span class="p">)</span>
+<span class="n">merged_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;merged_df.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">merged_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2018-04-24 11:38:36,923 - INFO - ## merged_df.head()=
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[33]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Artist</th>
+      <th>Composer_x</th>
+      <th>Album_x</th>
+      <th>Grouping_x</th>
+      <th>Work_x</th>
+      <th>Movement Number_x</th>
+      <th>Movement Count_x</th>
+      <th>Movement Name_x</th>
+      <th>Genre_x</th>
+      <th>...</th>
+      <th>Volume Adjustment_y</th>
+      <th>Kind_y</th>
+      <th>Equalizer_y</th>
+      <th>Comments_y</th>
+      <th>Plays_y</th>
+      <th>Last Played_y</th>
+      <th>Skips_y</th>
+      <th>Last Skipped_y</th>
+      <th>My Rating_y</th>
+      <th>Location_y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Fade To Grey</td>
+      <td>Visage</td>
+      <td>NaN</td>
+      <td>New Wave Hits Of The '80s, Vol. 3</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Rock, 80s, Alternative</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>62.0</td>
+      <td>2018-04-09 19:23:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>100</td>
+      <td>C:\data\lee\itunes\Music\Visage\New Wave Hits ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>I Could Be Happy</td>
+      <td>Altered Images</td>
+      <td>NaN</td>
+      <td>New Wave Hits Of The '80s, Vol. 04</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, New Wave, 80s, Alternative</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>66.0</td>
+      <td>2018-04-11 17:44:00</td>
+      <td>1.0</td>
+      <td>2018-01-06 20:21:00</td>
+      <td>80</td>
+      <td>C:\data\lee\itunes\Music\Altered Images\New Wa...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Dance This Mess Around</td>
+      <td>The B-52's</td>
+      <td>Cindy Wilson/Fred Schneider/Kate Pierson/Keith...</td>
+      <td>B-52's</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Alternative, Punk, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>Black1000</td>
+      <td>151.0</td>
+      <td>2018-04-10 15:09:00</td>
+      <td>6.0</td>
+      <td>2018-03-07 11:58:00</td>
+      <td>80</td>
+      <td>C:\data\lee\itunes\Music\The B-52's\B-52's\03 ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Fight For Your Right</td>
+      <td>Beastie Boys</td>
+      <td>NaN</td>
+      <td>The Best 80s Songs</td>
+      <td>NaN</td>
+      <td>.</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>80s, Pop, Alternative</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>53.0</td>
+      <td>2018-04-09 20:18:00</td>
+      <td>1.0</td>
+      <td>2018-01-02 01:37:00</td>
+      <td>80</td>
+      <td>C:\data\lee\itunes\Music\Compilations\The Best...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Just What I Needed</td>
+      <td>The Cars</td>
+      <td>Ric Ocasek</td>
+      <td>Complete Greatest Hits</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, Electronic, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>112.0</td>
+      <td>2018-01-08 12:44:00</td>
+      <td>4.0</td>
+      <td>2018-01-06 22:59:00</td>
+      <td>80</td>
+      <td>C:\data\lee\itunes\Music\The Cars\Complete Gre...</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 60 columns</p>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2018-04-24 11:38:36,961 - INFO - merged_df.shape=(72, 60)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>By default, the Pandas merge operation acts with an “inner” merge. An inner merge, (or inner join) keeps only the common values in both the left and right dataframes for the result.</p>
+<p>Note that the # of columns minus the specified common keys has doubled.</p>
+<p>The merged dataframe preserves the original data columns from each of the datasets.</p>
+<p>The merged results has an appended suffix for each set of columns, "_x" and "_y" in the prior example.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Inner,-Left,-and-right-merge-types">Inner, Left, and right merge types<a class="anchor-link" href="#Inner,-Left,-and-right-merge-types">&#182;</a></h2><p>There are three different types of merges available in Pandas. These merge types are common across most database and data-orientated languages (SQL, R, SAS) and are typically referred to as “joins”. If you don’t know them, learn them now.</p>
+<ol>
+<li>Inner Merge / Inner join – The default Pandas behaviour, only keep rows where the merge “on” value exists in both the left and right dataframes.</li>
+<li>Left Merge / Left outer join – (aka left merge or left join) Keep every row in the left dataframe. Where there are missing values of the “on” variable in the right dataframe, add empty / NaN values in the result.</li>
+<li>Right Merge / Right outer join – (aka right merge or right join) Keep every row in the right dataframe. Where there are missing values of the “on” variable in the left column, add empty / NaN values in the result.</li>
+<li>Outer Merge / Full outer join – A full outer join returns all the rows from the left dataframe, all the rows from the right dataframe, and matches up rows where possible, with NaNs elsewhere.</li>
+</ol>
+<p>The merge type to use is specified using the “how” parameter in the merge command, taking values “left”, “right”, “inner” (default), or “outer”.</p>
+<p>Venn diagrams are commonly used to exemplify the different merge and join types. See this example from <a href="http://stackoverflow.com/questions/38549/what-is-the-difference-between-inner-join-and-outer-join">Stack overflow</a>:</p>
+<p><img src="/images/join-types-merge-names.jpg" alt='[img: Venn Diagram for merge types]'></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Reduce-into-one-base-on-key">Reduce into one base on key<a class="anchor-link" href="#Reduce-into-one-base-on-key">&#182;</a></h2><p>We can also use functools.reduce to merge the list dataframe into one.</p>
+<p>This gets the same results as the merge in the last example.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">functools</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">]),</span> <span class="n">list_of_playlists</span><span class="p">)</span>
+
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;## merged_df.head()=&quot;</span><span class="p">)</span>
+<span class="n">merged_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;merged_df.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">merged_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2018-04-24 11:43:55,403 - INFO - ## merged_df.head()=
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[37]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Artist</th>
+      <th>Composer_x</th>
+      <th>Album_x</th>
+      <th>Grouping_x</th>
+      <th>Work_x</th>
+      <th>Movement Number_x</th>
+      <th>Movement Count_x</th>
+      <th>Movement Name_x</th>
+      <th>Genre_x</th>
+      <th>...</th>
+      <th>Volume Adjustment_y</th>
+      <th>Kind_y</th>
+      <th>Equalizer_y</th>
+      <th>Comments_y</th>
+      <th>Plays_y</th>
+      <th>Last Played_y</th>
+      <th>Skips_y</th>
+      <th>Last Skipped_y</th>
+      <th>My Rating_y</th>
+      <th>Location_y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Fade To Grey</td>
+      <td>Visage</td>
+      <td>NaN</td>
+      <td>New Wave Hits Of The '80s, Vol. 3</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Rock, 80s, Alternative</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>62.0</td>
+      <td>2018-04-09 19:23:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>100</td>
+      <td>C:\data\lee\itunes\Music\Visage\New Wave Hits ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>I Could Be Happy</td>
+      <td>Altered Images</td>
+      <td>NaN</td>
+      <td>New Wave Hits Of The '80s, Vol. 04</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, New Wave, 80s, Alternative</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>66.0</td>
+      <td>2018-04-11 17:44:00</td>
+      <td>1.0</td>
+      <td>2018-01-06 20:21:00</td>
+      <td>80</td>
+      <td>C:\data\lee\itunes\Music\Altered Images\New Wa...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Dance This Mess Around</td>
+      <td>The B-52's</td>
+      <td>Cindy Wilson/Fred Schneider/Kate Pierson/Keith...</td>
+      <td>B-52's</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Alternative, Punk, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>Black1000</td>
+      <td>151.0</td>
+      <td>2018-04-10 15:09:00</td>
+      <td>6.0</td>
+      <td>2018-03-07 11:58:00</td>
+      <td>80</td>
+      <td>C:\data\lee\itunes\Music\The B-52's\B-52's\03 ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Fight For Your Right</td>
+      <td>Beastie Boys</td>
+      <td>NaN</td>
+      <td>The Best 80s Songs</td>
+      <td>NaN</td>
+      <td>.</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>80s, Pop, Alternative</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>53.0</td>
+      <td>2018-04-09 20:18:00</td>
+      <td>1.0</td>
+      <td>2018-01-02 01:37:00</td>
+      <td>80</td>
+      <td>C:\data\lee\itunes\Music\Compilations\The Best...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Just What I Needed</td>
+      <td>The Cars</td>
+      <td>Ric Ocasek</td>
+      <td>Complete Greatest Hits</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, Electronic, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>112.0</td>
+      <td>2018-01-08 12:44:00</td>
+      <td>4.0</td>
+      <td>2018-01-06 22:59:00</td>
+      <td>80</td>
+      <td>C:\data\lee\itunes\Music\The Cars\Complete Gre...</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 60 columns</p>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2018-04-24 11:43:55,454 - INFO - merged_df.shape=(72, 60)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Example-of-outer-merge-/-full-outer-join">Example of outer merge / full outer join<a class="anchor-link" href="#Example-of-outer-merge-/-full-outer-join">&#182;</a></h2><p>Finally, we will perform an outer merge using Pandas, also referred to as a “full outer join” or just “outer join”. An outer join can be seen as a combination of left and right joins, or the opposite of an inner join. In outer joins, every row from the left and right dataframes is retained in the result, with NaNs where there are no matched join variables.</p>
+<p>As such, we would expect the results to have the same number of rows as there are distinct values of “use_id” between user_device and user_usage, i.e. every join value from the left dataframe will be in the result along with every value from the right dataframe, and they’ll be linked where possible.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">df_playlist1</span><span class="o">=</span><span class="n">list_of_playlists</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">df_playlist2</span><span class="o">=</span><span class="n">list_of_playlists</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_playlist1</span><span class="p">,</span> 
+                     <span class="n">df_playlist2</span><span class="p">,</span> 
+                     <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">],</span>
+                     <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;## merged_df.head()=&quot;</span><span class="p">)</span>
+<span class="n">merged_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;merged_df.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">merged_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2018-04-24 12:02:40,510 - INFO - ## merged_df.head()=
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[39]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Artist</th>
+      <th>Composer_x</th>
+      <th>Album_x</th>
+      <th>Grouping_x</th>
+      <th>Work_x</th>
+      <th>Movement Number_x</th>
+      <th>Movement Count_x</th>
+      <th>Movement Name_x</th>
+      <th>Genre_x</th>
+      <th>...</th>
+      <th>Volume Adjustment_y</th>
+      <th>Kind_y</th>
+      <th>Equalizer_y</th>
+      <th>Comments_y</th>
+      <th>Plays_y</th>
+      <th>Last Played_y</th>
+      <th>Skips_y</th>
+      <th>Last Skipped_y</th>
+      <th>My Rating_y</th>
+      <th>Location_y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Just The Way You Are</td>
+      <td>Billy Joel</td>
+      <td>Billy Joel</td>
+      <td>Greatest Hits Vol.I</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>She's Got A Way</td>
+      <td>Billy Joel</td>
+      <td>Billy Joel</td>
+      <td>Greatest Hits Vol.II</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Thunderstruck</td>
+      <td>Brian Johnson</td>
+      <td>NaN</td>
+      <td>The Very Best of AC/DC</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Don't Stop Believin'</td>
+      <td>Journey</td>
+      <td>Jonathan Cain/Neal Schon/Steve Perry</td>
+      <td>Greatest Hits (Limited Gold Edition)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Fade To Grey</td>
+      <td>Visage</td>
+      <td>NaN</td>
+      <td>New Wave Hits Of The '80s, Vol. 3</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Rock, 80s, Alternative</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>62.0</td>
+      <td>2018-04-09 19:23:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>100.0</td>
+      <td>C:\data\lee\itunes\Music\Visage\New Wave Hits ...</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 60 columns</p>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2018-04-24 12:02:40,553 - INFO - merged_df.shape=(797, 60)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We noted in our prior example that the vertically stacked dataframe had a rowcount of 864 and we noted that the inner data set found from the initial merge count is 72 rows.</p>
+<p>In theory the rowcount of the outer join should be the total count minus the intersection - so 864 - 72 = 792.</p>
+<p>However, the count is off by 5.</p>
+<p>Something is off.</p>
+<p>My instincts are that the data sets are not truely unique based on the composite key that we used.  This would lead to mismatched counts between the union count and the merged data set count.</p>
+<p>We can perform a simple check to validate if our instincts are correct.
+We now find out how many duplicate records exist based on the composite key we used in the first playlist dataset.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">df_dupes1</span> <span class="o">=</span> <span class="n">df_playlist1</span><span class="p">[</span><span class="n">df_playlist1</span><span class="o">.</span><span class="n">duplicated</span><span class="p">([</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="bp">False</span><span class="p">)]</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;df_dupes1.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">df_dupes1</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+
+<span class="n">df_dupes1</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2018-04-24 12:23:02,012 - INFO - df_dupes1.shape=(76, 31)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[47]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Artist</th>
+      <th>Composer</th>
+      <th>Album</th>
+      <th>Grouping</th>
+      <th>Work</th>
+      <th>Movement Number</th>
+      <th>Movement Count</th>
+      <th>Movement Name</th>
+      <th>Genre</th>
+      <th>...</th>
+      <th>Volume Adjustment</th>
+      <th>Kind</th>
+      <th>Equalizer</th>
+      <th>Comments</th>
+      <th>Plays</th>
+      <th>Last Played</th>
+      <th>Skips</th>
+      <th>Last Skipped</th>
+      <th>My Rating</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>122</th>
+      <td>Halloween</td>
+      <td>Dead Kennedys</td>
+      <td>NaN</td>
+      <td>Just Can't Get Enough: New Wa</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Alternative, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>4.0</td>
+      <td>2018-03-19 08:46:00</td>
+      <td>60</td>
+      <td>C:\data\lee\itunes\Music\Dead Kennedys\Just Ca...</td>
+    </tr>
+    <tr>
+      <th>310</th>
+      <td>Halloween</td>
+      <td>Dead Kennedys</td>
+      <td>D.H. Peligro/Dead Kennedys/East Bay Ray/Jello ...</td>
+      <td>Milking The Sacred Cow</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Punk Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>1.0</td>
+      <td>2018-01-11 23:59:00</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\Dead Kennedys\Milking...</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Enjoy The Silence</td>
+      <td>Depeche Mode</td>
+      <td>NaN</td>
+      <td>Best Of Depeche Mode, Vol. 1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>Track 4</td>
+      <td>40.0</td>
+      <td>2018-04-10 19:19:00</td>
+      <td>1.0</td>
+      <td>2018-01-14 10:37:00</td>
+      <td>80</td>
+      <td>C:\data\lee\itunes\Music\Depeche Mode\Best Of ...</td>
+    </tr>
+    <tr>
+      <th>127</th>
+      <td>Enjoy The Silence</td>
+      <td>Depeche Mode</td>
+      <td>Martin L. Gore</td>
+      <td>Violator</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, 80s, Alternative</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>Sire / Reprise 9 26081-2</td>
+      <td>27.0</td>
+      <td>2018-04-09 19:49:00</td>
+      <td>2.0</td>
+      <td>2018-02-23 13:33:00</td>
+      <td>60</td>
+      <td>C:\data\lee\itunes\Music\Depeche Mode\Violator...</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>The Final Countdown</td>
+      <td>Europe</td>
+      <td>NaN</td>
+      <td>101 Sporting Anthems</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>86.0</td>
+      <td>2016-04-29 15:29:00</td>
+      <td>5.0</td>
+      <td>2015-09-28 19:58:00</td>
+      <td>80</td>
+      <td>C:\data\lee\itunes\Music\Various Artists\101 S...</td>
+    </tr>
+    <tr>
+      <th>358</th>
+      <td>The Final Countdown</td>
+      <td>Europe</td>
+      <td>NaN</td>
+      <td>The Best 80s Songs</td>
+      <td>NaN</td>
+      <td>.</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>80s, Pop</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3.0</td>
+      <td>2018-01-02 17:47:00</td>
+      <td>2.0</td>
+      <td>2018-01-06 21:49:00</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\Compilations\The Best...</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>Down Under</td>
+      <td>Men At Work</td>
+      <td>NaN</td>
+      <td>The Best 80s Songs</td>
+      <td>NaN</td>
+      <td>.</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>80s, Pop</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>2018-01-02 19:24:00</td>
+      <td>1.0</td>
+      <td>2018-01-02 01:44:00</td>
+      <td>80</td>
+      <td>C:\data\lee\itunes\Music\Compilations\The Best...</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>Down Under</td>
+      <td>Men At Work</td>
+      <td>Colin Hay, Roy Strykert</td>
+      <td>Like, Omigod! The 80s Pop Culture Box (Totally...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>49.0</td>
+      <td>2018-04-11 18:47:00</td>
+      <td>3.0</td>
+      <td>2018-01-17 18:53:00</td>
+      <td>80</td>
+      <td>C:\data\lee\itunes\Music\Men At Work\Like, Omi...</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>Cum On Feel The Noize</td>
+      <td>Quiet Riot</td>
+      <td>NaN</td>
+      <td>101 Sporting Anthems</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>79.0</td>
+      <td>2016-04-29 16:44:00</td>
+      <td>5.0</td>
+      <td>2018-01-08 15:01:00</td>
+      <td>80</td>
+      <td>C:\data\lee\itunes\Music\Various Artists\101 S...</td>
+    </tr>
+    <tr>
+      <th>485</th>
+      <td>Cum On Feel The Noize</td>
+      <td>Quiet Riot</td>
+      <td>Noddy Holder, Jim Lea</td>
+      <td>Like, Omigod! The 80s Pop Culture Box (Totally...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3.0</td>
+      <td>2018-03-30 10:27:00</td>
+      <td>2.0</td>
+      <td>2018-01-09 18:04:00</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\Compilations\Like, Om...</td>
+    </tr>
+    <tr>
+      <th>509</th>
+      <td>Never Say Never</td>
+      <td>Romeo Void</td>
+      <td>NaN</td>
+      <td>New Wave Hits Of The '80s, Vol. 06</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>2018-01-08 15:49:00</td>
+      <td>1.0</td>
+      <td>2018-03-23 18:25:00</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\Romeo Void\New Wave H...</td>
+    </tr>
+    <tr>
+      <th>510</th>
+      <td>Never Say Never</td>
+      <td>Romeo Void</td>
+      <td>NaN</td>
+      <td>New Wave Women</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, New Wave, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>4.0</td>
+      <td>2018-03-12 16:31:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\Romeo Void\New Wave W...</td>
+    </tr>
+    <tr>
+      <th>263</th>
+      <td>Drive</td>
+      <td>The Cars</td>
+      <td>Ric Ocasek</td>
+      <td>Complete Greatest Hits</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, Electronic, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5.0</td>
+      <td>2018-01-09 15:38:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Cars\Complete Gre...</td>
+    </tr>
+    <tr>
+      <th>270</th>
+      <td>Drive</td>
+      <td>The Cars</td>
+      <td>Ric Ocasek</td>
+      <td>Just What I Needed - Anthology (CD 2)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>2018-03-25 13:33:00</td>
+      <td>1.0</td>
+      <td>2018-03-29 18:06:00</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Cars\Just What I ...</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>Good Times Roll</td>
+      <td>The Cars</td>
+      <td>Ric Ocasek</td>
+      <td>Complete Greatest Hits</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, Electronic, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>15.0</td>
+      <td>2018-01-09 15:15:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>60</td>
+      <td>C:\data\lee\itunes\Music\The Cars\Complete Gre...</td>
+    </tr>
+    <tr>
+      <th>264</th>
+      <td>Good Times Roll</td>
+      <td>The Cars</td>
+      <td>Ric Ocasek</td>
+      <td>Just What I Needed - Anthology (CD 1)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>2018-03-14 07:38:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Cars\Just What I ...</td>
+    </tr>
+    <tr>
+      <th>262</th>
+      <td>It's All I Can Do</td>
+      <td>The Cars</td>
+      <td>Ric Ocasek</td>
+      <td>Complete Greatest Hits</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, Electronic, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>12.0</td>
+      <td>2018-03-22 16:49:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Cars\Complete Gre...</td>
+    </tr>
+    <tr>
+      <th>266</th>
+      <td>It's All I Can Do</td>
+      <td>The Cars</td>
+      <td>Ric Ocasek</td>
+      <td>Just What I Needed - Anthology (CD 1)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>2018-01-09 16:28:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Cars\Just What I ...</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>Magic</td>
+      <td>The Cars</td>
+      <td>Ric Ocasek</td>
+      <td>Complete Greatest Hits</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, Electronic, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>12.0</td>
+      <td>2018-03-22 14:27:00</td>
+      <td>1.0</td>
+      <td>2018-01-06 22:27:00</td>
+      <td>60</td>
+      <td>C:\data\lee\itunes\Music\The Cars\Complete Gre...</td>
+    </tr>
+    <tr>
+      <th>271</th>
+      <td>Magic</td>
+      <td>The Cars</td>
+      <td>Ric Ocasek</td>
+      <td>Just What I Needed - Anthology (CD 2)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3.0</td>
+      <td>2018-03-30 10:19:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Cars\Just What I ...</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Tonight She Comes</td>
+      <td>The Cars</td>
+      <td>Ric Ocasek</td>
+      <td>Complete Greatest Hits</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, Electronic, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>20.0</td>
+      <td>2018-03-12 18:44:00</td>
+      <td>1.0</td>
+      <td>2014-03-11 13:47:00</td>
+      <td>80</td>
+      <td>C:\data\lee\itunes\Music\The Cars\Complete Gre...</td>
+    </tr>
+    <tr>
+      <th>272</th>
+      <td>Tonight She Comes</td>
+      <td>The Cars</td>
+      <td>Ric Ocasek</td>
+      <td>Just What I Needed - Anthology (CD 2)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pop, Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>2018-03-19 09:50:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Cars\Just What I ...</td>
+    </tr>
+    <tr>
+      <th>543</th>
+      <td>American Nights</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>Born To Be Bad</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\Born To ...</td>
+    </tr>
+    <tr>
+      <th>560</th>
+      <td>American Nights</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>Live In Japan</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>2018-03-25 15:15:00</td>
+      <td>1.0</td>
+      <td>2018-01-11 22:42:00</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\Live In ...</td>
+    </tr>
+    <tr>
+      <th>575</th>
+      <td>Johnny Guitar</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Mercury Albums Anthology (disc 2)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>2018-03-24 14:30:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Merc...</td>
+    </tr>
+    <tr>
+      <th>590</th>
+      <td>Johnny Guitar</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>Queens Of Noise</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td></td>
+      <td>1.0</td>
+      <td>2018-01-08 16:39:00</td>
+      <td>1.0</td>
+      <td>2018-01-09 18:55:00</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\Queens O...</td>
+    </tr>
+    <tr>
+      <th>519</th>
+      <td>Little Lost Girls</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>And Now ... The Runaways</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td></td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\And Now ...</td>
+    </tr>
+    <tr>
+      <th>555</th>
+      <td>Little Lost Girls</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>Little Lost Girls</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\Little L...</td>
+    </tr>
+    <tr>
+      <th>576</th>
+      <td>Little Sister</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Mercury Albums Anthology (disc 2)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Merc...</td>
+    </tr>
+    <tr>
+      <th>599</th>
+      <td>Little Sister</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>Waitin' For The Night</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3.0</td>
+      <td>2018-03-23 17:54:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\Waitin' ...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>204</th>
+      <td>Take It Or Leave It</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>Queens Of Noise</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td></td>
+      <td>4.0</td>
+      <td>2018-03-23 09:23:00</td>
+      <td>1.0</td>
+      <td>2018-01-09 18:17:00</td>
+      <td>60</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\Queens O...</td>
+    </tr>
+    <tr>
+      <th>522</th>
+      <td>Take It Or Leave It</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Best Of The Runaways</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>vtwin88cube</td>
+      <td>3.0</td>
+      <td>2018-03-22 14:17:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
+    </tr>
+    <tr>
+      <th>523</th>
+      <td>Take It Or Leave It</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Best Of The Runaways</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
+    </tr>
+    <tr>
+      <th>517</th>
+      <td>Takeover</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>And Now ... The Runaways</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td></td>
+      <td>1.0</td>
+      <td>2018-01-08 17:05:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\And Now ...</td>
+    </tr>
+    <tr>
+      <th>553</th>
+      <td>Takeover</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>Little Lost Girls</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>2018-01-08 16:49:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\Little L...</td>
+    </tr>
+    <tr>
+      <th>541</th>
+      <td>Thunder</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>Born To Be Bad</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>4.0</td>
+      <td>2018-03-14 08:07:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\Born To ...</td>
+    </tr>
+    <tr>
+      <th>562</th>
+      <td>Thunder</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Mercury Album Anthology (disc 1)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>2018-03-25 13:02:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Merc...</td>
+    </tr>
+    <tr>
+      <th>593</th>
+      <td>Thunder</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>2018-03-24 14:39:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Runa...</td>
+    </tr>
+    <tr>
+      <th>579</th>
+      <td>Trash Can Murders</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Mercury Albums Anthology (disc 2)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>2018-01-08 14:01:00</td>
+      <td>2.0</td>
+      <td>2018-01-09 19:08:00</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Merc...</td>
+    </tr>
+    <tr>
+      <th>605</th>
+      <td>Trash Can Murders</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>Waitin' For The Night</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3.0</td>
+      <td>2018-03-25 14:36:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\Waitin' ...</td>
+    </tr>
+    <tr>
+      <th>525</th>
+      <td>Wait For Me</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Best Of The Runaways</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>vtwin88cube</td>
+      <td>1.0</td>
+      <td>2018-03-22 09:18:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
+    </tr>
+    <tr>
+      <th>526</th>
+      <td>Wait For Me</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Best Of The Runaways</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>2018-01-09 13:15:00</td>
+      <td>1.0</td>
+      <td>2018-02-13 12:45:00</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
+    </tr>
+    <tr>
+      <th>537</th>
+      <td>Wait For Me</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Best Of The Runaways: 20th Century Masters...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
+    </tr>
+    <tr>
+      <th>578</th>
+      <td>Wait For Me</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Mercury Albums Anthology (disc 2)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>2018-02-20 20:03:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Merc...</td>
+    </tr>
+    <tr>
+      <th>602</th>
+      <td>Wait For Me</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>Waitin' For The Night</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>1.0</td>
+      <td>2018-02-12 19:27:00</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\Waitin' ...</td>
+    </tr>
+    <tr>
+      <th>529</th>
+      <td>Waitin' For The Night</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Best Of The Runaways</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>vtwin88cube</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>1.0</td>
+      <td>2018-02-16 13:27:00</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
+    </tr>
+    <tr>
+      <th>530</th>
+      <td>Waitin' For The Night</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Best Of The Runaways</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>1.0</td>
+      <td>2018-03-29 18:06:00</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
+    </tr>
+    <tr>
+      <th>538</th>
+      <td>Waitin' For The Night</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Best Of The Runaways: 20th Century Masters...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>2018-03-31 17:47:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
+    </tr>
+    <tr>
+      <th>607</th>
+      <td>Waitin' For The Night</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>Waitin' For The Night</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\Waitin' ...</td>
+    </tr>
+    <tr>
+      <th>580</th>
+      <td>Waitin' For the Night</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Mercury Albums Anthology (disc 2)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>2018-03-22 16:10:00</td>
+      <td>1.0</td>
+      <td>2018-01-11 22:43:00</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Merc...</td>
+    </tr>
+    <tr>
+      <th>584</th>
+      <td>Waitin' For the Night</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>Neon Angels</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>2018-01-08 15:18:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\Neon Ang...</td>
+    </tr>
+    <tr>
+      <th>527</th>
+      <td>Wasted</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Best Of The Runaways</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>vtwin88cube</td>
+      <td>3.0</td>
+      <td>2018-03-04 17:18:00</td>
+      <td>1.0</td>
+      <td>2018-01-09 19:35:00</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
+    </tr>
+    <tr>
+      <th>528</th>
+      <td>Wasted</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Best Of The Runaways</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
+    </tr>
+    <tr>
+      <th>536</th>
+      <td>Wasted</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Best Of The Runaways: 20th Century Masters...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
+    </tr>
+    <tr>
+      <th>577</th>
+      <td>Wasted</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Mercury Albums Anthology (disc 2)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>2018-03-24 14:19:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Merc...</td>
+    </tr>
+    <tr>
+      <th>600</th>
+      <td>Wasted</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>Waitin' For The Night</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>2.0</td>
+      <td>2018-03-23 18:30:00</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\Waitin' ...</td>
+    </tr>
+    <tr>
+      <th>545</th>
+      <td>Wild Thing</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>Born To Be Bad</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>2018-03-25 14:45:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\Born To ...</td>
+    </tr>
+    <tr>
+      <th>557</th>
+      <td>Wild Thing</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>Live In Japan</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>2018-03-22 11:15:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\Live In ...</td>
+    </tr>
+    <tr>
+      <th>524</th>
+      <td>You Drive Me Wild</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Best Of The Runaways</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>vtwin88cube</td>
+      <td>1.0</td>
+      <td>2018-01-09 12:15:00</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Best...</td>
+    </tr>
+    <tr>
+      <th>591</th>
+      <td>You Drive Me Wild</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>The Runaways</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Hard Rock, 80s</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>MPEG audio file</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+      <td>1.0</td>
+      <td>2018-01-09 18:13:00</td>
+      <td>40</td>
+      <td>C:\data\lee\itunes\Music\The Runaways\The Runa...</td>
+    </tr>
+  </tbody>
+</table>
+<p>76 rows × 31 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There 76 duplicate entries in the set based on the composite key we used.</p>
+<p>Looking at the data, it seems it contains information for the actual digital files stored on disk.</p>
+<p>For our purpose of comparing the logical music tracks between the 2 playlists, we can safely remove that physical file related information to form a new logical representation of the playlist based on a subset of the data.</p>
+<p>For now, we will simply strip out the duplicate records from the playlist based on original composite key and keep the first record in each case.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">df_playlist1_uniq</span><span class="o">=</span><span class="n">df_playlist1</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">])</span>
+
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;df_playlist1_uniq.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">df_playlist1_uniq</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2018-04-24 12:33:28,628 - INFO - df_playlist1_uniq.shape=(634, 31)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Enhance-the-dataset-load-to-exclude-duplicates">Enhance the dataset load to exclude duplicates<a class="anchor-link" href="#Enhance-the-dataset-load-to-exclude-duplicates">&#182;</a></h2><p>We now update the original load logic to exclude duplicates and rerun the merge to see if the set union set count agrees with the merged dataset count.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">all_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;data/Top80_sPop&amp;Rock.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;data/TopAlt&amp;Electronic.xlsx&#39;</span><span class="p">]</span>
+<span class="n">list_of_playlists</span><span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">file_</span> <span class="ow">in</span> <span class="n">all_files</span><span class="p">:</span>
+    <span class="n">xls_file</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelFile</span><span class="p">(</span><span class="n">file_</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">xls_file</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1">## load first sheet - there should only be one</span>
+    
+    <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;## </span><span class="si">%s</span><span class="s2">: df.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">file_</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
+
+    <span class="n">list_of_playlists</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="n">inner_df</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">),</span> <span class="n">list_of_playlists</span><span class="p">)</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">),</span> <span class="n">list_of_playlists</span><span class="p">)</span>
+
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;inner_df.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">inner_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;merged_df.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">merged_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+
+<span class="n">df1_cnt</span><span class="o">=</span><span class="n">list_of_playlists</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">df2_cnt</span><span class="o">=</span><span class="n">list_of_playlists</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">df_inner_cnt</span><span class="o">=</span><span class="n">inner_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">df_union_cnt</span><span class="o">=</span><span class="n">df1_cnt</span><span class="o">+</span><span class="n">df2_cnt</span><span class="o">-</span><span class="n">df_inner_cnt</span>
+<span class="n">df_merged_cnt</span><span class="o">=</span><span class="n">merged_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Rows in dataset1=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">df1_cnt</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Rows in dataset2=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">df2_cnt</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Rows in intersection=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">df_inner_cnt</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Rows in union=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">df_union_cnt</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;(Rows in union==Rows in merged) = </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">df_union_cnt</span><span class="o">==</span><span class="n">df_merged_cnt</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2018-04-24 12:52:31,276 - INFO - ## data/Top80_sPop&amp;Rock.xlsx: df.shape=(634, 31)
+2018-04-24 12:52:31,338 - INFO - ## data/TopAlt&amp;Electronic.xlsx: df.shape=(185, 31)
+2018-04-24 12:52:31,359 - INFO - inner_df.shape=(67, 60)
+2018-04-24 12:52:31,364 - INFO - merged_df.shape=(752, 60)
+2018-04-24 12:52:31,365 - INFO - Rows in dataset1=634
+2018-04-24 12:52:31,368 - INFO - Rows in dataset2=185
+2018-04-24 12:52:31,371 - INFO - Rows in intersection=67
+2018-04-24 12:52:31,371 - INFO - Rows in union=752
+2018-04-24 12:52:31,374 - INFO - (Rows in union==Rows in merged) = True
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So the data set union count agrees with the merged dataframe count!</p>
+
+</div>
+</div>
+</div>
+ 
+
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+        </div>
+
+        <div class="meta">
+            <div>
+                    <a href="http://lj020326.github.io/tag/jupyter.html" class="tag">jupyter</a>
+                    <a href="http://lj020326.github.io/tag/pandas.html" class="tag">pandas</a>
+                    <a href="http://lj020326.github.io/tag/itunes.html" class="tag">itunes</a>
+                    <a href="http://lj020326.github.io/tag/merge.html" class="tag">merge</a>
+                    <a href="http://lj020326.github.io/tag/join.html" class="tag">join</a>
+            </div>
+        </div>
+    </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'lj020326-github-io';
+      var disqus_identifier = '/blog/2018/04/24/merging-two-itunes-playlists-using-pandas/';
+      var disqus_url = 'http://lj020326.github.io/blog/2018/04/24/merging-two-itunes-playlists-using-pandas/';
+      var disqus_title = 'Merging Itunes Playlists using Pandas';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = "//" + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+  </section>
+
+</div>
+
+<style type="text/css">
+{
+    max-width: 700px;
+}
+
+.text_cell .prompt {
+    display: none;
+}
+
+div.cell {
+    padding: 0;
+}
+
+div.text_cell_render {
+    padding: 0;
+}
+
+div.prompt {
+    font-size: 13px;
+}
+
+div.input_prompt {
+    padding: .7em 0.2em;
+}
+
+div.output_prompt {
+    padding: .4em .2em;
+}
+
+div.input_area {
+    margin: .2em 0.4em;
+    max-width: 580px;
+}
+
+table.dataframe {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+table.dataframe th, td {
+    padding: 4px;
+    text-align: left;
+}
+
+pre code {
+    background-color: inherit;
+}</style>
+
+        </div>
+<!--
+    <footer>
+      <p>
+        © 2012-2017 Lee Johnson, license <a href="https://github.com/lj020326/lj020326.github.io-source/blob/master/LICENSE"> </a>
+        unless otherwise noted.
+        Generated by <a href= "http://docs.getpelican.com/">Pelican</a>.
+      </p>
+    </footer>
+-->
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-117727381-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-117727381-1');
+    ga('send', 'pageview');
+</script>
+    </body>
+</html>

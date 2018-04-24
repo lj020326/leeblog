@@ -4,20 +4,6 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Merging Itunes Playlists using Pandas"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "*This notebook originally appeared as a [post](http://lj020326.github.io/blog/2017/12/18/simulating-chutes-and-ladders/) on the blog [Python Automation Journal](http://lj020326.github.io).*"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
     "<!-- PELICAN_BEGIN_SUMMARY -->\n",
     "\n",
     "I recently wanted to see how many songs were common between 2 of my playlists.\n",
@@ -56,7 +42,7 @@
       ]
      },
      "metadata": {},
-     "output_type": "display_data"
+     "output_type": "execute_result"
     }
    ],
    "source": [
