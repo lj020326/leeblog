@@ -1415,15 +1415,12 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 
-
 <p>I recently wanted to see how many songs were common between 2 of my iTunes playlists.</p>
 <p>Here I'll take a look at some of the basic questions you can answer with this data.
 Later I hope to find the time to dig deeper and ask some more interesting and creative questions – stay tuned!</p>
 
-
 <p>For those who aren't familiar, this post is composed in the form of a <a href="https://jupyter.org/">Jupyter Notebook</a>, which is an open document format that combines text, code, data, and graphics and is viewable through the web browser – if you have not used it before I encourage you to try it out!</p>
 <p>You can download the notebook containing this post <a href="http://lj020326.github.io/downloads/notebooks/MergeItunesPlaylists.ipynb">here</a>, open it with Jupyter, and start asking your own questions of the data.</p>
-
 </div>
 </div>
 </div>
@@ -1431,62 +1428,49 @@ Later I hope to find the time to dig deeper and ask some more interesting and cr
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Setup-notebook-output-options">Setup notebook output options<a class="anchor-link" href="#Setup-notebook-output-options">&#182;</a></h2><p>Set notebook output formatting options:</p>
-
+<h2 id="Setup-notebook-output-options">Setup notebook output options<a class="anchor-link" href="#Setup-notebook-output-options">¶</a></h2><p>Set notebook output formatting options:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In [22]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.interactiveshell</span> <span class="kn">import</span> <span class="n">InteractiveShell</span>
-<span class="n">InteractiveShell</span><span class="o">.</span><span class="n">ast_node_interactivity</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span>
-<span class="n">InteractiveShell</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;INFO&#39;</span>
+<span class="n">InteractiveShell</span><span class="o">.</span><span class="n">ast_node_interactivity</span> <span class="o">=</span> <span class="s2">"all"</span>
+<span class="n">InteractiveShell</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">'INFO'</span>
 
 <span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;&quot;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">"&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;"</span><span class="p">))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
-
 <div class="output_html rendered_html output_subarea ">
 <style>.container { width:100% !important; }</style>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Import-standard-libraries">Import standard libraries<a class="anchor-link" href="#Import-standard-libraries">&#182;</a></h2><p>Some standard Python package imports:</p>
-
+<h2 id="Import-standard-libraries">Import standard libraries<a class="anchor-link" href="#Import-standard-libraries">¶</a></h2><p>Some standard Python package imports:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In [20]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -1500,77 +1484,62 @@ Later I hope to find the time to dig deeper and ask some more interesting and cr
 <span class="n">log</span><span class="o">.</span><span class="n">handlers</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">ch</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
 <span class="n">ch</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
-<span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">'</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">'</span><span class="p">)</span>
 <span class="n">ch</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
 <span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
 <span class="c1"># log.setLevel(logging.DEBUG)</span>
 <span class="n">log</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
 
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.width&#39;</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
-<span class="c1"># pd.set_option(&#39;max_colwidth&#39;,200)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">reset_option</span><span class="p">(</span><span class="s1">&#39;max_colwidth&#39;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.width'</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="c1"># pd.set_option('max_colwidth',200)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">reset_option</span><span class="p">(</span><span class="s1">'max_colwidth'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Import-Itunes-Playlist-Data">Import Itunes Playlist Data<a class="anchor-link" href="#Import-Itunes-Playlist-Data">&#182;</a></h2><p>We'll start by exporting the itunes playlist data (for howto export itunes playlists <a href="https://support.apple.com/kb/PH19491?locale=en_US">itunes</a>).
+<h2 id="Import-Itunes-Playlist-Data">Import Itunes Playlist Data<a class="anchor-link" href="#Import-Itunes-Playlist-Data">¶</a></h2><p>We'll start by exporting the itunes playlist data (for howto export itunes playlists <a href="https://support.apple.com/kb/PH19491?locale=en_US">itunes</a>).
 I chose the text export option rather than xml.</p>
 <p>We now load the 2 playlists into list_of_playlists.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">all_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;data/Top80_sPop&amp;Rock.txt&#39;</span><span class="p">,</span><span class="s1">&#39;data/TopAlt&amp;Electronic.txt&#39;</span><span class="p">]</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">all_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'data/Top80_sPop&amp;Rock.txt'</span><span class="p">,</span><span class="s1">'data/TopAlt&amp;Electronic.txt'</span><span class="p">]</span>
 <span class="n">list_of_playlists</span><span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">file_</span> <span class="ow">in</span> <span class="n">all_files</span><span class="p">:</span>
-    <span class="n">doc</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_</span><span class="p">,</span><span class="s1">&#39;rU&#39;</span><span class="p">,</span><span class="s1">&#39;UTF-16&#39;</span><span class="p">)</span> 
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;## </span><span class="si">%s</span><span class="s2">: df.head()=&quot;</span> <span class="o">%</span> <span class="n">file_</span><span class="p">)</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_</span><span class="p">,</span><span class="s1">'rU'</span><span class="p">,</span><span class="s1">'UTF-16'</span><span class="p">)</span> 
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">'</span><span class="se">\t</span><span class="s1">'</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"## </span><span class="si">%s</span><span class="s2">: df.head()="</span> <span class="o">%</span> <span class="n">file_</span><span class="p">)</span>
     <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;## </span><span class="si">%s</span><span class="s2">: df.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">file_</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"## </span><span class="si">%s</span><span class="s2">: df.shape=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">file_</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
     <span class="n">list_of_playlists</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>2018-04-24 15:30:30,966 - INFO - ## data/Top80_sPop&amp;Rock.txt: df.head()=
 </pre>
 </div>
 </div>
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[13]:</div>
-
-
-
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
-<style scoped>
+<style scoped="">
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -1584,182 +1553,172 @@ I chose the text export option rather than xml.</p>
     }
 </style>
 <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Artist</th>
-      <th>Composer</th>
-      <th>Album</th>
-      <th>Grouping</th>
-      <th>Work</th>
-      <th>Movement Number</th>
-      <th>Movement Count</th>
-      <th>Movement Name</th>
-      <th>Genre</th>
-      <th>...</th>
-      <th>Volume Adjustment</th>
-      <th>Kind</th>
-      <th>Equalizer</th>
-      <th>Comments</th>
-      <th>Plays</th>
-      <th>Last Played</th>
-      <th>Skips</th>
-      <th>Last Skipped</th>
-      <th>My Rating</th>
-      <th>Location</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Just The Way You Are</td>
-      <td>Billy Joel</td>
-      <td>Billy Joel</td>
-      <td>Greatest Hits Vol.I</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>154.0</td>
-      <td>4/7/2018 9:49 AM</td>
-      <td>2.0</td>
-      <td>12/27/2017 10:16 AM</td>
-      <td>100</td>
-      <td>C:\Users\Lee\itunes\Music\Billy Joel\Greatest ...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>She's Got A Way</td>
-      <td>Billy Joel</td>
-      <td>Billy Joel</td>
-      <td>Greatest Hits Vol.II</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>144.0</td>
-      <td>3/25/2018 2:02 PM</td>
-      <td>3.0</td>
-      <td>1/20/2018 8:18 AM</td>
-      <td>100</td>
-      <td>C:\Users\Lee\itunes\Music\Billy Joel\Greatest ...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Thunderstruck</td>
-      <td>Brian Johnson</td>
-      <td>NaN</td>
-      <td>The Very Best of AC/DC</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>96.0</td>
-      <td>2/7/2018 11:01 AM</td>
-      <td>7.0</td>
-      <td>1/8/2018 6:35 PM</td>
-      <td>100</td>
-      <td>C:\Users\Lee\itunes\Music\Compilations\The Ver...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Don't Stop Believin'</td>
-      <td>Journey</td>
-      <td>Jonathan Cain/Neal Schon/Steve Perry</td>
-      <td>Greatest Hits (Limited Gold Edition)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>Encoded from Original CD album.  Lame v3.98.2 ...</td>
-      <td>86.0</td>
-      <td>2/9/2018 7:07 AM</td>
-      <td>6.0</td>
-      <td>1/6/2018 12:45 PM</td>
-      <td>100</td>
-      <td>C:\Users\Lee\itunes\Music\Journey\Greatest Hit...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Fade To Grey</td>
-      <td>Visage</td>
-      <td>NaN</td>
-      <td>New Wave Hits Of The '80s, Vol. 3</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Rock, 80s, Alternative</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>62.0</td>
-      <td>4/9/2018 7:23 PM</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>100</td>
-      <td>C:\Users\Lee\itunes\Music\Visage\New Wave Hits...</td>
-    </tr>
-  </tbody>
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Name</th>
+<th>Artist</th>
+<th>Composer</th>
+<th>Album</th>
+<th>Grouping</th>
+<th>Work</th>
+<th>Movement Number</th>
+<th>Movement Count</th>
+<th>Movement Name</th>
+<th>Genre</th>
+<th>...</th>
+<th>Volume Adjustment</th>
+<th>Kind</th>
+<th>Equalizer</th>
+<th>Comments</th>
+<th>Plays</th>
+<th>Last Played</th>
+<th>Skips</th>
+<th>Last Skipped</th>
+<th>My Rating</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>Just The Way You Are</td>
+<td>Billy Joel</td>
+<td>Billy Joel</td>
+<td>Greatest Hits Vol.I</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Pop, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>154.0</td>
+<td>4/7/2018 9:49 AM</td>
+<td>2.0</td>
+<td>12/27/2017 10:16 AM</td>
+<td>100</td>
+<td>C:\Users\Lee\itunes\Music\Billy Joel\Greatest ...</td>
+</tr>
+<tr>
+<th>1</th>
+<td>She's Got A Way</td>
+<td>Billy Joel</td>
+<td>Billy Joel</td>
+<td>Greatest Hits Vol.II</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Pop, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>144.0</td>
+<td>3/25/2018 2:02 PM</td>
+<td>3.0</td>
+<td>1/20/2018 8:18 AM</td>
+<td>100</td>
+<td>C:\Users\Lee\itunes\Music\Billy Joel\Greatest ...</td>
+</tr>
+<tr>
+<th>2</th>
+<td>Thunderstruck</td>
+<td>Brian Johnson</td>
+<td>NaN</td>
+<td>The Very Best of AC/DC</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Hard Rock, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>96.0</td>
+<td>2/7/2018 11:01 AM</td>
+<td>7.0</td>
+<td>1/8/2018 6:35 PM</td>
+<td>100</td>
+<td>C:\Users\Lee\itunes\Music\Compilations\The Ver...</td>
+</tr>
+<tr>
+<th>3</th>
+<td>Don't Stop Believin'</td>
+<td>Journey</td>
+<td>Jonathan Cain/Neal Schon/Steve Perry</td>
+<td>Greatest Hits (Limited Gold Edition)</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Pop, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>Encoded from Original CD album.  Lame v3.98.2 ...</td>
+<td>86.0</td>
+<td>2/9/2018 7:07 AM</td>
+<td>6.0</td>
+<td>1/6/2018 12:45 PM</td>
+<td>100</td>
+<td>C:\Users\Lee\itunes\Music\Journey\Greatest Hit...</td>
+</tr>
+<tr>
+<th>4</th>
+<td>Fade To Grey</td>
+<td>Visage</td>
+<td>NaN</td>
+<td>New Wave Hits Of The '80s, Vol. 3</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Rock, 80s, Alternative</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>62.0</td>
+<td>4/9/2018 7:23 PM</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>100</td>
+<td>C:\Users\Lee\itunes\Music\Visage\New Wave Hits...</td>
+</tr>
+</tbody>
 </table>
 <p>5 rows × 31 columns</p>
 </div>
 </div>
-
 </div>
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>2018-04-24 15:30:31,000 - INFO - ## data/Top80_sPop&amp;Rock.txt: df.shape=(678, 31)
 2018-04-24 15:30:31,012 - INFO - ## data/TopAlt&amp;Electronic.txt: df.head()=
 </pre>
 </div>
 </div>
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[13]:</div>
-
-
-
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
-<style scoped>
+<style scoped="">
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -1773,227 +1732,207 @@ I chose the text export option rather than xml.</p>
     }
 </style>
 <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Artist</th>
-      <th>Composer</th>
-      <th>Album</th>
-      <th>Grouping</th>
-      <th>Work</th>
-      <th>Movement Number</th>
-      <th>Movement Count</th>
-      <th>Movement Name</th>
-      <th>Genre</th>
-      <th>...</th>
-      <th>Volume Adjustment</th>
-      <th>Kind</th>
-      <th>Equalizer</th>
-      <th>Comments</th>
-      <th>Plays</th>
-      <th>Last Played</th>
-      <th>Skips</th>
-      <th>Last Skipped</th>
-      <th>My Rating</th>
-      <th>Location</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>The Walker</td>
-      <td>Fitz &amp; The Tantrums</td>
-      <td>NaN</td>
-      <td>More Than Just a Dream (Deluxe Version)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Alternative</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>176.0</td>
-      <td>12/5/2017 10:46 AM</td>
-      <td>10.0</td>
-      <td>1/8/2018 7:45 PM</td>
-      <td>100</td>
-      <td>C:\Users\Lee\itunes\Music\Fitz &amp; The Tantrums\...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Jack The Ripper</td>
-      <td>Morrissey</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Alternative, Punk</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>436.0</td>
-      <td>3/12/2018 7:59 PM</td>
-      <td>13.0</td>
-      <td>9/28/2017 6:59 PM</td>
-      <td>100</td>
-      <td>C:\Users\Lee\itunes\Music\Morrissey\Unknown Al...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Heathens</td>
-      <td>Twenty One Pilots</td>
-      <td>NaN</td>
-      <td>Suicide Squad: The Album</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Indie Rock, Alternative</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>176.0</td>
-      <td>11/21/2017 2:29 PM</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>100</td>
-      <td>C:\Users\Lee\itunes\Music\Twenty One Pilots\Su...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Fade To Grey</td>
-      <td>Visage</td>
-      <td>NaN</td>
-      <td>New Wave Hits Of The '80s, Vol. 3</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Rock, 80s, Alternative</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>62.0</td>
-      <td>4/9/2018 7:23 PM</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>100</td>
-      <td>C:\Users\Lee\itunes\Music\Visage\New Wave Hits...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Take A Chance On Me</td>
-      <td>ABBA</td>
-      <td>NaN</td>
-      <td>The Essential Collection (CD 1/2)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Disco/Dance/Electronica/Pop</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>96.0</td>
-      <td>11/21/2017 2:37 PM</td>
-      <td>23.0</td>
-      <td>10/30/2017 6:33 PM</td>
-      <td>80</td>
-      <td>C:\Users\Lee\itunes\Music\ABBA\The Essential C...</td>
-    </tr>
-  </tbody>
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Name</th>
+<th>Artist</th>
+<th>Composer</th>
+<th>Album</th>
+<th>Grouping</th>
+<th>Work</th>
+<th>Movement Number</th>
+<th>Movement Count</th>
+<th>Movement Name</th>
+<th>Genre</th>
+<th>...</th>
+<th>Volume Adjustment</th>
+<th>Kind</th>
+<th>Equalizer</th>
+<th>Comments</th>
+<th>Plays</th>
+<th>Last Played</th>
+<th>Skips</th>
+<th>Last Skipped</th>
+<th>My Rating</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>The Walker</td>
+<td>Fitz &amp; The Tantrums</td>
+<td>NaN</td>
+<td>More Than Just a Dream (Deluxe Version)</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Alternative</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>176.0</td>
+<td>12/5/2017 10:46 AM</td>
+<td>10.0</td>
+<td>1/8/2018 7:45 PM</td>
+<td>100</td>
+<td>C:\Users\Lee\itunes\Music\Fitz &amp; The Tantrums\...</td>
+</tr>
+<tr>
+<th>1</th>
+<td>Jack The Ripper</td>
+<td>Morrissey</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Alternative, Punk</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>436.0</td>
+<td>3/12/2018 7:59 PM</td>
+<td>13.0</td>
+<td>9/28/2017 6:59 PM</td>
+<td>100</td>
+<td>C:\Users\Lee\itunes\Music\Morrissey\Unknown Al...</td>
+</tr>
+<tr>
+<th>2</th>
+<td>Heathens</td>
+<td>Twenty One Pilots</td>
+<td>NaN</td>
+<td>Suicide Squad: The Album</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Indie Rock, Alternative</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>176.0</td>
+<td>11/21/2017 2:29 PM</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>100</td>
+<td>C:\Users\Lee\itunes\Music\Twenty One Pilots\Su...</td>
+</tr>
+<tr>
+<th>3</th>
+<td>Fade To Grey</td>
+<td>Visage</td>
+<td>NaN</td>
+<td>New Wave Hits Of The '80s, Vol. 3</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Rock, 80s, Alternative</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>62.0</td>
+<td>4/9/2018 7:23 PM</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>100</td>
+<td>C:\Users\Lee\itunes\Music\Visage\New Wave Hits...</td>
+</tr>
+<tr>
+<th>4</th>
+<td>Take A Chance On Me</td>
+<td>ABBA</td>
+<td>NaN</td>
+<td>The Essential Collection (CD 1/2)</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Disco/Dance/Electronica/Pop</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>96.0</td>
+<td>11/21/2017 2:37 PM</td>
+<td>23.0</td>
+<td>10/30/2017 6:33 PM</td>
+<td>80</td>
+<td>C:\Users\Lee\itunes\Music\ABBA\The Essential C...</td>
+</tr>
+</tbody>
 </table>
 <p>5 rows × 31 columns</p>
 </div>
 </div>
-
 </div>
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>2018-04-24 15:30:31,048 - INFO - ## data/TopAlt&amp;Electronic.txt: df.shape=(186, 31)
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Vertically-Stack-the-Playlist-Data">Vertically Stack the Playlist Data<a class="anchor-link" href="#Vertically-Stack-the-Playlist-Data">&#182;</a></h2><p>For our first example - I will load the playlists in list_of_playlists into dataframes and stack vertically.</p>
+<h2 id="Vertically-Stack-the-Playlist-Data">Vertically Stack the Playlist Data<a class="anchor-link" href="#Vertically-Stack-the-Playlist-Data">¶</a></h2><p>For our first example - I will load the playlists in list_of_playlists into dataframes and stack vertically.</p>
 <p>When we concatenate DataFrames, we need to specify the axis. axis=0 tells pandas to stack the second DataFrame under the first one. It will automatically detect whether the column names are the same and will stack accordingly. To stack the data vertically, we need to make sure we have the same columns and associated column format in both datasets.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In [14]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Stack the DataFrames on top of each other</span>
 <span class="n">vertical_stack</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">list_of_playlists</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;## vertical_stack.head()=&quot;</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"## vertical_stack.head()="</span><span class="p">)</span>
 <span class="n">vertical_stack</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;vertical_stack.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">vertical_stack</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"vertical_stack.shape=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">vertical_stack</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>2018-04-24 15:30:36,223 - INFO - ## vertical_stack.head()=
 </pre>
 </div>
 </div>
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[14]:</div>
-
-
-
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
-<style scoped>
+<style scoped="">
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -2007,229 +1946,209 @@ I chose the text export option rather than xml.</p>
     }
 </style>
 <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Artist</th>
-      <th>Composer</th>
-      <th>Album</th>
-      <th>Grouping</th>
-      <th>Work</th>
-      <th>Movement Number</th>
-      <th>Movement Count</th>
-      <th>Movement Name</th>
-      <th>Genre</th>
-      <th>...</th>
-      <th>Volume Adjustment</th>
-      <th>Kind</th>
-      <th>Equalizer</th>
-      <th>Comments</th>
-      <th>Plays</th>
-      <th>Last Played</th>
-      <th>Skips</th>
-      <th>Last Skipped</th>
-      <th>My Rating</th>
-      <th>Location</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Just The Way You Are</td>
-      <td>Billy Joel</td>
-      <td>Billy Joel</td>
-      <td>Greatest Hits Vol.I</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>154.0</td>
-      <td>4/7/2018 9:49 AM</td>
-      <td>2.0</td>
-      <td>12/27/2017 10:16 AM</td>
-      <td>100</td>
-      <td>C:\Users\Lee\itunes\Music\Billy Joel\Greatest ...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>She's Got A Way</td>
-      <td>Billy Joel</td>
-      <td>Billy Joel</td>
-      <td>Greatest Hits Vol.II</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>144.0</td>
-      <td>3/25/2018 2:02 PM</td>
-      <td>3.0</td>
-      <td>1/20/2018 8:18 AM</td>
-      <td>100</td>
-      <td>C:\Users\Lee\itunes\Music\Billy Joel\Greatest ...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Thunderstruck</td>
-      <td>Brian Johnson</td>
-      <td>NaN</td>
-      <td>The Very Best of AC/DC</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>96.0</td>
-      <td>2/7/2018 11:01 AM</td>
-      <td>7.0</td>
-      <td>1/8/2018 6:35 PM</td>
-      <td>100</td>
-      <td>C:\Users\Lee\itunes\Music\Compilations\The Ver...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Don't Stop Believin'</td>
-      <td>Journey</td>
-      <td>Jonathan Cain/Neal Schon/Steve Perry</td>
-      <td>Greatest Hits (Limited Gold Edition)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>Encoded from Original CD album.  Lame v3.98.2 ...</td>
-      <td>86.0</td>
-      <td>2/9/2018 7:07 AM</td>
-      <td>6.0</td>
-      <td>1/6/2018 12:45 PM</td>
-      <td>100</td>
-      <td>C:\Users\Lee\itunes\Music\Journey\Greatest Hit...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Fade To Grey</td>
-      <td>Visage</td>
-      <td>NaN</td>
-      <td>New Wave Hits Of The '80s, Vol. 3</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Rock, 80s, Alternative</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>62.0</td>
-      <td>4/9/2018 7:23 PM</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>100</td>
-      <td>C:\Users\Lee\itunes\Music\Visage\New Wave Hits...</td>
-    </tr>
-  </tbody>
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Name</th>
+<th>Artist</th>
+<th>Composer</th>
+<th>Album</th>
+<th>Grouping</th>
+<th>Work</th>
+<th>Movement Number</th>
+<th>Movement Count</th>
+<th>Movement Name</th>
+<th>Genre</th>
+<th>...</th>
+<th>Volume Adjustment</th>
+<th>Kind</th>
+<th>Equalizer</th>
+<th>Comments</th>
+<th>Plays</th>
+<th>Last Played</th>
+<th>Skips</th>
+<th>Last Skipped</th>
+<th>My Rating</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>Just The Way You Are</td>
+<td>Billy Joel</td>
+<td>Billy Joel</td>
+<td>Greatest Hits Vol.I</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Pop, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>154.0</td>
+<td>4/7/2018 9:49 AM</td>
+<td>2.0</td>
+<td>12/27/2017 10:16 AM</td>
+<td>100</td>
+<td>C:\Users\Lee\itunes\Music\Billy Joel\Greatest ...</td>
+</tr>
+<tr>
+<th>1</th>
+<td>She's Got A Way</td>
+<td>Billy Joel</td>
+<td>Billy Joel</td>
+<td>Greatest Hits Vol.II</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Pop, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>144.0</td>
+<td>3/25/2018 2:02 PM</td>
+<td>3.0</td>
+<td>1/20/2018 8:18 AM</td>
+<td>100</td>
+<td>C:\Users\Lee\itunes\Music\Billy Joel\Greatest ...</td>
+</tr>
+<tr>
+<th>2</th>
+<td>Thunderstruck</td>
+<td>Brian Johnson</td>
+<td>NaN</td>
+<td>The Very Best of AC/DC</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Hard Rock, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>96.0</td>
+<td>2/7/2018 11:01 AM</td>
+<td>7.0</td>
+<td>1/8/2018 6:35 PM</td>
+<td>100</td>
+<td>C:\Users\Lee\itunes\Music\Compilations\The Ver...</td>
+</tr>
+<tr>
+<th>3</th>
+<td>Don't Stop Believin'</td>
+<td>Journey</td>
+<td>Jonathan Cain/Neal Schon/Steve Perry</td>
+<td>Greatest Hits (Limited Gold Edition)</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Pop, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>Encoded from Original CD album.  Lame v3.98.2 ...</td>
+<td>86.0</td>
+<td>2/9/2018 7:07 AM</td>
+<td>6.0</td>
+<td>1/6/2018 12:45 PM</td>
+<td>100</td>
+<td>C:\Users\Lee\itunes\Music\Journey\Greatest Hit...</td>
+</tr>
+<tr>
+<th>4</th>
+<td>Fade To Grey</td>
+<td>Visage</td>
+<td>NaN</td>
+<td>New Wave Hits Of The '80s, Vol. 3</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Rock, 80s, Alternative</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>62.0</td>
+<td>4/9/2018 7:23 PM</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>100</td>
+<td>C:\Users\Lee\itunes\Music\Visage\New Wave Hits...</td>
+</tr>
+</tbody>
 </table>
 <p>5 rows × 31 columns</p>
 </div>
 </div>
-
 </div>
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>2018-04-24 15:30:36,266 - INFO - vertical_stack.shape=(864, 31)
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Merge-into-one-dataframe-based-on-composite-keys.">Merge into one dataframe based on composite keys.<a class="anchor-link" href="#Merge-into-one-dataframe-based-on-composite-keys.">&#182;</a></h2><p>We can also merge the list dataframe into one dataframe based on a common unique key - or multiple keys.<br>
+<h2 id="Merge-into-one-dataframe-based-on-composite-keys.">Merge into one dataframe based on composite keys.<a class="anchor-link" href="#Merge-into-one-dataframe-based-on-composite-keys.">¶</a></h2><p>We can also merge the list dataframe into one dataframe based on a common unique key - or multiple keys.<br/>
 Note that I refer to the term "composite key" when there multiple keys used to identify a record.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">df_playlist1</span><span class="o">=</span><span class="n">list_of_playlists</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">df_playlist2</span><span class="o">=</span><span class="n">list_of_playlists</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-<span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_playlist1</span><span class="p">,</span> <span class="n">df_playlist2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_playlist1</span><span class="p">,</span> <span class="n">df_playlist2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">'Artist'</span><span class="p">,</span><span class="s1">'Name'</span><span class="p">])</span>
 
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;## merged_df.head()=&quot;</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"## merged_df.head()="</span><span class="p">)</span>
 <span class="n">merged_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;merged_df.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">merged_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"merged_df.shape=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">merged_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>2018-04-24 15:30:39,713 - INFO - ## merged_df.head()=
 </pre>
 </div>
 </div>
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[15]:</div>
-
-
-
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
-<style scoped>
+<style scoped="">
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -2243,175 +2162,168 @@ Note that I refer to the term "composite key" when there multiple keys used to i
     }
 </style>
 <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Artist</th>
-      <th>Composer_x</th>
-      <th>Album_x</th>
-      <th>Grouping_x</th>
-      <th>Work_x</th>
-      <th>Movement Number_x</th>
-      <th>Movement Count_x</th>
-      <th>Movement Name_x</th>
-      <th>Genre_x</th>
-      <th>...</th>
-      <th>Volume Adjustment_y</th>
-      <th>Kind_y</th>
-      <th>Equalizer_y</th>
-      <th>Comments_y</th>
-      <th>Plays_y</th>
-      <th>Last Played_y</th>
-      <th>Skips_y</th>
-      <th>Last Skipped_y</th>
-      <th>My Rating_y</th>
-      <th>Location_y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Fade To Grey</td>
-      <td>Visage</td>
-      <td>NaN</td>
-      <td>New Wave Hits Of The '80s, Vol. 3</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Rock, 80s, Alternative</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>62.0</td>
-      <td>4/9/2018 7:23 PM</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>100</td>
-      <td>C:\Users\Lee\itunes\Music\Visage\New Wave Hits...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>I Could Be Happy</td>
-      <td>Altered Images</td>
-      <td>NaN</td>
-      <td>New Wave Hits Of The '80s, Vol. 04</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, New Wave, 80s, Alternative</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>66.0</td>
-      <td>4/11/2018 5:44 PM</td>
-      <td>1.0</td>
-      <td>1/6/2018 8:21 PM</td>
-      <td>80</td>
-      <td>C:\Users\Lee\itunes\Music\Altered Images\New W...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Dance This Mess Around</td>
-      <td>The B-52's</td>
-      <td>Cindy Wilson/Fred Schneider/Kate Pierson/Keith...</td>
-      <td>B-52's</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Alternative, Punk, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>Black1000</td>
-      <td>151.0</td>
-      <td>4/10/2018 3:09 PM</td>
-      <td>6.0</td>
-      <td>3/7/2018 11:58 AM</td>
-      <td>80</td>
-      <td>C:\Users\Lee\itunes\Music\The B-52's\B-52's\03...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Fight For Your Right</td>
-      <td>Beastie Boys</td>
-      <td>NaN</td>
-      <td>The Best 80s Songs</td>
-      <td>NaN</td>
-      <td>.</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>80s, Pop, Alternative</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>53.0</td>
-      <td>4/9/2018 8:18 PM</td>
-      <td>1.0</td>
-      <td>1/2/2018 1:37 AM</td>
-      <td>80</td>
-      <td>C:\Users\Lee\itunes\Music\Compilations\The Bes...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Just What I Needed</td>
-      <td>The Cars</td>
-      <td>Ric Ocasek</td>
-      <td>Complete Greatest Hits</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, Electronic, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>112.0</td>
-      <td>1/8/2018 12:44 PM</td>
-      <td>4.0</td>
-      <td>1/6/2018 10:59 PM</td>
-      <td>80</td>
-      <td>C:\Users\Lee\itunes\Music\The Cars\Complete Gr...</td>
-    </tr>
-  </tbody>
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Name</th>
+<th>Artist</th>
+<th>Composer_x</th>
+<th>Album_x</th>
+<th>Grouping_x</th>
+<th>Work_x</th>
+<th>Movement Number_x</th>
+<th>Movement Count_x</th>
+<th>Movement Name_x</th>
+<th>Genre_x</th>
+<th>...</th>
+<th>Volume Adjustment_y</th>
+<th>Kind_y</th>
+<th>Equalizer_y</th>
+<th>Comments_y</th>
+<th>Plays_y</th>
+<th>Last Played_y</th>
+<th>Skips_y</th>
+<th>Last Skipped_y</th>
+<th>My Rating_y</th>
+<th>Location_y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>Fade To Grey</td>
+<td>Visage</td>
+<td>NaN</td>
+<td>New Wave Hits Of The '80s, Vol. 3</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Rock, 80s, Alternative</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>62.0</td>
+<td>4/9/2018 7:23 PM</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>100</td>
+<td>C:\Users\Lee\itunes\Music\Visage\New Wave Hits...</td>
+</tr>
+<tr>
+<th>1</th>
+<td>I Could Be Happy</td>
+<td>Altered Images</td>
+<td>NaN</td>
+<td>New Wave Hits Of The '80s, Vol. 04</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Pop, New Wave, 80s, Alternative</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>66.0</td>
+<td>4/11/2018 5:44 PM</td>
+<td>1.0</td>
+<td>1/6/2018 8:21 PM</td>
+<td>80</td>
+<td>C:\Users\Lee\itunes\Music\Altered Images\New W...</td>
+</tr>
+<tr>
+<th>2</th>
+<td>Dance This Mess Around</td>
+<td>The B-52's</td>
+<td>Cindy Wilson/Fred Schneider/Kate Pierson/Keith...</td>
+<td>B-52's</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Alternative, Punk, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>Black1000</td>
+<td>151.0</td>
+<td>4/10/2018 3:09 PM</td>
+<td>6.0</td>
+<td>3/7/2018 11:58 AM</td>
+<td>80</td>
+<td>C:\Users\Lee\itunes\Music\The B-52's\B-52's\03...</td>
+</tr>
+<tr>
+<th>3</th>
+<td>Fight For Your Right</td>
+<td>Beastie Boys</td>
+<td>NaN</td>
+<td>The Best 80s Songs</td>
+<td>NaN</td>
+<td>.</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>80s, Pop, Alternative</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>53.0</td>
+<td>4/9/2018 8:18 PM</td>
+<td>1.0</td>
+<td>1/2/2018 1:37 AM</td>
+<td>80</td>
+<td>C:\Users\Lee\itunes\Music\Compilations\The Bes...</td>
+</tr>
+<tr>
+<th>4</th>
+<td>Just What I Needed</td>
+<td>The Cars</td>
+<td>Ric Ocasek</td>
+<td>Complete Greatest Hits</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Pop, Electronic, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>112.0</td>
+<td>1/8/2018 12:44 PM</td>
+<td>4.0</td>
+<td>1/6/2018 10:59 PM</td>
+<td>80</td>
+<td>C:\Users\Lee\itunes\Music\The Cars\Complete Gr...</td>
+</tr>
+</tbody>
 </table>
 <p>5 rows × 60 columns</p>
 </div>
 </div>
-
 </div>
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>2018-04-24 15:30:39,750 - INFO - merged_df.shape=(72, 60)
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -2421,7 +2333,6 @@ Note that I refer to the term "composite key" when there multiple keys used to i
 <p>Note that the # of columns minus the specified common keys has doubled.</p>
 <p>The merged dataframe preserves the original data columns from each of the datasets.</p>
 <p>The merged results has an appended suffix for each set of columns, "_x" and "_y" in the prior example.</p>
-
 </div>
 </div>
 </div>
@@ -2429,7 +2340,7 @@ Note that I refer to the term "composite key" when there multiple keys used to i
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Inner,-Left,-and-right-merge-types">Inner, Left, and right merge types<a class="anchor-link" href="#Inner,-Left,-and-right-merge-types">&#182;</a></h2><p>There are three different types of merges available in Pandas. These merge types are common across most database and data-orientated languages (SQL, R, SAS) and are typically referred to as “joins”. If you don’t know them, learn them now.</p>
+<h2 id="Inner,-Left,-and-right-merge-types">Inner, Left, and right merge types<a class="anchor-link" href="#Inner,-Left,-and-right-merge-types">¶</a></h2><p>There are three different types of merges available in Pandas. These merge types are common across most database and data-orientated languages (SQL, R, SAS) and are typically referred to as “joins”. If you don’t know them, learn them now.</p>
 <ol>
 <li>Inner Merge / Inner join – The default Pandas behaviour, only keep rows where the merge “on” value exists in both the left and right dataframes.</li>
 <li>Left Merge / Left outer join – (aka left merge or left join) Keep every row in the left dataframe. Where there are missing values of the “on” variable in the right dataframe, add empty / NaN values in the result.</li>
@@ -2438,8 +2349,7 @@ Note that I refer to the term "composite key" when there multiple keys used to i
 </ol>
 <p>The merge type to use is specified using the “how” parameter in the merge command, taking values “left”, “right”, “inner” (default), or “outer”.</p>
 <p>Venn diagrams are commonly used to exemplify the different merge and join types. See this example from <a href="http://stackoverflow.com/questions/38549/what-is-the-difference-between-inner-join-and-outer-join">Stack overflow</a>:</p>
-<p><img src="/images/join-types-merge-names.jpg" alt='[img: Venn Diagram for merge types]'></p>
-
+<p><img alt="[img: Venn Diagram for merge types]" src="/images/join-types-merge-names.jpg"/></p>
 </div>
 </div>
 </div>
@@ -2447,53 +2357,40 @@ Note that I refer to the term "composite key" when there multiple keys used to i
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Reduce-into-one-dataframe-based-on-the-composite-key">Reduce into one dataframe based on the composite key<a class="anchor-link" href="#Reduce-into-one-dataframe-based-on-the-composite-key">&#182;</a></h2><p>We can also use reduce to merge the list dataframe into one.</p>
+<h2 id="Reduce-into-one-dataframe-based-on-the-composite-key">Reduce into one dataframe based on the composite key<a class="anchor-link" href="#Reduce-into-one-dataframe-based-on-the-composite-key">¶</a></h2><p>We can also use reduce to merge the list dataframe into one.</p>
 <p>This gets the same results as the merge in the last example.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">functools</span>
-<span class="n">merged_df</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">]),</span> <span class="n">list_of_playlists</span><span class="p">)</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">'Artist'</span><span class="p">,</span><span class="s1">'Name'</span><span class="p">]),</span> <span class="n">list_of_playlists</span><span class="p">)</span>
 
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;## merged_df.head()=&quot;</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"## merged_df.head()="</span><span class="p">)</span>
 <span class="n">merged_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;merged_df.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">merged_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"merged_df.shape=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">merged_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>2018-04-24 15:30:44,378 - INFO - ## merged_df.head()=
 </pre>
 </div>
 </div>
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[16]:</div>
-
-
-
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
-<style scoped>
+<style scoped="">
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -2507,232 +2404,212 @@ Note that I refer to the term "composite key" when there multiple keys used to i
     }
 </style>
 <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Artist</th>
-      <th>Composer_x</th>
-      <th>Album_x</th>
-      <th>Grouping_x</th>
-      <th>Work_x</th>
-      <th>Movement Number_x</th>
-      <th>Movement Count_x</th>
-      <th>Movement Name_x</th>
-      <th>Genre_x</th>
-      <th>...</th>
-      <th>Volume Adjustment_y</th>
-      <th>Kind_y</th>
-      <th>Equalizer_y</th>
-      <th>Comments_y</th>
-      <th>Plays_y</th>
-      <th>Last Played_y</th>
-      <th>Skips_y</th>
-      <th>Last Skipped_y</th>
-      <th>My Rating_y</th>
-      <th>Location_y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Fade To Grey</td>
-      <td>Visage</td>
-      <td>NaN</td>
-      <td>New Wave Hits Of The '80s, Vol. 3</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Rock, 80s, Alternative</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>62.0</td>
-      <td>4/9/2018 7:23 PM</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>100</td>
-      <td>C:\Users\Lee\itunes\Music\Visage\New Wave Hits...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>I Could Be Happy</td>
-      <td>Altered Images</td>
-      <td>NaN</td>
-      <td>New Wave Hits Of The '80s, Vol. 04</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, New Wave, 80s, Alternative</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>66.0</td>
-      <td>4/11/2018 5:44 PM</td>
-      <td>1.0</td>
-      <td>1/6/2018 8:21 PM</td>
-      <td>80</td>
-      <td>C:\Users\Lee\itunes\Music\Altered Images\New W...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Dance This Mess Around</td>
-      <td>The B-52's</td>
-      <td>Cindy Wilson/Fred Schneider/Kate Pierson/Keith...</td>
-      <td>B-52's</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Alternative, Punk, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>Black1000</td>
-      <td>151.0</td>
-      <td>4/10/2018 3:09 PM</td>
-      <td>6.0</td>
-      <td>3/7/2018 11:58 AM</td>
-      <td>80</td>
-      <td>C:\Users\Lee\itunes\Music\The B-52's\B-52's\03...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Fight For Your Right</td>
-      <td>Beastie Boys</td>
-      <td>NaN</td>
-      <td>The Best 80s Songs</td>
-      <td>NaN</td>
-      <td>.</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>80s, Pop, Alternative</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>53.0</td>
-      <td>4/9/2018 8:18 PM</td>
-      <td>1.0</td>
-      <td>1/2/2018 1:37 AM</td>
-      <td>80</td>
-      <td>C:\Users\Lee\itunes\Music\Compilations\The Bes...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Just What I Needed</td>
-      <td>The Cars</td>
-      <td>Ric Ocasek</td>
-      <td>Complete Greatest Hits</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, Electronic, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>112.0</td>
-      <td>1/8/2018 12:44 PM</td>
-      <td>4.0</td>
-      <td>1/6/2018 10:59 PM</td>
-      <td>80</td>
-      <td>C:\Users\Lee\itunes\Music\The Cars\Complete Gr...</td>
-    </tr>
-  </tbody>
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Name</th>
+<th>Artist</th>
+<th>Composer_x</th>
+<th>Album_x</th>
+<th>Grouping_x</th>
+<th>Work_x</th>
+<th>Movement Number_x</th>
+<th>Movement Count_x</th>
+<th>Movement Name_x</th>
+<th>Genre_x</th>
+<th>...</th>
+<th>Volume Adjustment_y</th>
+<th>Kind_y</th>
+<th>Equalizer_y</th>
+<th>Comments_y</th>
+<th>Plays_y</th>
+<th>Last Played_y</th>
+<th>Skips_y</th>
+<th>Last Skipped_y</th>
+<th>My Rating_y</th>
+<th>Location_y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>Fade To Grey</td>
+<td>Visage</td>
+<td>NaN</td>
+<td>New Wave Hits Of The '80s, Vol. 3</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Rock, 80s, Alternative</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>62.0</td>
+<td>4/9/2018 7:23 PM</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>100</td>
+<td>C:\Users\Lee\itunes\Music\Visage\New Wave Hits...</td>
+</tr>
+<tr>
+<th>1</th>
+<td>I Could Be Happy</td>
+<td>Altered Images</td>
+<td>NaN</td>
+<td>New Wave Hits Of The '80s, Vol. 04</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Pop, New Wave, 80s, Alternative</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>66.0</td>
+<td>4/11/2018 5:44 PM</td>
+<td>1.0</td>
+<td>1/6/2018 8:21 PM</td>
+<td>80</td>
+<td>C:\Users\Lee\itunes\Music\Altered Images\New W...</td>
+</tr>
+<tr>
+<th>2</th>
+<td>Dance This Mess Around</td>
+<td>The B-52's</td>
+<td>Cindy Wilson/Fred Schneider/Kate Pierson/Keith...</td>
+<td>B-52's</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Alternative, Punk, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>Black1000</td>
+<td>151.0</td>
+<td>4/10/2018 3:09 PM</td>
+<td>6.0</td>
+<td>3/7/2018 11:58 AM</td>
+<td>80</td>
+<td>C:\Users\Lee\itunes\Music\The B-52's\B-52's\03...</td>
+</tr>
+<tr>
+<th>3</th>
+<td>Fight For Your Right</td>
+<td>Beastie Boys</td>
+<td>NaN</td>
+<td>The Best 80s Songs</td>
+<td>NaN</td>
+<td>.</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>80s, Pop, Alternative</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>53.0</td>
+<td>4/9/2018 8:18 PM</td>
+<td>1.0</td>
+<td>1/2/2018 1:37 AM</td>
+<td>80</td>
+<td>C:\Users\Lee\itunes\Music\Compilations\The Bes...</td>
+</tr>
+<tr>
+<th>4</th>
+<td>Just What I Needed</td>
+<td>The Cars</td>
+<td>Ric Ocasek</td>
+<td>Complete Greatest Hits</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Pop, Electronic, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>112.0</td>
+<td>1/8/2018 12:44 PM</td>
+<td>4.0</td>
+<td>1/6/2018 10:59 PM</td>
+<td>80</td>
+<td>C:\Users\Lee\itunes\Music\The Cars\Complete Gr...</td>
+</tr>
+</tbody>
 </table>
 <p>5 rows × 60 columns</p>
 </div>
 </div>
-
 </div>
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>2018-04-24 15:30:44,417 - INFO - merged_df.shape=(72, 60)
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Example-of-outer-merge-/-full-outer-join">Example of outer merge / full outer join<a class="anchor-link" href="#Example-of-outer-merge-/-full-outer-join">&#182;</a></h2><p>Finally, we will perform an outer merge using Pandas, also referred to as a “full outer join” or just “outer join”. An outer join can be seen as a combination of left and right joins, or the opposite of an inner join. In outer joins, every row from the left and right dataframes is retained in the result, with NaNs where there are no matched join variables.</p>
+<h2 id="Example-of-outer-merge-/-full-outer-join">Example of outer merge / full outer join<a class="anchor-link" href="#Example-of-outer-merge-/-full-outer-join">¶</a></h2><p>Finally, we will perform an outer merge using Pandas, also referred to as a “full outer join” or just “outer join”. An outer join can be seen as a combination of left and right joins, or the opposite of an inner join. In outer joins, every row from the left and right dataframes is retained in the result, with NaNs where there are no matched join variables.</p>
 <p>As such, we would expect the results to have the same number of rows as there are distinct values of “use_id” between user_device and user_usage, i.e. every join value from the left dataframe will be in the result along with every value from the right dataframe, and they’ll be linked where possible.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In [17]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">df_playlist1</span><span class="o">=</span><span class="n">list_of_playlists</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">df_playlist2</span><span class="o">=</span><span class="n">list_of_playlists</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_playlist1</span><span class="p">,</span> 
                      <span class="n">df_playlist2</span><span class="p">,</span> 
-                     <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">],</span>
-                     <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+                     <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">'Artist'</span><span class="p">,</span><span class="s1">'Name'</span><span class="p">],</span>
+                     <span class="n">how</span><span class="o">=</span><span class="s1">'outer'</span><span class="p">)</span>
 
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;## merged_df.head()=&quot;</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"## merged_df.head()="</span><span class="p">)</span>
 <span class="n">merged_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;merged_df.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">merged_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"merged_df.shape=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">merged_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>2018-04-24 15:30:48,407 - INFO - ## merged_df.head()=
 </pre>
 </div>
 </div>
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[17]:</div>
-
-
-
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
-<style scoped>
+<style scoped="">
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -2746,175 +2623,168 @@ Note that I refer to the term "composite key" when there multiple keys used to i
     }
 </style>
 <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Artist</th>
-      <th>Composer_x</th>
-      <th>Album_x</th>
-      <th>Grouping_x</th>
-      <th>Work_x</th>
-      <th>Movement Number_x</th>
-      <th>Movement Count_x</th>
-      <th>Movement Name_x</th>
-      <th>Genre_x</th>
-      <th>...</th>
-      <th>Volume Adjustment_y</th>
-      <th>Kind_y</th>
-      <th>Equalizer_y</th>
-      <th>Comments_y</th>
-      <th>Plays_y</th>
-      <th>Last Played_y</th>
-      <th>Skips_y</th>
-      <th>Last Skipped_y</th>
-      <th>My Rating_y</th>
-      <th>Location_y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Just The Way You Are</td>
-      <td>Billy Joel</td>
-      <td>Billy Joel</td>
-      <td>Greatest Hits Vol.I</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>She's Got A Way</td>
-      <td>Billy Joel</td>
-      <td>Billy Joel</td>
-      <td>Greatest Hits Vol.II</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Thunderstruck</td>
-      <td>Brian Johnson</td>
-      <td>NaN</td>
-      <td>The Very Best of AC/DC</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Don't Stop Believin'</td>
-      <td>Journey</td>
-      <td>Jonathan Cain/Neal Schon/Steve Perry</td>
-      <td>Greatest Hits (Limited Gold Edition)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Fade To Grey</td>
-      <td>Visage</td>
-      <td>NaN</td>
-      <td>New Wave Hits Of The '80s, Vol. 3</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Rock, 80s, Alternative</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>62.0</td>
-      <td>4/9/2018 7:23 PM</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>100.0</td>
-      <td>C:\Users\Lee\itunes\Music\Visage\New Wave Hits...</td>
-    </tr>
-  </tbody>
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Name</th>
+<th>Artist</th>
+<th>Composer_x</th>
+<th>Album_x</th>
+<th>Grouping_x</th>
+<th>Work_x</th>
+<th>Movement Number_x</th>
+<th>Movement Count_x</th>
+<th>Movement Name_x</th>
+<th>Genre_x</th>
+<th>...</th>
+<th>Volume Adjustment_y</th>
+<th>Kind_y</th>
+<th>Equalizer_y</th>
+<th>Comments_y</th>
+<th>Plays_y</th>
+<th>Last Played_y</th>
+<th>Skips_y</th>
+<th>Last Skipped_y</th>
+<th>My Rating_y</th>
+<th>Location_y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>Just The Way You Are</td>
+<td>Billy Joel</td>
+<td>Billy Joel</td>
+<td>Greatest Hits Vol.I</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Pop, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>1</th>
+<td>She's Got A Way</td>
+<td>Billy Joel</td>
+<td>Billy Joel</td>
+<td>Greatest Hits Vol.II</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Pop, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>2</th>
+<td>Thunderstruck</td>
+<td>Brian Johnson</td>
+<td>NaN</td>
+<td>The Very Best of AC/DC</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Hard Rock, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>3</th>
+<td>Don't Stop Believin'</td>
+<td>Journey</td>
+<td>Jonathan Cain/Neal Schon/Steve Perry</td>
+<td>Greatest Hits (Limited Gold Edition)</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Pop, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>4</th>
+<td>Fade To Grey</td>
+<td>Visage</td>
+<td>NaN</td>
+<td>New Wave Hits Of The '80s, Vol. 3</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Rock, 80s, Alternative</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>62.0</td>
+<td>4/9/2018 7:23 PM</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>100.0</td>
+<td>C:\Users\Lee\itunes\Music\Visage\New Wave Hits...</td>
+</tr>
+</tbody>
 </table>
 <p>5 rows × 60 columns</p>
 </div>
 </div>
-
 </div>
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>2018-04-24 15:30:48,447 - INFO - merged_df.shape=(797, 60)
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -2927,49 +2797,36 @@ Note that I refer to the term "composite key" when there multiple keys used to i
 <p>My instincts are that the data sets are not truely unique based on the composite key that we used.  This would lead to mismatched counts between the union count and the merged data set count.</p>
 <p>We can perform a simple check to validate if our instincts are correct.
 We now find out how many duplicate records exist based on the composite key we used in the first playlist dataset.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In [18]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">df_dupes1</span> <span class="o">=</span> <span class="n">df_playlist1</span><span class="p">[</span><span class="n">df_playlist1</span><span class="o">.</span><span class="n">duplicated</span><span class="p">([</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="bp">False</span><span class="p">)]</span>
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;df_dupes1.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">df_dupes1</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">df_dupes1</span> <span class="o">=</span> <span class="n">df_playlist1</span><span class="p">[</span><span class="n">df_playlist1</span><span class="o">.</span><span class="n">duplicated</span><span class="p">([</span><span class="s1">'Artist'</span><span class="p">,</span><span class="s1">'Name'</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="bp">False</span><span class="p">)]</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"df_dupes1.shape=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">df_dupes1</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 
-<span class="n">df_dupes1</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">df_dupes1</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">'Artist'</span><span class="p">,</span><span class="s1">'Name'</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>2018-04-24 15:30:52,357 - INFO - df_dupes1.shape=(76, 31)
 </pre>
 </div>
 </div>
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[18]:</div>
-
-
-
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
-<style scoped>
+<style scoped="">
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -2983,284 +2840,281 @@ We now find out how many duplicate records exist based on the composite key we u
     }
 </style>
 <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Artist</th>
-      <th>Composer</th>
-      <th>Album</th>
-      <th>Grouping</th>
-      <th>Work</th>
-      <th>Movement Number</th>
-      <th>Movement Count</th>
-      <th>Movement Name</th>
-      <th>Genre</th>
-      <th>...</th>
-      <th>Volume Adjustment</th>
-      <th>Kind</th>
-      <th>Equalizer</th>
-      <th>Comments</th>
-      <th>Plays</th>
-      <th>Last Played</th>
-      <th>Skips</th>
-      <th>Last Skipped</th>
-      <th>My Rating</th>
-      <th>Location</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>122</th>
-      <td>Halloween</td>
-      <td>Dead Kennedys</td>
-      <td>NaN</td>
-      <td>Just Can't Get Enough: New Wa</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Alternative, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>4.0</td>
-      <td>3/19/2018 8:46 AM</td>
-      <td>60</td>
-      <td>C:\Users\Lee\itunes\Music\Dead Kennedys\Just C...</td>
-    </tr>
-    <tr>
-      <th>310</th>
-      <td>Halloween</td>
-      <td>Dead Kennedys</td>
-      <td>D.H. Peligro/Dead Kennedys/East Bay Ray/Jello ...</td>
-      <td>Milking The Sacred Cow</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Punk Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>1/11/2018 11:59 PM</td>
-      <td>40</td>
-      <td>C:\Users\Lee\itunes\Music\Dead Kennedys\Milkin...</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>Enjoy The Silence</td>
-      <td>Depeche Mode</td>
-      <td>NaN</td>
-      <td>Best Of Depeche Mode, Vol. 1</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>Track 4</td>
-      <td>40.0</td>
-      <td>4/10/2018 7:19 PM</td>
-      <td>1.0</td>
-      <td>1/14/2018 10:37 AM</td>
-      <td>80</td>
-      <td>C:\Users\Lee\itunes\Music\Depeche Mode\Best Of...</td>
-    </tr>
-    <tr>
-      <th>127</th>
-      <td>Enjoy The Silence</td>
-      <td>Depeche Mode</td>
-      <td>Martin L. Gore</td>
-      <td>Violator</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, 80s, Alternative</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>Sire / Reprise 9 26081-2</td>
-      <td>27.0</td>
-      <td>4/9/2018 7:49 PM</td>
-      <td>2.0</td>
-      <td>2/23/2018 1:33 PM</td>
-      <td>60</td>
-      <td>C:\Users\Lee\itunes\Music\Depeche Mode\Violato...</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>The Final Countdown</td>
-      <td>Europe</td>
-      <td>NaN</td>
-      <td>101 Sporting Anthems</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>86.0</td>
-      <td>4/29/2016 3:29 PM</td>
-      <td>5.0</td>
-      <td>9/28/2015 7:58 PM</td>
-      <td>80</td>
-      <td>C:\Users\Lee\itunes\Music\Various Artists\101 ...</td>
-    </tr>
-    <tr>
-      <th>358</th>
-      <td>The Final Countdown</td>
-      <td>Europe</td>
-      <td>NaN</td>
-      <td>The Best 80s Songs</td>
-      <td>NaN</td>
-      <td>.</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>80s, Pop</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>3.0</td>
-      <td>1/2/2018 5:47 PM</td>
-      <td>2.0</td>
-      <td>1/6/2018 9:49 PM</td>
-      <td>40</td>
-      <td>C:\Users\Lee\itunes\Music\Compilations\The Bes...</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>Down Under</td>
-      <td>Men At Work</td>
-      <td>NaN</td>
-      <td>The Best 80s Songs</td>
-      <td>NaN</td>
-      <td>.</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>80s, Pop</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2.0</td>
-      <td>1/2/2018 7:24 PM</td>
-      <td>1.0</td>
-      <td>1/2/2018 1:44 AM</td>
-      <td>80</td>
-      <td>C:\Users\Lee\itunes\Music\Compilations\The Bes...</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td>Down Under</td>
-      <td>Men At Work</td>
-      <td>Colin Hay, Roy Strykert</td>
-      <td>Like, Omigod! The 80s Pop Culture Box (Totally...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>49.0</td>
-      <td>4/11/2018 6:47 PM</td>
-      <td>3.0</td>
-      <td>1/17/2018 6:53 PM</td>
-      <td>80</td>
-      <td>C:\Users\Lee\itunes\Music\Men At Work\Like, Om...</td>
-    </tr>
-    <tr>
-      <th>45</th>
-      <td>Cum On Feel The Noize</td>
-      <td>Quiet Riot</td>
-      <td>NaN</td>
-      <td>101 Sporting Anthems</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Hard Rock, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>79.0</td>
-      <td>4/29/2016 4:44 PM</td>
-      <td>5.0</td>
-      <td>1/8/2018 3:01 PM</td>
-      <td>80</td>
-      <td>C:\Users\Lee\itunes\Music\Various Artists\101 ...</td>
-    </tr>
-    <tr>
-      <th>485</th>
-      <td>Cum On Feel The Noize</td>
-      <td>Quiet Riot</td>
-      <td>Noddy Holder, Jim Lea</td>
-      <td>Like, Omigod! The 80s Pop Culture Box (Totally...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Pop, 80s</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>MPEG audio file</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>3.0</td>
-      <td>3/30/2018 10:27 AM</td>
-      <td>2.0</td>
-      <td>1/9/2018 6:04 PM</td>
-      <td>40</td>
-      <td>C:\Users\Lee\itunes\Music\Compilations\Like, O...</td>
-    </tr>
-  </tbody>
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Name</th>
+<th>Artist</th>
+<th>Composer</th>
+<th>Album</th>
+<th>Grouping</th>
+<th>Work</th>
+<th>Movement Number</th>
+<th>Movement Count</th>
+<th>Movement Name</th>
+<th>Genre</th>
+<th>...</th>
+<th>Volume Adjustment</th>
+<th>Kind</th>
+<th>Equalizer</th>
+<th>Comments</th>
+<th>Plays</th>
+<th>Last Played</th>
+<th>Skips</th>
+<th>Last Skipped</th>
+<th>My Rating</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>122</th>
+<td>Halloween</td>
+<td>Dead Kennedys</td>
+<td>NaN</td>
+<td>Just Can't Get Enough: New Wa</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Alternative, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>4.0</td>
+<td>3/19/2018 8:46 AM</td>
+<td>60</td>
+<td>C:\Users\Lee\itunes\Music\Dead Kennedys\Just C...</td>
+</tr>
+<tr>
+<th>310</th>
+<td>Halloween</td>
+<td>Dead Kennedys</td>
+<td>D.H. Peligro/Dead Kennedys/East Bay Ray/Jello ...</td>
+<td>Milking The Sacred Cow</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Punk Rock, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>1.0</td>
+<td>1/11/2018 11:59 PM</td>
+<td>40</td>
+<td>C:\Users\Lee\itunes\Music\Dead Kennedys\Milkin...</td>
+</tr>
+<tr>
+<th>20</th>
+<td>Enjoy The Silence</td>
+<td>Depeche Mode</td>
+<td>NaN</td>
+<td>Best Of Depeche Mode, Vol. 1</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Pop, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>Track 4</td>
+<td>40.0</td>
+<td>4/10/2018 7:19 PM</td>
+<td>1.0</td>
+<td>1/14/2018 10:37 AM</td>
+<td>80</td>
+<td>C:\Users\Lee\itunes\Music\Depeche Mode\Best Of...</td>
+</tr>
+<tr>
+<th>127</th>
+<td>Enjoy The Silence</td>
+<td>Depeche Mode</td>
+<td>Martin L. Gore</td>
+<td>Violator</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Pop, 80s, Alternative</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>Sire / Reprise 9 26081-2</td>
+<td>27.0</td>
+<td>4/9/2018 7:49 PM</td>
+<td>2.0</td>
+<td>2/23/2018 1:33 PM</td>
+<td>60</td>
+<td>C:\Users\Lee\itunes\Music\Depeche Mode\Violato...</td>
+</tr>
+<tr>
+<th>29</th>
+<td>The Final Countdown</td>
+<td>Europe</td>
+<td>NaN</td>
+<td>101 Sporting Anthems</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Hard Rock, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>86.0</td>
+<td>4/29/2016 3:29 PM</td>
+<td>5.0</td>
+<td>9/28/2015 7:58 PM</td>
+<td>80</td>
+<td>C:\Users\Lee\itunes\Music\Various Artists\101 ...</td>
+</tr>
+<tr>
+<th>358</th>
+<td>The Final Countdown</td>
+<td>Europe</td>
+<td>NaN</td>
+<td>The Best 80s Songs</td>
+<td>NaN</td>
+<td>.</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>80s, Pop</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>3.0</td>
+<td>1/2/2018 5:47 PM</td>
+<td>2.0</td>
+<td>1/6/2018 9:49 PM</td>
+<td>40</td>
+<td>C:\Users\Lee\itunes\Music\Compilations\The Bes...</td>
+</tr>
+<tr>
+<th>36</th>
+<td>Down Under</td>
+<td>Men At Work</td>
+<td>NaN</td>
+<td>The Best 80s Songs</td>
+<td>NaN</td>
+<td>.</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>80s, Pop</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>2.0</td>
+<td>1/2/2018 7:24 PM</td>
+<td>1.0</td>
+<td>1/2/2018 1:44 AM</td>
+<td>80</td>
+<td>C:\Users\Lee\itunes\Music\Compilations\The Bes...</td>
+</tr>
+<tr>
+<th>37</th>
+<td>Down Under</td>
+<td>Men At Work</td>
+<td>Colin Hay, Roy Strykert</td>
+<td>Like, Omigod! The 80s Pop Culture Box (Totally...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Pop, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>49.0</td>
+<td>4/11/2018 6:47 PM</td>
+<td>3.0</td>
+<td>1/17/2018 6:53 PM</td>
+<td>80</td>
+<td>C:\Users\Lee\itunes\Music\Men At Work\Like, Om...</td>
+</tr>
+<tr>
+<th>45</th>
+<td>Cum On Feel The Noize</td>
+<td>Quiet Riot</td>
+<td>NaN</td>
+<td>101 Sporting Anthems</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Hard Rock, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>79.0</td>
+<td>4/29/2016 4:44 PM</td>
+<td>5.0</td>
+<td>1/8/2018 3:01 PM</td>
+<td>80</td>
+<td>C:\Users\Lee\itunes\Music\Various Artists\101 ...</td>
+</tr>
+<tr>
+<th>485</th>
+<td>Cum On Feel The Noize</td>
+<td>Quiet Riot</td>
+<td>Noddy Holder, Jim Lea</td>
+<td>Like, Omigod! The 80s Pop Culture Box (Totally...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Pop, 80s</td>
+<td>...</td>
+<td>NaN</td>
+<td>MPEG audio file</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>3.0</td>
+<td>3/30/2018 10:27 AM</td>
+<td>2.0</td>
+<td>1/9/2018 6:04 PM</td>
+<td>40</td>
+<td>C:\Users\Lee\itunes\Music\Compilations\Like, O...</td>
+</tr>
+</tbody>
 </table>
 <p>10 rows × 31 columns</p>
 </div>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -3270,73 +3124,62 @@ We now find out how many duplicate records exist based on the composite key we u
 <p>Looking at the data, it seems it contains information for the actual digital files stored on disk.</p>
 <p>For our purpose of comparing the logical music tracks between the 2 playlists, we can safely remove that physical file related information to form a new logical representation of the playlist based on a subset of the data.</p>
 <p>For now, we will simply strip out the duplicate records from the playlist based on original composite key and keep the first record in each case.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In [19]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">df_playlist1_uniq</span><span class="o">=</span><span class="n">df_playlist1</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">])</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">df_playlist1_uniq</span><span class="o">=</span><span class="n">df_playlist1</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">'Artist'</span><span class="p">,</span> <span class="s1">'Name'</span><span class="p">])</span>
 
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;df_playlist1_uniq.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">df_playlist1_uniq</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"df_playlist1_uniq.shape=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">df_playlist1_uniq</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>2018-04-24 15:30:56,282 - INFO - df_playlist1_uniq.shape=(634, 31)
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Enhance-the-dataset-load-to-exclude-duplicates">Enhance the dataset load to exclude duplicates<a class="anchor-link" href="#Enhance-the-dataset-load-to-exclude-duplicates">&#182;</a></h2><p>We now update the original load logic to exclude duplicates and rerun the merge to see if the set union set count agrees with the merged dataset count.</p>
-
+<h2 id="Enhance-the-dataset-load-to-exclude-duplicates">Enhance the dataset load to exclude duplicates<a class="anchor-link" href="#Enhance-the-dataset-load-to-exclude-duplicates">¶</a></h2><p>We now update the original load logic to exclude duplicates and rerun the merge to see if the set union set count agrees with the merged dataset count.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In [21]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">all_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;data/Top80_sPop&amp;Rock.txt&#39;</span><span class="p">,</span><span class="s1">&#39;data/TopAlt&amp;Electronic.txt&#39;</span><span class="p">]</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">all_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'data/Top80_sPop&amp;Rock.txt'</span><span class="p">,</span><span class="s1">'data/TopAlt&amp;Electronic.txt'</span><span class="p">]</span>
 <span class="n">list_of_playlists</span><span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">file_</span> <span class="ow">in</span> <span class="n">all_files</span><span class="p">:</span>
-    <span class="n">doc</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_</span><span class="p">,</span><span class="s1">&#39;rU&#39;</span><span class="p">,</span><span class="s1">&#39;UTF-16&#39;</span><span class="p">)</span> 
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_</span><span class="p">,</span><span class="s1">'rU'</span><span class="p">,</span><span class="s1">'UTF-16'</span><span class="p">)</span> 
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">'</span><span class="se">\t</span><span class="s1">'</span><span class="p">)</span>
     
-    <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;## </span><span class="si">%s</span><span class="s2">: df.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">file_</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">'Artist'</span><span class="p">,</span> <span class="s1">'Name'</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"## </span><span class="si">%s</span><span class="s2">: df.shape=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">file_</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
 
     <span class="n">list_of_playlists</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 
-<span class="n">inner_df</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">),</span> <span class="n">list_of_playlists</span><span class="p">)</span>
-<span class="n">merged_df</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">),</span> <span class="n">list_of_playlists</span><span class="p">)</span>
+<span class="n">inner_df</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">'Artist'</span><span class="p">,</span><span class="s1">'Name'</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">'inner'</span><span class="p">),</span> <span class="n">list_of_playlists</span><span class="p">)</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">'Artist'</span><span class="p">,</span><span class="s1">'Name'</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">'outer'</span><span class="p">),</span> <span class="n">list_of_playlists</span><span class="p">)</span>
 
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;inner_df.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">inner_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;merged_df.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">merged_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"inner_df.shape=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">inner_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"merged_df.shape=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">merged_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 
 <span class="n">df1_cnt</span><span class="o">=</span><span class="n">list_of_playlists</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">df2_cnt</span><span class="o">=</span><span class="n">list_of_playlists</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -3344,26 +3187,19 @@ We now find out how many duplicate records exist based on the composite key we u
 <span class="n">df_union_cnt</span><span class="o">=</span><span class="n">df1_cnt</span><span class="o">+</span><span class="n">df2_cnt</span><span class="o">-</span><span class="n">df_inner_cnt</span>
 <span class="n">df_merged_cnt</span><span class="o">=</span><span class="n">merged_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Rows in dataset1=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">df1_cnt</span><span class="p">)</span>
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Rows in dataset2=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">df2_cnt</span><span class="p">)</span>
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Rows in intersection=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">df_inner_cnt</span><span class="p">)</span>
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Rows in union=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">df_union_cnt</span><span class="p">)</span>
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;(Rows in union==Rows in merged) = </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">df_union_cnt</span><span class="o">==</span><span class="n">df_merged_cnt</span><span class="p">))</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Rows in dataset1=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">df1_cnt</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Rows in dataset2=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">df2_cnt</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Rows in intersection=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">df_inner_cnt</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Rows in union=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">df_union_cnt</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"(Rows in union==Rows in merged) = </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">df_union_cnt</span><span class="o">==</span><span class="n">df_merged_cnt</span><span class="p">))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>2018-04-24 15:31:58,614 - INFO - ## data/Top80_sPop&amp;Rock.txt: df.shape=(634, 31)
 2018-04-24 15:31:58,625 - INFO - ## data/TopAlt&amp;Electronic.txt: df.shape=(185, 31)
@@ -3377,10 +3213,8 @@ We now find out how many duplicate records exist based on the composite key we u
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -3388,12 +3222,9 @@ We now find out how many duplicate records exist based on the composite key we u
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>So the data set union count agrees with the merged dataframe count.</p>
 <p>For an example using pandas to load multiple excel datasets/sheets into a single dataframe, see <a href="http://leeblog.org/blog/2018/04/24/merging-excel-sheets-using-pandas/">here</a>.</p>
-
 </div>
 </div>
 </div>
- 
-
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
@@ -3423,6 +3254,14 @@ We now find out how many duplicate records exist based on the composite key we u
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 </script>
+
+
+<p>Related Reference:</p>
+<div class="highlight"><pre><span></span>https://www.shanelynn.ie/merge-join-dataframes-python-pandas-index-1/
+https://stackoverflow.com/questions/46751699/python-pandas-merge-csv-files-in-directory-into-one
+http://www.datacarpentry.org/python-ecology-lesson/04-merging-data/
+https://stackoverflow.com/questions/18792918/pandas-combining-2-data-frames-join-on-a-common-column
+</pre></div>
         </div>
 
         <div class="meta">

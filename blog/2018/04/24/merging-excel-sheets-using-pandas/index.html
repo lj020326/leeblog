@@ -1415,14 +1415,11 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 
-
 <p>In my prior <a href="http://leeblog.org/blog/2018/04/24/merging-itunes-playlists-using-pandas/">post</a>, I loaded 2 playlists in an iTunes text export format into pandas dataframes to match into 1 single dataframe.</p>
 <p>Here I repeat the last step of the prior post assuming that the 2 text files were first imported into excel.</p>
 
-
 <p>For those who aren't familiar, this post is composed in the form of a <a href="https://jupyter.org/">Jupyter Notebook</a>, which is an open document format that combines text, code, data, and graphics and is viewable through the web browser – if you have not used it before I encourage you to try it out!</p>
 <p>You can download the notebook containing this post <a href="http://lj020326.github.io/downloads/notebooks/MergeExcelUsingPandas.ipynb">here</a>, open it with Jupyter, and start asking your own questions of the data.</p>
-
 </div>
 </div>
 </div>
@@ -1430,62 +1427,49 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Setup-notebook-output-options">Setup notebook output options<a class="anchor-link" href="#Setup-notebook-output-options">&#182;</a></h2><p>Set notebook output formatting options:</p>
-
+<h2 id="Setup-notebook-output-options">Setup notebook output options<a class="anchor-link" href="#Setup-notebook-output-options">¶</a></h2><p>Set notebook output formatting options:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.interactiveshell</span> <span class="kn">import</span> <span class="n">InteractiveShell</span>
-<span class="n">InteractiveShell</span><span class="o">.</span><span class="n">ast_node_interactivity</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span>
-<span class="n">InteractiveShell</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;INFO&#39;</span>
+<span class="n">InteractiveShell</span><span class="o">.</span><span class="n">ast_node_interactivity</span> <span class="o">=</span> <span class="s2">"all"</span>
+<span class="n">InteractiveShell</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">'INFO'</span>
 
 <span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;&quot;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">"&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;"</span><span class="p">))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
-
 <div class="output_html rendered_html output_subarea ">
 <style>.container { width:100% !important; }</style>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Import-standard-libraries">Import standard libraries<a class="anchor-link" href="#Import-standard-libraries">&#182;</a></h2><p>Some standard Python package imports:</p>
-
+<h2 id="Import-standard-libraries">Import standard libraries<a class="anchor-link" href="#Import-standard-libraries">¶</a></h2><p>Some standard Python package imports:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -1498,58 +1482,55 @@ h6:hover .anchor-link {
 <span class="n">log</span><span class="o">.</span><span class="n">handlers</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">ch</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
 <span class="n">ch</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
-<span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">'</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">'</span><span class="p">)</span>
 <span class="n">ch</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
 <span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
 <span class="c1"># log.setLevel(logging.DEBUG)</span>
 <span class="n">log</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
 
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.width&#39;</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
-<span class="c1"># pd.set_option(&#39;max_colwidth&#39;,200)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">reset_option</span><span class="p">(</span><span class="s1">&#39;max_colwidth&#39;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.width'</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="c1"># pd.set_option('max_colwidth',200)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">reset_option</span><span class="p">(</span><span class="s1">'max_colwidth'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Import-Itunes-Playlist-Data">Import Itunes Playlist Data<a class="anchor-link" href="#Import-Itunes-Playlist-Data">&#182;</a></h2><p>We'll start by exporting the itunes playlist data (for howto export itunes playlists <a href="https://support.apple.com/kb/PH19491?locale=en_US">itunes</a>).
+<h2 id="Import-Itunes-Playlist-Data">Import Itunes Playlist Data<a class="anchor-link" href="#Import-Itunes-Playlist-Data">¶</a></h2><p>We'll start by exporting the itunes playlist data (for howto export itunes playlists <a href="https://support.apple.com/kb/PH19491?locale=en_US">itunes</a>).
 I chose the text export option rather than xml.</p>
 <p>After exporting, I opened and saved the file in excel.
 I now have 2 playlist excel files as seen in the example below.</p>
 <p>Note that I could directly import the text formatted file.
 I use excel here to simply demonstrate that excel based imports will also work.</p>
 <p>We now load the 2 playlists into list_of_playlists.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">all_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;data/Top80_sPop&amp;Rock.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;data/TopAlt&amp;Electronic.xlsx&#39;</span><span class="p">]</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">all_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'data/Top80_sPop&amp;Rock.xlsx'</span><span class="p">,</span><span class="s1">'data/TopAlt&amp;Electronic.xlsx'</span><span class="p">]</span>
 <span class="n">list_of_playlists</span><span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">file_</span> <span class="ow">in</span> <span class="n">all_files</span><span class="p">:</span>
     <span class="n">xls_file</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelFile</span><span class="p">(</span><span class="n">file_</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">xls_file</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1">## load first sheet - there should only be one</span>
     
-    <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;## </span><span class="si">%s</span><span class="s2">: df.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">file_</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">'Artist'</span><span class="p">,</span> <span class="s1">'Name'</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"## </span><span class="si">%s</span><span class="s2">: df.shape=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">file_</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
 
     <span class="n">list_of_playlists</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 
-<span class="n">inner_df</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">),</span> <span class="n">list_of_playlists</span><span class="p">)</span>
-<span class="n">merged_df</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">),</span> <span class="n">list_of_playlists</span><span class="p">)</span>
+<span class="n">inner_df</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">'Artist'</span><span class="p">,</span><span class="s1">'Name'</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">'inner'</span><span class="p">),</span> <span class="n">list_of_playlists</span><span class="p">)</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">'Artist'</span><span class="p">,</span><span class="s1">'Name'</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">'outer'</span><span class="p">),</span> <span class="n">list_of_playlists</span><span class="p">)</span>
 
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;inner_df.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">inner_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;merged_df.shape=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">merged_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"inner_df.shape=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">inner_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"merged_df.shape=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">merged_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 
 <span class="n">df1_cnt</span><span class="o">=</span><span class="n">list_of_playlists</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">df2_cnt</span><span class="o">=</span><span class="n">list_of_playlists</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1557,26 +1538,19 @@ I use excel here to simply demonstrate that excel based imports will also work.<
 <span class="n">df_union_cnt</span><span class="o">=</span><span class="n">df1_cnt</span><span class="o">+</span><span class="n">df2_cnt</span><span class="o">-</span><span class="n">df_inner_cnt</span>
 <span class="n">df_merged_cnt</span><span class="o">=</span><span class="n">merged_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Rows in dataset1=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">df1_cnt</span><span class="p">)</span>
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Rows in dataset2=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">df2_cnt</span><span class="p">)</span>
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Rows in intersection=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">df_inner_cnt</span><span class="p">)</span>
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Rows in union=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">df_union_cnt</span><span class="p">)</span>
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;(Rows in union==Rows in merged) = </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">df_union_cnt</span><span class="o">==</span><span class="n">df_merged_cnt</span><span class="p">))</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Rows in dataset1=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">df1_cnt</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Rows in dataset2=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">df2_cnt</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Rows in intersection=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">df_inner_cnt</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Rows in union=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">df_union_cnt</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"(Rows in union==Rows in merged) = </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">df_union_cnt</span><span class="o">==</span><span class="n">df_merged_cnt</span><span class="p">))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>2018-04-24 15:35:13,785 - INFO - ## data/Top80_sPop&amp;Rock.xlsx: df.shape=(634, 31)
 2018-04-24 15:35:13,857 - INFO - ## data/TopAlt&amp;Electronic.xlsx: df.shape=(185, 31)
@@ -1590,22 +1564,17 @@ I use excel here to simply demonstrate that excel based imports will also work.<
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>So the data set union count agrees with the merged dataframe count.</p>
-
 </div>
 </div>
 </div>
- 
-
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');

@@ -1415,7 +1415,6 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 
-
 <p>Python is quick and easy to code, but can be slow when doing intensive numerical operations. Translating code to Cython can be helpful, but in most cases requires a bit of trial and error to achieve the optimal result. <a href="http://cython.readthedocs.io/en/latest/src/tutorial/">Cython's tutorials</a> contain a lot of information, but for iterative workflows like optimization with Cython, it's often useful to see it done "live".</p>
 <p>For that reason, I decided to record some screencasts showing this iterative optimization process, using an  <a href="https://en.wikipedia.org/wiki/Ising_model">Ising Model</a>, as an example application.</p>
 
@@ -1426,7 +1425,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="When-to-use-Cython">When to use Cython<a class="anchor-link" href="#When-to-use-Cython">&#182;</a></h2><p>Before I get to the videos, I wanted to say a few words about <em>when</em> and <em>why</em> you might choose Cython.</p>
+<h2 id="When-to-use-Cython">When to use Cython<a class="anchor-link" href="#When-to-use-Cython">¶</a></h2><p>Before I get to the videos, I wanted to say a few words about <em>when</em> and <em>why</em> you might choose Cython.</p>
 <p>With scientific Python code, before turning to Cython I'd suggest going as far as you can with <em>vectorization</em>.
 Vectorization involves the judicious use of built-in routines in NumPy, SciPy, Pandas, and other libraries to reduce the number of explicit for-loops in your code. It can work quite well in many situations, and doesn't require any sort of special compilation step in running your code. See my PyCon 2015 talk, <a href="https://www.youtube.com/watch?v=EEUXKG97YRw">Losing Your Loops</a> for an intro to this approach.</p>
 <p>When a problem cannot be easily solved using standard vectorization approaches, Cython is a good choice.
@@ -1434,7 +1433,6 @@ Cython provides a bridge between Python and C code, and is quite mature and reli
 <p>Other approaches to optimizing Python code are available, but I tend not to use them as often as Cython:</p>
 <p>The <a href="https://pypy.org/">PyPy</a> project is an alternative implementation of Python that avoids the slow loops of the default CPython implementation. Although it is quite promising, it currently does not support many of the core scientific packages, so is not the best choice for scientific code (though that has been changing).</p>
 <p><a href="http://numba.pydata.org/">Numba</a> is a Python-to-LLVM converter which can often give you 100x speedups in Python by adding a simple compilation decorator to Python functions. For an example of Numba being used on code like that in this notebook, see <a href="http://matthewrocklin.com/blog/work/2015/02/28/Ising">Matthew Rocklin's post</a>. Though it is convenient, Numba doesn't support all Python constructs yet, and can be difficult to optimize when the most straightforward approach fails.</p>
-
 </div>
 </div>
 </div>
@@ -1442,78 +1440,55 @@ Cython provides a bridge between Python and C code, and is quite mature and reli
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Videos">Videos<a class="anchor-link" href="#Videos">&#182;</a></h2><p>Finally, here are the demos of using Cython to optimize an Ising model.</p>
-
+<h2 id="Videos">Videos<a class="anchor-link" href="#Videos">¶</a></h2><p>Finally, here are the demos of using Cython to optimize an Ising model.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">YouTubeVideo</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Part-1">Part 1<a class="anchor-link" href="#Part-1">&#182;</a></h3><p>In part 1, I write a function to evolve an Ising model in Python, along with some tools to visualize the resulting evolution:</p>
-
+<h3 id="Part-1">Part 1<a class="anchor-link" href="#Part-1">¶</a></h3><p>In part 1, I write a function to evolve an Ising model in Python, along with some tools to visualize the resulting evolution:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">YouTubeVideo</span><span class="p">(</span><span class="s1">&#39;rN7g4gzO2sk&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">350</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">YouTubeVideo</span><span class="p">(</span><span class="s1">'rN7g4gzO2sk'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">350</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[2]:</div>
-
-
-
 <div class="output_html rendered_html output_subarea output_execute_result">
-
-        <iframe
-            width="600"
-            height="350"
-            src="https://www.youtube.com/embed/rN7g4gzO2sk"
-            frameborder="0"
-            allowfullscreen
-        ></iframe>
-        
-</div>
-
-</div>
-
+<iframe allowfullscreen="" frameborder="0" height="350" src="https://www.youtube.com/embed/rN7g4gzO2sk" width="600"></iframe>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Part-2">Part 2<a class="anchor-link" href="#Part-2">&#182;</a></h3>
+<h3 id="Part-2">Part 2<a class="anchor-link" href="#Part-2">¶</a></h3>
 </div>
 </div>
 </div>
@@ -1522,56 +1497,27 @@ Cython provides a bridge between Python and C code, and is quite mature and reli
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In part 2, I go through the process of optimizing this function with Cython:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">YouTubeVideo</span><span class="p">(</span><span class="s1">&#39;LOzcSuw3yOY&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">350</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">YouTubeVideo</span><span class="p">(</span><span class="s1">'LOzcSuw3yOY'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">350</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[3]:</div>
-
-
-
 <div class="output_html rendered_html output_subarea output_execute_result">
-
-        <iframe
-            width="600"
-            height="350"
-            src="https://www.youtube.com/embed/LOzcSuw3yOY"
-            frameborder="0"
-            allowfullscreen
-        ></iframe>
-        
-</div>
-
-</div>
-
+<iframe allowfullscreen="" frameborder="0" height="350" src="https://www.youtube.com/embed/LOzcSuw3yOY" width="600"></iframe>
 </div>
 </div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="The-Code">The Code<a class="anchor-link" href="#The-Code">&#182;</a></h2><p>Below you can find the code that I wrote in those two videos:</p>
-
 </div>
 </div>
 </div>
@@ -1579,7 +1525,7 @@ Cython provides a bridge between Python and C code, and is quite mature and reli
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.-Simple-Python-Ising-Model">1. Simple Python Ising Model<a class="anchor-link" href="#1.-Simple-Python-Ising-Model">&#182;</a></h3>
+<h2 id="The-Code">The Code<a class="anchor-link" href="#The-Code">¶</a></h2><p>Below you can find the code that I wrote in those two videos:</p>
 </div>
 </div>
 </div>
@@ -1587,15 +1533,23 @@ Cython provides a bridge between Python and C code, and is quite mature and reli
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Displaying-an-Ising-Field">Displaying an Ising Field<a class="anchor-link" href="#Displaying-an-Ising-Field">&#182;</a></h4>
+<h3 id="1.-Simple-Python-Ising-Model">1. Simple Python Ising Model<a class="anchor-link" href="#1.-Simple-Python-Ising-Model">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Displaying-an-Ising-Field">Displaying an Ising Field<a class="anchor-link" href="#Displaying-an-Ising-Field">¶</a></h4>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="k">def</span> <span class="nf">random_spin_field</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">):</span>
@@ -1603,22 +1557,13 @@ Cython provides a bridge between Python and C code, and is quite mature and reli
 
 <span class="n">random_spin_field</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[4]:</div>
-
-
-
-
 <div class="output_text output_subarea output_execute_result">
 <pre>array([[ 1, -1, -1,  1, -1, -1,  1, -1,  1,  1],
        [ 1, -1,  1, -1, -1,  1, -1, -1, -1, -1],
@@ -1631,18 +1576,15 @@ Cython provides a bridge between Python and C code, and is quite mature and reli
        [ 1, -1, -1, -1,  1,  1, -1,  1, -1,  1],
        [ 1,  1,  1, -1,  1, -1,  1,  1, -1, -1]])</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># pip install pillow</span>
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
 
@@ -1651,22 +1593,13 @@ Cython provides a bridge between Python and C code, and is quite mature and reli
 
 <span class="n">display_spin_field</span><span class="p">(</span><span class="n">random_spin_field</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[5]:</div>
-
-
-
-
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAAAAACIM/FCAAAiMUlEQVR4nG2d0ZYjOQhDIaf//5fZ
 B9CVXLOzO92dlMvGIIRwkp6eqp6q6pqqqq6qmr7/q6pmr1dP9XTVMKaqpqprer9Vz47o8XQ79w6s
@@ -1823,29 +1756,25 @@ nUHlvAC/E/B1ESZMrvuBWcscgiDVQUxx/wPtjEIoEeWlbnNaBWacuHO/3HvMkMurW2vFfRxJbF2q
 eX5DSJeq/1ymTNX94rEZCe3hvEPVlumENKMgsNtzEmOGt87dFEb85ahdZi85BeRfHBAeZ5SntZsU
 ntB5Ib7wcWCAQDpznKISVy+raa79vfFUtUWnUO1CKM1U1L02YoPqTgXp4cBpoQxWrJQn158hzTqU
 QSkRJZhaK11gtdp/xP0BtutAnmcAAAAASUVORK5CYII=
-"
->
-</div>
-
-</div>
-
+"/>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Implementing-the-Ising-Model">Implementing the Ising Model<a class="anchor-link" href="#Implementing-the-Ising-Model">&#182;</a></h4>
+<h4 id="Implementing-the-Ising-Model">Implementing the Ising Model<a class="anchor-link" href="#Implementing-the-Ising-Model">¶</a></h4>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">ising_step</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.4</span><span class="p">):</span>
     <span class="n">N</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">shape</span>
     <span class="k">for</span> <span class="n">n_offset</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
@@ -1869,35 +1798,24 @@ QSkRJZhaK11gtdp/xP0BtutAnmcAAAAASUVORK5CYII=
     <span class="k">elif</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">dE</span> <span class="o">*</span> <span class="n">beta</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">():</span>
         <span class="n">field</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">display_spin_field</span><span class="p">(</span><span class="n">ising_step</span><span class="p">(</span><span class="n">random_spin_field</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">)))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[7]:</div>
-
-
-
-
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAAAAACIM/FCAAAbtElEQVR4nIVdWbLjRgwjVXP/KzMf
 zQUA6Rcn9WxLvXAFepPHzczCzMzD84NZX5zvYR7m0ZfiXQ8zqBZY218bHlnLYxqfXqer99H7SwvQ
@@ -2025,30 +1943,25 @@ Uax36zF3+O1mVnrqdXOMnvTJsUihiPT/I69PVmJKoTQfp9fVD4p1yzxhxJYmPLaMtWFYPjGrh318
 2RPrxrpEM8Povv39mSkRSswBQxbehIfpU0EAsX34gEQfpFaeEbmwRw0alHOiI/wL0IO7Tl27Eefb
 vB45Jw+d3rqNxsK1W8K5v5h0DxFqqQf619+jJvgB2JD2JkqLmWdZnxgMBhPGrTEqTaN1soF6vETQ
 7cj/AFguTBsXBoH2AAAAAElFTkSuQmCC
-"
->
-</div>
-
-</div>
-
+"/>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Animating-an-Ising-Sequence">Animating an Ising Sequence<a class="anchor-link" href="#Animating-an-Ising-Sequence">&#182;</a></h4><p>Note that this requires a live kernel, and so will not show up on the blog or other static rendering:</p>
-
+<h4 id="Animating-an-Ising-Sequence">Animating an Ising Sequence<a class="anchor-link" href="#Animating-an-Ising-Sequence">¶</a></h4><p>Note that this requires a live kernel, and so will not show up on the blog or other static rendering:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="k">import</span> <span class="n">interact</span>
 
 <span class="k">def</span> <span class="nf">display_ising_sequence</span><span class="p">(</span><span class="n">images</span><span class="p">):</span>
@@ -2056,64 +1969,46 @@ vB45Jw+d3rqNxsK1W8K5v5h0DxFqqQf619+jJvgB2JD2JkqLmWdZnxgMBhPGrTEqTaN1soF6vETQ
         <span class="k">return</span> <span class="n">display_spin_field</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="n">frame</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">interact</span><span class="p">(</span><span class="n">_show</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">images</span> <span class="o">=</span> <span class="p">[</span><span class="n">random_spin_field</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">)]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
     <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ising_step</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()))</span>
 <span class="n">display_ising_sequence</span><span class="p">(</span><span class="n">images</span><span class="p">);</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
-
-
-
- 
- 
-<div id="8cc3788a-36b0-4b85-9c50-d25e010265af"></div>
+<div id="00fb573f-d097-4b1f-b817-b207e353e516"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#8cc3788a-36b0-4b85-9c50-d25e010265af');
+var element = $('#00fb573f-d097-4b1f-b817-b207e353e516');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "fedb0a4e08a14268941973baac924a6b"}
+{"version_major": 2, "model_id": "fedb0a4e08a14268941973baac924a6b", "version_minor": 0}
 </script>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The result will look something like this:</p>
-<p><img src="http://lj020326.github.io/images/Ising-Slider-1.gif" width=500 alt="[Ising-Slider-1.gif]"/></p>
-
+<p><img alt="[Ising-Slider-1.gif]" src="http://lj020326.github.io/images/Ising-Slider-1.gif" width="500"/></p>
 </div>
 </div>
 </div>
@@ -2121,28 +2016,26 @@ var element = $('#8cc3788a-36b0-4b85-9c50-d25e010265af');
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.-Use-Cython-to-speed-it-up">2. Use Cython to speed it up<a class="anchor-link" href="#2.-Use-Cython-to-speed-it-up">&#182;</a></h3>
+<h3 id="2.-Use-Cython-to-speed-it-up">2. Use Cython to speed it up<a class="anchor-link" href="#2.-Use-Cython-to-speed-it-up">¶</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> Cython
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span>
 
 <span class="k">cimport</span> <span class="nn">cython</span>
@@ -2152,7 +2045,7 @@ var element = $('#8cc3788a-36b0-4b85-9c50-d25e010265af');
 
 <span class="k">from</span> <span class="nn">libc.math</span> <span class="k">cimport</span> <span class="n">exp</span>
 <span class="k">from</span> <span class="nn">libc.stdlib</span> <span class="k">cimport</span> <span class="n">rand</span>
-<span class="k">cdef</span> <span class="kr">extern</span> <span class="k">from</span> <span class="s">&quot;limits.h&quot;</span><span class="p">:</span>
+<span class="k">cdef</span> <span class="kr">extern</span> <span class="k">from</span> <span class="s">"limits.h"</span><span class="p">:</span>
     <span class="nb">int</span> <span class="n">RAND_MAX</span>
 
 
@@ -2188,59 +2081,48 @@ var element = $('#8cc3788a-36b0-4b85-9c50-d25e010265af');
     <span class="k">elif</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">dE</span> <span class="o">*</span> <span class="n">beta</span><span class="p">)</span> <span class="o">*</span> <span class="n">RAND_MAX</span> <span class="o">&gt;</span> <span class="n">rand</span><span class="p">():</span>
         <span class="n">field</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mf">1</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Timing-the-result">Timing the result<a class="anchor-link" href="#Timing-the-result">&#182;</a></h4>
+<h4 id="Timing-the-result">Timing the result<a class="anchor-link" href="#Timing-the-result">¶</a></h4>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In [12]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">field</span> <span class="o">=</span> <span class="n">random_spin_field</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
 <span class="o">%</span><span class="k">timeit</span> ising_step(field)
 <span class="o">%</span><span class="k">timeit</span> cy_ising_step(field)
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>317 ms ± 10.4 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 2.64 ms ± 132 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Visualizing-the-result">Visualizing the result<a class="anchor-link" href="#Visualizing-the-result">&#182;</a></h4>
+<h4 id="Visualizing-the-result">Visualizing the result<a class="anchor-link" href="#Visualizing-the-result">¶</a></h4>
 </div>
 </div>
 </div>
@@ -2249,62 +2131,45 @@ var element = $('#8cc3788a-36b0-4b85-9c50-d25e010265af');
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>(Note that the following code requires a live kernel, and will not display within a static rendering such as the blog post):</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">images</span> <span class="o">=</span> <span class="p">[</span><span class="n">random_spin_field</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">)]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
     <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cy_ising_step</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.4</span><span class="p">))</span>
 <span class="n">display_ising_sequence</span><span class="p">(</span><span class="n">images</span><span class="p">);</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
-
-
-
- 
- 
-<div id="acf4c413-d8e4-47d9-9b4d-b74d918bcbc6"></div>
+<div id="e02528fc-38b1-42dd-a03b-5c7c377ba6aa"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#acf4c413-d8e4-47d9-9b4d-b74d918bcbc6');
+var element = $('#e02528fc-38b1-42dd-a03b-5c7c377ba6aa');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "d785ec459bae49669cfcab176c6d615f"}
+{"version_major": 2, "model_id": "d785ec459bae49669cfcab176c6d615f", "version_minor": 0}
 </script>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The result will look something like this:</p>
-<p><img src="http://lj020326.github.io/images/Ising-Slider-2.gif" alt="[Ising-Slider-2.gif]"/></p>
-
+<p><img alt="[Ising-Slider-2.gif]" src="http://lj020326.github.io/images/Ising-Slider-2.gif"/></p>
 </div>
 </div>
 </div>
@@ -2316,12 +2181,9 @@ var element = $('#acf4c413-d8e4-47d9-9b4d-b74d918bcbc6');
 <a href="http://lj020326.github.io/downloads/notebooks/CythonIsingModel.ipynb">download</a>
 this notebook, or see a static view
 <a href="http://nbviewer.jupyter.org/url/lj020326.github.io/downloads/notebooks/CythonIsingModel.ipynb">on nbviewer</a>.</em></p>
-
 </div>
 </div>
 </div>
- 
-
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');

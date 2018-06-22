@@ -1415,7 +1415,6 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 
-
 <p>In software, it's said that <a href="https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/">all abstractions are leaky</a>, and this is true for the Jupyter notebook as it is for any other software.
 I most often see this manifest itself with the following issue:</p>
 <blockquote><p>I installed <em>package X</em> and now I can't import it in the notebook. Help!</p>
@@ -1444,8 +1443,7 @@ Other package managers exist (including platform-specific tools like <a href="ht
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Quick-Fix:-How-To-Install-Packages-from-the-Jupyter-Notebook">Quick Fix: How To Install Packages from the Jupyter Notebook<a class="anchor-link" href="#Quick-Fix:-How-To-Install-Packages-from-the-Jupyter-Notebook">&#182;</a></h2><p>If you're just looking for a quick answer to the question, <em>how do I install packages so they work with the notebook</em>, then look no further.</p>
-
+<h2 id="Quick-Fix:-How-To-Install-Packages-from-the-Jupyter-Notebook">Quick Fix: How To Install Packages from the Jupyter Notebook<a class="anchor-link" href="#Quick-Fix:-How-To-Install-Packages-from-the-Jupyter-Notebook">¶</a></h2><p>If you're just looking for a quick answer to the question, <em>how do I install packages so they work with the notebook</em>, then look no further.</p>
 </div>
 </div>
 </div>
@@ -1453,7 +1451,7 @@ Other package managers exist (including platform-specific tools like <a href="ht
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="pip-vs.-conda">pip vs. conda<a class="anchor-link" href="#pip-vs.-conda">&#182;</a></h3><p>First, a few words on <code>pip</code> vs. <code>conda</code>.
+<h3 id="pip-vs.-conda">pip vs. conda<a class="anchor-link" href="#pip-vs.-conda">¶</a></h3><p>First, a few words on <code>pip</code> vs. <code>conda</code>.
 For many users, the choice between pip and conda can be a confusing one.
 I wrote <a href="https://lj020326.github.io/blog/2016/08/25/conda-myths-and-misconceptions/">way more than you ever want to know</a> about these in a post last year, but the essential difference between the two is this:</p>
 <ul>
@@ -1472,7 +1470,6 @@ I wrote <a href="https://lj020326.github.io/blog/2016/08/25/conda-myths-and-misc
 <p>It will always lead to problems in the long term, even if it seems to solve them in the short-term.
 For example, if <code>pip install</code> gives you a permission error, it likely means you're trying to install/update packages in a system python, such as <code>/usr/bin/python</code>. Doing this can have bad consequences, as often the operating system itself depends on particular versions of packages within that Python installation.
 For day-to-day Python usage, you should isolate your packages from the system Python, using either <a href="https://virtualenv.pypa.io/en/stable/">virtual environments</a> or <a href="https://conda.io/docs/user-guide/install/download.html">Anaconda/Miniconda</a> — I personally prefer conda for this, but I know many colleagues who prefer virtualenv.</p>
-
 </div>
 </div>
 </div>
@@ -1480,33 +1477,25 @@ For day-to-day Python usage, you should isolate your packages from the system Py
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="How-to-use-Conda-from-the-Jupyter-Notebook">How to use Conda from the Jupyter Notebook<a class="anchor-link" href="#How-to-use-Conda-from-the-Jupyter-Notebook">&#182;</a></h3><p>If you're in the jupyter notebook and you want to install a package with conda, you might be tempted to use the <code>!</code> notation to run conda directly as a shell command from the notebook:</p>
-
+<h3 id="How-to-use-Conda-from-the-Jupyter-Notebook">How to use Conda from the Jupyter Notebook<a class="anchor-link" href="#How-to-use-Conda-from-the-Jupyter-Notebook">¶</a></h3><p>If you're in the jupyter notebook and you want to install a package with conda, you might be tempted to use the <code>!</code> notation to run conda directly as a shell command from the notebook:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># DON&#39;T DO THIS!</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># DON'T DO THIS!</span>
 <span class="o">!</span>conda install --yes numpy
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Fetching package metadata ...........
 Solving package specifications: .
@@ -1518,10 +1507,8 @@ numpy                     1.13.3           py36h2cdce51_0
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -1530,33 +1517,25 @@ numpy                     1.13.3           py36h2cdce51_0
 <p>(Note that we use <code>--yes</code> to automatically answer <code>y</code> if and when conda asks for user confirmation)</p>
 <p>For various reasons that I'll outline more fully below, this <strong>will not generally work</strong> if you want to use these installed packages from the current notebook, though it may work in the simplest cases.</p>
 <p>Here is a short snippet that should work in general:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Install a conda package in the current Jupyter kernel</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="o">!</span>conda install --yes --prefix <span class="o">{</span>sys.prefix<span class="o">}</span> numpy
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Fetching package metadata ...........
 Solving package specifications: .
@@ -1568,10 +1547,8 @@ numpy                     1.13.3           py36h2cdce51_0
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -1579,7 +1556,6 @@ numpy                     1.13.3           py36h2cdce51_0
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>That bit of extra boiler-plate makes certain that conda installs the package in the currently-running Jupyter kernel (thanks to <a href="https://twitter.com/minrk/status/842067777150169088">Min Ragan-Kelley</a> for suggesting this approach).
 I'll discuss why this is needed momentarily.</p>
-
 </div>
 </div>
 </div>
@@ -1587,42 +1563,32 @@ I'll discuss why this is needed momentarily.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="How-to-use-Pip-from-the-Jupyter-Notebook">How to use Pip from the Jupyter Notebook<a class="anchor-link" href="#How-to-use-Pip-from-the-Jupyter-Notebook">&#182;</a></h3><p>If you're using the Jupyter notebook and want to install a package with <code>pip</code>, you similarly might be inclined to run pip directly in the shell:</p>
-
+<h3 id="How-to-use-Pip-from-the-Jupyter-Notebook">How to use Pip from the Jupyter Notebook<a class="anchor-link" href="#How-to-use-Pip-from-the-Jupyter-Notebook">¶</a></h3><p>If you're using the Jupyter notebook and want to install a package with <code>pip</code>, you similarly might be inclined to run pip directly in the shell:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># DON&#39;T DO THIS</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># DON'T DO THIS</span>
 <span class="o">!</span>pip install numpy
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Requirement already satisfied: numpy in /Users/lj020326/anaconda/envs/python3.6/lib/python3.6/site-packages
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -1630,42 +1596,32 @@ I'll discuss why this is needed momentarily.</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For various reasons that I'll outline more fully below, this <strong>will not generally work</strong> if you want to use these installed packages from the current notebook, though it may work in the simplest cases.</p>
 <p>Here is a short snippet that should generally work:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Install a pip package in the current Jupyter kernel</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="o">!{</span>sys.executable<span class="o">}</span> -m pip install numpy
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Requirement already satisfied: numpy in /Users/lj020326/anaconda/lib/python3.6/site-packages
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -1673,17 +1629,14 @@ I'll discuss why this is needed momentarily.</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>That bit of extra boiler-plate makes certain that you are running the <code>pip</code> version associated with the current Python kernel, so that the installed packages can be used in the current notebook.
 This is related to the fact that, even setting Jupyter notebooks aside, it's better to install packages using</p>
-
 <pre><code>$ python -m pip install &lt;package&gt;
 
 </code></pre>
 <p>rather than</p>
-
 <pre><code>$ pip install &lt;package&gt;
 
 </code></pre>
 <p>because the former is more explicit about where the package will be installed (more on this below).</p>
-
 </div>
 </div>
 </div>
@@ -1691,7 +1644,7 @@ This is related to the fact that, even setting Jupyter notebooks aside, it's bet
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="The-Details:-Why-is-Installation-from-Jupyter-so-Messy?">The Details: Why is Installation from Jupyter so Messy?<a class="anchor-link" href="#The-Details:-Why-is-Installation-from-Jupyter-so-Messy?">&#182;</a></h2><p>Those above solutions should work in all cases... but why is that additional boilerplate necessary?
+<h2 id="The-Details:-Why-is-Installation-from-Jupyter-so-Messy?">The Details: Why is Installation from Jupyter so Messy?<a class="anchor-link" href="#The-Details:-Why-is-Installation-from-Jupyter-so-Messy?">¶</a></h2><p>Those above solutions should work in all cases... but why is that additional boilerplate necessary?
 In short, it's because in Jupyter, <strong>the shell environment and the Python executable are disconnected</strong>.
 Understanding why that matters depends on a basic understanding of a few different concepts:</p>
 <ol>
@@ -1701,7 +1654,6 @@ Understanding why that matters depends on a basic understanding of a few differe
 </ol>
 <p>For completeness, I'm going to delve briefly into each of these topics (this discussion is partly drawn from <a href="https://stackoverflow.com/questions/39007571/running-jupyter-with-multiple-python-and-ipython-paths/39022003#39022003">This StackOverflow answer</a> that I wrote last year).</p>
 <p><em>Note: the following discussion assumes Linux, Unix, MacOSX and similar operating systems. Windows has a slightly different architecture, and so some details will differ.</em></p>
-
 </div>
 </div>
 </div>
@@ -1709,42 +1661,32 @@ Understanding why that matters depends on a basic understanding of a few differe
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="How-your-operating-system-locates-executables">How your operating system locates executables<a class="anchor-link" href="#How-your-operating-system-locates-executables">&#182;</a></h3><p>When you're using the terminal and type a command like <code>python</code>, <code>jupyter</code>, <code>ipython</code>, <code>pip</code>, <code>conda</code>, etc., your operating system contains a well-defined mechanism to find the executable file the name refers to.</p>
+<h3 id="How-your-operating-system-locates-executables">How your operating system locates executables<a class="anchor-link" href="#How-your-operating-system-locates-executables">¶</a></h3><p>When you're using the terminal and type a command like <code>python</code>, <code>jupyter</code>, <code>ipython</code>, <code>pip</code>, <code>conda</code>, etc., your operating system contains a well-defined mechanism to find the executable file the name refers to.</p>
 <p>On Linux &amp; Mac systems, the system will first check for an <a href="http://tldp.org/LDP/abs/html/aliases.html">alias</a> matching the command; if this fails it references the <code>$PATH</code> environment variable:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="nb">echo</span> <span class="nv">$PATH</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>/Users/lj020326/anaconda/envs/python3.6/bin:/Users/lj020326/anaconda/envs/python3.6/bin:/Users/lj020326/anaconda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -1753,151 +1695,113 @@ Understanding why that matters depends on a basic understanding of a few differe
 <p><code>$PATH</code> lists the directories, in order, that will be searched for any executable: for example, if I type <code>python</code> on my system with the above <code>$PATH</code>, it will first look for <code>/Users/lj020326/anaconda/envs/python3.6/bin/python</code>, and if that doesn't exist it will look for <code>/Users/lj020326/anaconda/bin/python</code>, and so on.</p>
 <p>(Parenthetical note: why is the first entry of <code>$PATH</code> repeated twice here? Because every time you launch <code>jupyter notebook</code>, Jupyter prepends the location of the <code>jupyter</code> executable to the beginning of the <code>$PATH</code>. In this case, the location was already at the beginning of the path, and the result is that the entry is duplicated. Duplicate entries add clutter, but cause no harm).</p>
 <p>If you want to know what is actually executed when you type <code>python</code>, you can use the <code>type</code> shell command:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="nb">type</span> python
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>python is /Users/lj020326/anaconda/envs/python3.6/bin/python
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Note that this is true of <em>any</em> command you use from the terminal:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="nb">type</span> ls
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>ls is /bin/ls
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Even built-in commands like <code>type</code> itself:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="nb">type</span> type
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>type is a shell builtin
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You can optionally add the <code>-a</code> tag to see <em>all available</em> versions of the command in your current shell environment; for example:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="nb">type</span> -a python
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>python is /Users/lj020326/anaconda/envs/python3.6/bin/python
 python is /Users/lj020326/anaconda/envs/python3.6/bin/python
@@ -1906,32 +1810,23 @@ python is /usr/bin/python
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="nb">type</span> -a conda
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>conda is /Users/lj020326/anaconda/envs/python3.6/bin/conda
 conda is /Users/lj020326/anaconda/envs/python3.6/bin/conda
@@ -1939,32 +1834,23 @@ conda is /Users/lj020326/anaconda/bin/conda
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="nb">type</span> -a pip
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>pip is /Users/lj020326/anaconda/envs/python3.6/bin/pip
 pip is /Users/lj020326/anaconda/envs/python3.6/bin/pip
@@ -1972,17 +1858,14 @@ pip is /Users/lj020326/anaconda/bin/pip
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>When you have multiple available versions of any command, it is important to keep in mind the role of <code>$PATH</code> in choosing which will be used.</p>
-
 </div>
 </div>
 </div>
@@ -1990,53 +1873,40 @@ pip is /Users/lj020326/anaconda/bin/pip
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="How-Python-locates-packages">How Python locates packages<a class="anchor-link" href="#How-Python-locates-packages">&#182;</a></h3><p>Python uses a similar mechanism to locate imported packages.
+<h3 id="How-Python-locates-packages">How Python locates packages<a class="anchor-link" href="#How-Python-locates-packages">¶</a></h3><p>Python uses a similar mechanism to locate imported packages.
 The list of paths searched by Python on import is found in <code>sys.path</code>:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In [12]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[12]:</div>
-
-
-
-
 <div class="output_text output_subarea output_execute_result">
-<pre>[&#39;&#39;,
- &#39;/Users/lj020326/anaconda/lib/python36.zip&#39;,
- &#39;/Users/lj020326/anaconda/lib/python3.6&#39;,
- &#39;/Users/lj020326/anaconda/lib/python3.6/lib-dynload&#39;,
- &#39;/Users/lj020326/anaconda/lib/python3.6/site-packages&#39;,
- &#39;/Users/lj020326/anaconda/lib/python3.6/site-packages/schemapi-0.3.0.dev0+791c7f6-py3.6.egg&#39;,
- &#39;/Users/lj020326/anaconda/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg&#39;,
- &#39;/Users/lj020326/anaconda/lib/python3.6/site-packages/IPython/extensions&#39;,
- &#39;/Users/lj020326/.ipython&#39;]</pre>
-</div>
-
-</div>
-
+<pre>['',
+ '/Users/lj020326/anaconda/lib/python36.zip',
+ '/Users/lj020326/anaconda/lib/python3.6',
+ '/Users/lj020326/anaconda/lib/python3.6/lib-dynload',
+ '/Users/lj020326/anaconda/lib/python3.6/site-packages',
+ '/Users/lj020326/anaconda/lib/python3.6/site-packages/schemapi-0.3.0.dev0+791c7f6-py3.6.egg',
+ '/Users/lj020326/anaconda/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg',
+ '/Users/lj020326/anaconda/lib/python3.6/site-packages/IPython/extensions',
+ '/Users/lj020326/.ipython']</pre>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -2045,43 +1915,30 @@ The list of paths searched by Python on import is found in <code>sys.path</code>
 <p>By default, the first place Python looks for a module is an empty path, meaning the current working directory.
 If the module is not found there, it goes down the list of locations until the module is found.
 You can find out which location has been used using the <code>__path__</code> attribute of an imported module:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
 <span class="n">numpy</span><span class="o">.</span><span class="n">__path__</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[13]:</div>
-
-
-
-
 <div class="output_text output_subarea output_execute_result">
-<pre>[&#39;/Users/lj020326/anaconda/lib/python3.6/site-packages/numpy&#39;]</pre>
-</div>
-
-</div>
-
+<pre>['/Users/lj020326/anaconda/lib/python3.6/site-packages/numpy']</pre>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -2090,53 +1947,43 @@ You can find out which location has been used using the <code>__path__</code> at
 <p>In most cases, a Python package you install with <code>pip</code> or with <code>conda</code> will be put in a directory called <code>site-packages</code>.
 The important thing to realize is that each Python executable has <strong>its own <code>site-packages</code></strong>: what this means is that when you install a package, it is <strong>associated with particular python executable</strong> and by default can only be used with that Python installation!</p>
 <p>We can see this by printing the <code>sys.path</code> variables for each of the available <code>python</code> executables in my path, using Jupyter's delightful ability to mix Python and bash commands in a single code block:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In [14]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">paths</span> <span class="o">=</span> <span class="o">!</span><span class="nb">type</span> -a python
 <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">paths</span><span class="p">):</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-    <span class="o">!{</span>path<span class="o">}</span> -c <span class="s2">&quot;import sys; print(sys.path)&quot;</span>
+    <span class="o">!{</span>path<span class="o">}</span> -c <span class="s2">"import sys; print(sys.path)"</span>
     <span class="nb">print</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>/Users/lj020326/anaconda/envs/python3.6/bin/python
-[&#39;&#39;, &#39;/Users/lj020326/anaconda/envs/python3.6/lib/python36.zip&#39;, &#39;/Users/lj020326/anaconda/envs/python3.6/lib/python3.6&#39;, &#39;/Users/lj020326/anaconda/envs/python3.6/lib/python3.6/lib-dynload&#39;, &#39;/Users/lj020326/anaconda/envs/python3.6/lib/python3.6/site-packages&#39;]
+['', '/Users/lj020326/anaconda/envs/python3.6/lib/python36.zip', '/Users/lj020326/anaconda/envs/python3.6/lib/python3.6', '/Users/lj020326/anaconda/envs/python3.6/lib/python3.6/lib-dynload', '/Users/lj020326/anaconda/envs/python3.6/lib/python3.6/site-packages']
 
 /usr/bin/python
-[&#39;&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python27.zip&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-darwin&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac/lib-scriptpackages&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-tk&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-old&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload&#39;, &#39;/Library/Python/2.7/site-packages&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python&#39;, &#39;/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/PyObjC&#39;]
+['', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python27.zip', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-darwin', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac/lib-scriptpackages', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-tk', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-old', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload', '/Library/Python/2.7/site-packages', '/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python', '/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/PyObjC']
 
 /Users/lj020326/anaconda/bin/python
-[&#39;&#39;, &#39;/Users/lj020326/anaconda/lib/python36.zip&#39;, &#39;/Users/lj020326/anaconda/lib/python3.6&#39;, &#39;/Users/lj020326/anaconda/lib/python3.6/lib-dynload&#39;, &#39;/Users/lj020326/anaconda/lib/python3.6/site-packages&#39;, &#39;/Users/lj020326/anaconda/lib/python3.6/site-packages/schemapi-0.3.0.dev0+791c7f6-py3.6.egg&#39;, &#39;/Users/lj020326/anaconda/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg&#39;]
+['', '/Users/lj020326/anaconda/lib/python36.zip', '/Users/lj020326/anaconda/lib/python3.6', '/Users/lj020326/anaconda/lib/python3.6/lib-dynload', '/Users/lj020326/anaconda/lib/python3.6/site-packages', '/Users/lj020326/anaconda/lib/python3.6/site-packages/schemapi-0.3.0.dev0+791c7f6-py3.6.egg', '/Users/lj020326/anaconda/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg']
 
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -2149,71 +1996,53 @@ The important thing to realize is that each Python executable has <strong>its ow
 <li><code>conda</code> installs packages in the current active conda environment</li>
 </ul>
 <p>So, for example we see that <code>pip install</code> will install to the conda environment named <code>python3.6</code>:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="nb">type</span> pip
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>pip is /Users/lj020326/anaconda/envs/python3.6/bin/pip
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>And <code>conda install</code> will do the same, because <code>python3.6</code> is the current active environment (notice the <code>*</code> indicating the active environment):</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>conda env list
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre># conda environments:
 #
@@ -2226,10 +2055,8 @@ root                     /Users/lj020326/anaconda
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -2237,7 +2064,6 @@ root                     /Users/lj020326/anaconda
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The reason both <code>pip</code> and <code>conda</code> default to the conda <code>python3.6</code> environment is that this is the Python environment I used to launch the notebook.</p>
 <p>I'll say this again for emphasis: <strong>the shell environment in Jupyter notebook matches the Python version used to <em>launch</em> the notebook.</strong></p>
-
 </div>
 </div>
 </div>
@@ -2245,36 +2071,28 @@ root                     /Users/lj020326/anaconda
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="How-Jupyter-executes-code:-Jupyter-Kernels">How Jupyter executes code: Jupyter Kernels<a class="anchor-link" href="#How-Jupyter-executes-code:-Jupyter-Kernels">&#182;</a></h3><p>The next relevant question is how Jupyter chooses to execute Python code, and this brings us to the concept of a <em>Jupyter Kernel</em>.</p>
+<h3 id="How-Jupyter-executes-code:-Jupyter-Kernels">How Jupyter executes code: Jupyter Kernels<a class="anchor-link" href="#How-Jupyter-executes-code:-Jupyter-Kernels">¶</a></h3><p>The next relevant question is how Jupyter chooses to execute Python code, and this brings us to the concept of a <em>Jupyter Kernel</em>.</p>
 <p>A Jupyter kernel is a set of files that point Jupyter to some means of executing code within the notebook.
 For Python kernels, this will point to a particular Python version, but Jupyter is designed to be much more general than this: Jupyter has <a href="https://github.com/jupyter/jupyter/wiki/Jupyter-kernels">dozens of available kernels</a> for languages including Python 2, Python 3, Julia, R, Ruby, Haskell, and even C++ and Fortran!</p>
 <p>If you're using the Jupyter notebook, you can change your kernel at any time using the <em>Kernel → Choose Kernel</em> menu item.</p>
 <p>To see the kernels you have available on your system, you can run the following command in the shell:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In [17]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter kernelspec list
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Available kernels:
   python3       /Users/lj020326/anaconda/envs/python3.6/lib/python3.6/site-packages/ipykernel/resources
@@ -2285,10 +2103,8 @@ For Python kernels, this will point to a particular Python version, but Jupyter 
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -2296,50 +2112,40 @@ For Python kernels, this will point to a particular Python version, but Jupyter 
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Each of these listed kernels is a directory that contains a file called <code>kernel.json</code> which specifies, among other things, which language and executable the kernel should use.
 For example:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In [18]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>cat /Users/lj020326/Library/Jupyter/kernels/conda-root/kernel.json
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>{
- &#34;argv&#34;: [
-  &#34;/Users/lj020326/anaconda/bin/python&#34;,
-  &#34;-m&#34;,
-  &#34;ipykernel_launcher&#34;,
-  &#34;-f&#34;,
-  &#34;{connection_file}&#34;
+ "argv": [
+  "/Users/lj020326/anaconda/bin/python",
+  "-m",
+  "ipykernel_launcher",
+  "-f",
+  "{connection_file}"
  ],
- &#34;display_name&#34;: &#34;python (conda-root)&#34;,
- &#34;language&#34;: &#34;python&#34;
+ "display_name": "python (conda-root)",
+ "language": "python"
 }
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -2347,10 +2153,8 @@ For example:</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>If you'd like to create a new kernel, you can do so using the <a href="http://ipython.readthedocs.io/en/stable/install/kernel_install.html#kernels-for-different-environments">jupyter ipykernel command</a>;
 for example, I created the above kernels for my primary conda environments using the following as a template:</p>
-
 <pre><code>$ source activate myenv
 $ python -m ipykernel install --user --name myenv --display-name "Python (myenv)"</code></pre>
-
 </div>
 </div>
 </div>
@@ -2358,7 +2162,7 @@ $ python -m ipykernel install --user --name myenv --display-name "Python (myenv)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="The-Root-of-the-Issue">The Root of the Issue<a class="anchor-link" href="#The-Root-of-the-Issue">&#182;</a></h2>
+<h2 id="The-Root-of-the-Issue">The Root of the Issue<a class="anchor-link" href="#The-Root-of-the-Issue">¶</a></h2>
 </div>
 </div>
 </div>
@@ -2370,82 +2174,59 @@ $ python -m ipykernel install --user --name myenv --display-name "Python (myenv)
 <p>The root of the issue is this: the shell environment is determined when the Jupyter notebook is launched, while the Python executable is determined by the kernel, and the two do not necessarily match.
 In other words, there is no guarantee that the <code>python</code>, <code>pip</code>, and <code>conda</code> in your <code>$PATH</code> will be compatible with the <code>python</code> executable used by the notebook.</p>
 <p>Recall that the <code>python</code> in your path can be determined using</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In [19]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="nb">type</span> python
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>python is /Users/lj020326/anaconda/envs/python3.6/bin/python
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The Python executable being used in the notebook can be determined using</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In [20]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[20]:</div>
-
-
-
-
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;/Users/lj020326/anaconda/bin/python&#39;</pre>
-</div>
-
-</div>
-
+<pre>'/Users/lj020326/anaconda/bin/python'</pre>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -2455,19 +2236,14 @@ In other words, there is no guarantee that the <code>python</code>, <code>pip</c
 This is why a simple <code>!pip install</code> or <code>!conda install</code> does not work: the commands install packages in the <code>site-packages</code> of the wrong Python installation.</p>
 <p>As noted above, we can get around this by explicitly identifying where we want packages to be installed.</p>
 <p>For <strong>conda</strong>, you can set the prefix manually in the shell command:</p>
-
 <pre><code>$ conda install --yes --prefix /Users/lj020326/anaconda numpy</code></pre>
 <p>or, to automatically use the correct prefix (using syntax available in the notebook)</p>
-
 <pre><code>!conda install --yes --prefix {sys.prefix} numpy</code></pre>
 <p>For <strong>pip</strong>, you can specify the Python executable explicitly:</p>
-
 <pre><code>$ /Users/lj020326/anaconda/bin/python -m pip install numpy</code></pre>
 <p>or, to automatically use the correct executable (again using notebook shell syntax)</p>
-
 <pre><code>!{sys.executable} -m pip install numpy</code></pre>
 <p>Remember: you need your <em>installation command</em> to match the <em>current python kernel</em> if you want installed packages to be available in the notebook.</p>
-
 </div>
 </div>
 </div>
@@ -2475,7 +2251,7 @@ This is why a simple <code>!pip install</code> or <code>!conda install</code> do
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Some-Modest-Proposals">Some Modest Proposals<a class="anchor-link" href="#Some-Modest-Proposals">&#182;</a></h2>
+<h2 id="Some-Modest-Proposals">Some Modest Proposals<a class="anchor-link" href="#Some-Modest-Proposals">¶</a></h2>
 </div>
 </div>
 </div>
@@ -2488,7 +2264,6 @@ The exception is the special case where you run <code>jupyter notebook</code> fr
 <p>But that leaves us in an undesireable place, as it increases the learning curve for novice users who may want to do something they (rightly) presume should be simple: install a package and then use it.
 So what can we as a community do to smooth-out this issue?</p>
 <p>I have a few ideas, some of which might even be useful:</p>
-
 </div>
 </div>
 </div>
@@ -2496,11 +2271,10 @@ So what can we as a community do to smooth-out this issue?</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Potential-Changes-to-Jupyter">Potential Changes to Jupyter<a class="anchor-link" href="#Potential-Changes-to-Jupyter">&#182;</a></h3><p>As I mentioned, the fundamental issue is a mismatch between Jupyter's shell environment and compute kernel.
+<h3 id="Potential-Changes-to-Jupyter">Potential Changes to Jupyter<a class="anchor-link" href="#Potential-Changes-to-Jupyter">¶</a></h3><p>As I mentioned, the fundamental issue is a mismatch between Jupyter's shell environment and compute kernel.
 So, could we massage kernel specifications such that they force the two to match?</p>
 <p>Perhaps: for example, <a href="https://github.com/jupyterhub/jupyterhub/issues/847">this github issue</a> shows an approach to modifying shell variables as part of kernel startup.</p>
 <p>Basically, in your kernel directory, you can add a script <code>kernel-startup.sh</code> that looks something like this (and make sure you change the permissions so that it's executable):</p>
-
 <pre><code>#!/usr/bin/env bash
 
 # activate anaconda env
@@ -2509,7 +2283,6 @@ source activate myenv
 # this is the critical part, and should be at the end of your script:
 exec python -m ipykernel $@</code></pre>
 <p>Then in your <code>kernel.json</code> file, modify the <code>argv</code> field to look like this:</p>
-
 <pre><code>"argv": [
    "/path/to/kernel-startup.sh",
    "-f",
@@ -2517,7 +2290,6 @@ exec python -m ipykernel $@</code></pre>
  ]</code></pre>
 <p>Once you do this, switching to the <code>myenv</code> kernel will automatically activate the <code>myenv</code> conda environment, which changes your <code>$CONDA_PREFIX</code>, <code>$PATH</code> and other system variables such that <code>!conda install XXX</code> and <code>!pip install XXX</code> will work correctly. A similar approach could work for virtualenvs or other Python environments.</p>
 <p>There is one tricky issue here: this approach will fail if your <code>myenv</code> environment does not have the <code>ipykernel</code> package installed, and probably also requires it to have a jupyter version compatible with that used to launch the notebook. So it's not a full solution to the problem by any means, but if Python kernels could be designed to do this sort of shell initialization by default, it would be far less confusing to users: <code>!pip install</code> and <code>!conda install</code> would simply work.</p>
-
 </div>
 </div>
 </div>
@@ -2525,13 +2297,12 @@ exec python -m ipykernel $@</code></pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Potential-Changes-to-pip">Potential Changes to pip<a class="anchor-link" href="#Potential-Changes-to-pip">&#182;</a></h3><p>One source of installation confusion, even outside of Jupyter, is the fact that, depending on the nature of your system's aliases and <code>$PATH</code> variable, <code>pip</code> and <code>python</code> might point to different paths.
+<h3 id="Potential-Changes-to-pip">Potential Changes to pip<a class="anchor-link" href="#Potential-Changes-to-pip">¶</a></h3><p>One source of installation confusion, even outside of Jupyter, is the fact that, depending on the nature of your system's aliases and <code>$PATH</code> variable, <code>pip</code> and <code>python</code> might point to different paths.
 In this case <code>pip install</code> will install packages to a path inaccessible to the <code>python</code> executable.
 For this reason, it is safer to use <code>python -m pip install</code>, which explicitly specifies the desired Python version (<a href="https://www.python.org/dev/peps/pep-0020/">explicit is better than implicit</a>, after all).</p>
 <p>This is one reason that <code>pip install</code> no longer appears in <a href="https://docs.python.org/3/installing/index.html#basic-usage">Python's docs</a>, and experienced Python educators like David Beazley <a href="https://twitter.com/dabeaz/status/922859605247643649">never teach bare pip</a>.
 CPython developer Nick Coghlan has even <a href="https://twitter.com/ncoghlan_dev/status/922979220711661568">indicated</a> that the <code>pip</code> executable may someday be deprecated in favor of <code>python -m pip</code>.
 Even though it's more verbose, I think forcing users to be explicit would be a useful change, particularly as the use of virtualenvs and conda envs becomes more common.</p>
-
 </div>
 </div>
 </div>
@@ -2539,8 +2310,7 @@ Even though it's more verbose, I think forcing users to be explicit would be a u
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Changes-to-Conda">Changes to Conda<a class="anchor-link" href="#Changes-to-Conda">&#182;</a></h3><p>I can think of a couple modifications to conda's API that may be helpful to users</p>
-
+<h3 id="Changes-to-Conda">Changes to Conda<a class="anchor-link" href="#Changes-to-Conda">¶</a></h3><p>I can think of a couple modifications to conda's API that may be helpful to users</p>
 </div>
 </div>
 </div>
@@ -2548,16 +2318,14 @@ Even though it's more verbose, I think forcing users to be explicit would be a u
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Explicit-invocation">Explicit invocation<a class="anchor-link" href="#Explicit-invocation">&#182;</a></h4><p>For symmetry with <code>pip</code>, it would be nice if <code>python -m conda install</code> could be expected to work in the same way the <code>pip</code> counterpart does.
+<h4 id="Explicit-invocation">Explicit invocation<a class="anchor-link" href="#Explicit-invocation">¶</a></h4><p>For symmetry with <code>pip</code>, it would be nice if <code>python -m conda install</code> could be expected to work in the same way the <code>pip</code> counterpart does.
 You can call <code>conda</code> this way in the root environment, but the conda Python package (as opposed to the conda executable) cannot currently be installed anywhere but the root environment:</p>
-
 <pre><code>(myenv) lj020326$ conda install conda
 Fetching package metadata ...........
 
 InstallError: Error: 'conda' can only be installed into the root environment</code></pre>
 <p>I suspect that allowing <code>python -m conda install</code> in all conda environments would require a fairly significant redesign of conda's installation model, so it may not be worth the change just for symmetry with <code>pip</code>'s API.
 That said, such a symmetry would certainly be a help to users.</p>
-
 </div>
 </div>
 </div>
@@ -2565,9 +2333,8 @@ That said, such a symmetry would certainly be a help to users.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="A-pip-channel-for-conda?">A pip channel for conda?<a class="anchor-link" href="#A-pip-channel-for-conda?">&#182;</a></h4><p>Another useful change conda could make would be to add a channel that essentially mirrors the <a href="https://pypi.python.org/pypi">Python Package Index</a>, so that when you do <code>conda install some-package</code> it will automatically draw from packages available to <code>pip</code> as well.</p>
+<h4 id="A-pip-channel-for-conda?">A pip channel for conda?<a class="anchor-link" href="#A-pip-channel-for-conda?">¶</a></h4><p>Another useful change conda could make would be to add a channel that essentially mirrors the <a href="https://pypi.python.org/pypi">Python Package Index</a>, so that when you do <code>conda install some-package</code> it will automatically draw from packages available to <code>pip</code> as well.</p>
 <p>I don't have a deep enough knowledge of conda's architecture to know how easy such a feature would be to implement, but I <em>do</em> have loads of experiences helping newcomers to Python and/or conda: I can say with certainty that such a feature would go a long way toward softening their learning curve.</p>
-
 </div>
 </div>
 </div>
@@ -2575,8 +2342,7 @@ That said, such a symmetry would certainly be a help to users.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="New-Jupyter-Magic-Functions">New Jupyter Magic Functions<a class="anchor-link" href="#New-Jupyter-Magic-Functions">&#182;</a></h3><p>Even if the above changes to the stack are not possible or desirable, we could simplify the user experience somewhat by introducing <code>%pip</code> and <code>%conda</code> magic functions within the Jupyter notebook that detect the current kernel and make certain packages are installed in the correct location.</p>
-
+<h3 id="New-Jupyter-Magic-Functions">New Jupyter Magic Functions<a class="anchor-link" href="#New-Jupyter-Magic-Functions">¶</a></h3><p>Even if the above changes to the stack are not possible or desirable, we could simplify the user experience somewhat by introducing <code>%pip</code> and <code>%conda</code> magic functions within the Jupyter notebook that detect the current kernel and make certain packages are installed in the correct location.</p>
 </div>
 </div>
 </div>
@@ -2584,79 +2350,64 @@ That said, such a symmetry would certainly be a help to users.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="pip-magic">pip magic<a class="anchor-link" href="#pip-magic">&#182;</a></h4><p>For example, here's how you can define a <code>%pip</code> magic function that works in the current kernel:</p>
-
+<h4 id="pip-magic">pip magic<a class="anchor-link" href="#pip-magic">¶</a></h4><p>For example, here's how you can define a <code>%pip</code> magic function that works in the current kernel:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In [21]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.magic</span> <span class="k">import</span> <span class="n">register_line_magic</span>
 
 <span class="nd">@register_line_magic</span>
 <span class="k">def</span> <span class="nf">pip</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Use pip from the current kernel&quot;&quot;&quot;</span>
+    <span class="sd">"""Use pip from the current kernel"""</span>
     <span class="kn">from</span> <span class="nn">pip</span> <span class="k">import</span> <span class="n">main</span>
     <span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Running it as follows will install packages in the expected location</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In [22]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pip</span> install numpy
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Requirement already satisfied: numpy in /Users/lj020326/anaconda/lib/python3.6/site-packages
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Note that Jupyter developer Matthias Bussonnier has published essentially this in his <a href="https://github.com/Carreau/pip_magic">pip_magic</a> repository, so you can do</p>
-
 <pre><code>$ python -m pip install pip_magic</code></pre>
 <p>and use this right now (that is, assuming you install <code>pip_magic</code> in the right place!)</p>
-
 </div>
 </div>
 </div>
@@ -2664,17 +2415,16 @@ That said, such a symmetry would certainly be a help to users.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="conda-magic">conda magic<a class="anchor-link" href="#conda-magic">&#182;</a></h4><p>Similarly, we can define a conda magic that will do the right thing if you type <code>%conda install XXX</code>.
+<h4 id="conda-magic">conda magic<a class="anchor-link" href="#conda-magic">¶</a></h4><p>Similarly, we can define a conda magic that will do the right thing if you type <code>%conda install XXX</code>.
 This is a bit more involved than the <code>pip</code> magic, because it must first confirm that the environment is conda-compatible, and then (related to the lack of <code>python -m conda install</code>) must call a subprocess to execute the appropriate shell command:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In [23]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.magic</span> <span class="k">import</span> <span class="n">register_line_magic</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -2682,82 +2432,72 @@ This is a bit more involved than the <code>pip</code> magic, because it must fir
 
 
 <span class="k">def</span> <span class="nf">is_conda_environment</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Return True if the current Python executable is in a conda env&quot;&quot;&quot;</span>
+    <span class="sd">"""Return True if the current Python executable is in a conda env"""</span>
     <span class="c1"># TODO: make this work with Conda.exe in Windows</span>
-    <span class="n">conda_exec</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">),</span> <span class="s1">&#39;conda&#39;</span><span class="p">)</span>
-    <span class="n">conda_history</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span> <span class="s1">&#39;conda-meta&#39;</span><span class="p">,</span> <span class="s1">&#39;history&#39;</span><span class="p">)</span>
+    <span class="n">conda_exec</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">),</span> <span class="s1">'conda'</span><span class="p">)</span>
+    <span class="n">conda_history</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span> <span class="s1">'conda-meta'</span><span class="p">,</span> <span class="s1">'history'</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">conda_exec</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">conda_history</span><span class="p">)</span>
 
 
 <span class="nd">@register_line_magic</span>
 <span class="k">def</span> <span class="nf">conda</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Use conda from the current kernel&quot;&quot;&quot;</span>
+    <span class="sd">"""Use conda from the current kernel"""</span>
     <span class="c1"># TODO: make this work with Conda.exe in Windows</span>
     <span class="c1"># TODO: fix string encoding to work with Python 2</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">is_conda_environment</span><span class="p">():</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The python kernel does not appear to be a conda environment.  &quot;</span>
-                         <span class="s2">&quot;Please use ``%pip install`` instead.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The python kernel does not appear to be a conda environment.  "</span>
+                         <span class="s2">"Please use ``%pip install`` instead."</span><span class="p">)</span>
     
-    <span class="n">conda_executable</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">),</span> <span class="s1">&#39;conda&#39;</span><span class="p">)</span>
+    <span class="n">conda_executable</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">),</span> <span class="s1">'conda'</span><span class="p">)</span>
     <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">conda_executable</span><span class="p">]</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
     
     <span class="c1"># Add --prefix to point conda installation to the current environment</span>
-    <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="s1">&#39;upgrade&#39;</span><span class="p">,</span> <span class="s1">&#39;remove&#39;</span><span class="p">,</span> <span class="s1">&#39;uninstall&#39;</span><span class="p">,</span> <span class="s1">&#39;list&#39;</span><span class="p">]:</span>
-        <span class="k">if</span> <span class="s1">&#39;-p&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">args</span> <span class="ow">and</span> <span class="s1">&#39;--prefix&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
-            <span class="n">args</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;--prefix&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'install'</span><span class="p">,</span> <span class="s1">'update'</span><span class="p">,</span> <span class="s1">'upgrade'</span><span class="p">,</span> <span class="s1">'remove'</span><span class="p">,</span> <span class="s1">'uninstall'</span><span class="p">,</span> <span class="s1">'list'</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="s1">'-p'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">args</span> <span class="ow">and</span> <span class="s1">'--prefix'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">'--prefix'</span><span class="p">)</span>
             <span class="n">args</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">prefix</span><span class="p">)</span>
             
-    <span class="c1"># Because the notebook does not allow us to respond &quot;yes&quot; during the</span>
+    <span class="c1"># Because the notebook does not allow us to respond "yes" during the</span>
     <span class="c1"># installation, we need to insert --yes in the argument list for some commands</span>
-    <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="s1">&#39;upgrade&#39;</span><span class="p">,</span> <span class="s1">&#39;remove&#39;</span><span class="p">,</span> <span class="s1">&#39;uninstall&#39;</span><span class="p">,</span> <span class="s1">&#39;create&#39;</span><span class="p">]:</span>
-        <span class="k">if</span> <span class="s1">&#39;-y&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">args</span> <span class="ow">and</span> <span class="s1">&#39;--yes&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
-            <span class="n">args</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;--yes&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'install'</span><span class="p">,</span> <span class="s1">'update'</span><span class="p">,</span> <span class="s1">'upgrade'</span><span class="p">,</span> <span class="s1">'remove'</span><span class="p">,</span> <span class="s1">'uninstall'</span><span class="p">,</span> <span class="s1">'create'</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="s1">'-y'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">args</span> <span class="ow">and</span> <span class="s1">'--yes'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">'--yes'</span><span class="p">)</span>
             
     <span class="c1"># Call conda from command line with subprocess &amp; send results to stdout &amp; stderr</span>
     <span class="k">with</span> <span class="n">Popen</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">PIPE</span><span class="p">)</span> <span class="k">as</span> <span class="n">process</span><span class="p">:</span>
         <span class="c1"># Read stdout character by character, as it includes real-time progress updates</span>
-        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">process</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">process</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="sa">b</span><span class="s1">''</span><span class="p">):</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">encoding</span><span class="p">))</span>
         <span class="c1"># Read stderr line by line, because real-time does not matter</span>
-        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="n">process</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">readline</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="n">process</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">readline</span><span class="p">,</span> <span class="sa">b</span><span class="s1">''</span><span class="p">):</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">encoding</span><span class="p">))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You can now use <code>%conda install</code> and it will install packages to the correct environment:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In [24]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">conda</span> install numpy
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Fetching package metadata ...........
 Solving package specifications: .
@@ -2769,10 +2509,8 @@ numpy                     1.13.3           py36h2cdce51_0
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -2782,7 +2520,6 @@ numpy                     1.13.3           py36h2cdce51_0
 <p>If a pip magic and conda magic similar to the above were added to Jupyter's default set of magic commands, I think it could go a long way toward solving the common problems that users have when trying to install Python packages for use with Jupyter notebooks.
 This approach is not without its own dangers, though: these magics are yet another layer of abstraction that, like all abstractions, will inevitably leak.
 But if they are implemented carefully, I think it would lead to a much nicer overall user experience.</p>
-
 </div>
 </div>
 </div>
@@ -2790,14 +2527,13 @@ But if they are implemented carefully, I think it would lead to a much nicer ove
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Summary">Summary<a class="anchor-link" href="#Summary">&#182;</a></h2><p>In this post, I tried to answer once and for all the perennial question, <em>how do I install Python packages in the Jupyter notebook</em>.</p>
+<h2 id="Summary">Summary<a class="anchor-link" href="#Summary">¶</a></h2><p>In this post, I tried to answer once and for all the perennial question, <em>how do I install Python packages in the Jupyter notebook</em>.</p>
 <p>After proposing some simple solutions that can be used today, I went into a detailed explanation of <em>why</em> these solutions are necessary: it comes down to the fact that in Jupyter, the kernel is disconnected from the shell.
 The kernel environment can be changed at runtime, while the shell environment is determined when the notebook is launched.
 The fact that a full explanation took so many words and touched so many concepts, I think, indicates a real usability issue for the Jupyter ecosystem, and so I proposed a few possible avenues that the community might adopt to try to streamline the experience for users.</p>
 <p>One final addendum: I have a huge amount of respect and appreciation for the developers of Jupyter, conda, pip, and related tools that form the foundations of the Python data science ecosystem.
 I'm fairly certain those developers have already considered these issues and weighed some of these potential fixes – if any of you are reading this, please feel free to comment and set me straight on anything I've overlooked!
 And, finally, thanks for all that you do for the open source community.</p>
-
 </div>
 </div>
 </div>
@@ -2806,7 +2542,6 @@ And, finally, thanks for all that you do for the open source community.</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><em>Thanks to Andy Mueller, Craig Citro, and Matthias Bussonnier for helpful comments on an early draft of this post</em>.</p>
-
 </div>
 </div>
 </div>
@@ -2815,12 +2550,9 @@ And, finally, thanks for all that you do for the open source community.</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><em>This post was written within a Jupyter notebook; you can view a static version <a href="http://nbviewer.jupyter.org/url/lj020326.github.com/downloads/notebooks/JupyterInstallation.ipynb">here</a> or download the full notebook <a href="http://lj020326.github.com/downloads/notebooks/JupyterInstallation.ipynb">here</a>.</em></p>
-
 </div>
 </div>
 </div>
- 
-
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');

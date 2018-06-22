@@ -1415,11 +1415,9 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 
-
 <p>I've found one of the best ways to grow in my scientific coding is to spend time comparing the efficiency of various approaches to implementing particular algorithms that I find useful, in order to build an intuition of the performance of the building blocks of the scientific Python ecosystem.</p>
 <p>In this vein, today I want to take a look at an operation that is in many ways fundamental to data-driven exploration: the group-by, otherwise known as the <a href="https://www.jstatsoft.org/article/view/v040i01">split-apply-combine</a> pattern.
 An architypical example of a summation group-by is shown in this figure, borrowed from the <a href="http://nbviewer.jupyter.org/github/lj020326/PythonDataScienceHandbook/blob/master/notebooks/03.08-Aggregation-and-Grouping.ipynb">Aggregation and Grouping</a> section of the <a href="https://github.com/lj020326/PythonDataScienceHandbook">Python Data Science Handbook</a>:</p>
-
 </div>
 </div>
 </div>
@@ -1427,8 +1425,7 @@ An architypical example of a summation group-by is shown in this figure, borrowe
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="https://lj020326.github.io/figures/split-apply-combine.svg" alt="split-apply-combine diagram"></p>
-
+<p><img alt="split-apply-combine diagram" src="https://lj020326.github.io/figures/split-apply-combine.svg"/></p>
 </div>
 </div>
 </div>
@@ -1444,54 +1441,40 @@ Python users generally turn to the <a href="http://pandas.pydata.org">Pandas</a>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">keys</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">keys</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">'A'</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">,</span> <span class="s1">'C'</span><span class="p">,</span> <span class="s1">'A'</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">,</span> <span class="s1">'C'</span><span class="p">]</span>
 <span class="n">vals</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span>   <span class="mi">2</span><span class="p">,</span>   <span class="mi">3</span><span class="p">,</span>   <span class="mi">4</span><span class="p">,</span>   <span class="mi">5</span><span class="p">,</span>   <span class="mi">6</span> <span class="p">]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[2]:</div>
-
-
-
-
 <div class="output_text output_subarea output_execute_result">
 <pre>A    5
 B    7
 C    9
 dtype: int64</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -1501,7 +1484,6 @@ dtype: int64</pre>
 This is a claim I've repeated often in my own teaching and writing, but I found myself recently wondering if it's really true.</p>
 <p>Below I'll explore this question by approaching the group-by summation from a number of angles, taking advantage of both built-in Python operations and operations provided by NumPy and SciPy.
 I hope that through this, you will gain some intuition for the performance of various algorithmic building-blocks available in the PyData ecosystem, and how you might apply them effectively to solve your own problems.</p>
-
 </div>
 </div>
 </div>
@@ -1509,69 +1491,55 @@ I hope that through this, you will gain some intuition for the performance of va
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Timing-Functions">Timing Functions<a class="anchor-link" href="#Timing-Functions">&#182;</a></h2><p>For convenience, let's start by defining some functionality that will let us quickly profile and visualize group-by functionality.
+<h2 id="Timing-Functions">Timing Functions<a class="anchor-link" href="#Timing-Functions">¶</a></h2><p>For convenience, let's start by defining some functionality that will let us quickly profile and visualize group-by functionality.
 We'll assume that the operations to be profiled will come in the form of a function that takes a list of keys and values, and returns a dictionary of summed groups.
 For example:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">pandas_groupby</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">vals</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
 
 <span class="n">pandas_groupby</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">vals</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[3]:</div>
-
-
-
-
 <div class="output_text output_subarea output_execute_result">
-<pre>{&#39;A&#39;: 5, &#39;B&#39;: 7, &#39;C&#39;: 9}</pre>
-</div>
-
-</div>
-
+<pre>{'A': 5, 'B': 7, 'C': 9}</pre>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To avoid rerunning of identical benchmarks within the notebook, I'll make use of Python's <code>functools.lru_cache</code> decorator, which can cache the results of long-running functions, returning the cached value if the function is called again with the same inputs:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-whitegrid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">'seaborn-whitegrid'</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">lru_cache</span>
 
@@ -1583,7 +1551,7 @@ For example:</p>
 
 <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">_bench_one</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">n_group</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">rseed</span><span class="o">=</span><span class="mi">754389</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute a timing and cache it for later use&quot;&quot;&quot;</span>
+    <span class="sd">"""Compute a timing and cache it for later use"""</span>
     <span class="k">global</span> <span class="n">timeitfunc</span><span class="p">,</span> <span class="n">timeitkeys</span><span class="p">,</span> <span class="n">timeitvals</span>
     <span class="n">rand</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">rseed</span><span class="p">)</span>
     <span class="n">timeitkeys</span> <span class="o">=</span> <span class="n">rand</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_group</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
@@ -1595,74 +1563,62 @@ For example:</p>
 
 
 <span class="k">def</span> <span class="nf">bench</span><span class="p">(</span><span class="n">funcs</span><span class="p">,</span> <span class="n">n_groups</span><span class="p">,</span> <span class="n">sizes</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Run a set of benchmarks and return as a dataframe&quot;&quot;&quot;</span>
+    <span class="sd">"""Run a set of benchmarks and return as a dataframe"""</span>
     <span class="n">n_groups</span><span class="p">,</span> <span class="n">sizes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">broadcast_arrays</span><span class="p">(</span><span class="n">n_groups</span><span class="p">,</span> <span class="n">sizes</span><span class="p">)</span>
-    <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">]</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'_'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">]</span>
     <span class="n">timings</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="p">[</span><span class="n">_bench_one</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">n_group</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
                       <span class="k">for</span> <span class="n">n_group</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">n_groups</span><span class="p">,</span> <span class="n">sizes</span><span class="p">)]</span>
                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">funcs</span><span class="p">)}</span>
     <span class="n">ind</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_arrays</span><span class="p">([</span><span class="n">n_groups</span><span class="p">,</span> <span class="n">sizes</span><span class="p">],</span>
-                                    <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;num_groups&#39;</span><span class="p">,</span> <span class="s1">&#39;size&#39;</span><span class="p">])</span>
+                                    <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">'num_groups'</span><span class="p">,</span> <span class="s1">'size'</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">timings</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">ind</span><span class="p">)[</span><span class="n">names</span><span class="p">]</span>
 
 
 <span class="k">def</span> <span class="nf">plot_benchmarks</span><span class="p">(</span><span class="n">funcs</span><span class="p">,</span> <span class="n">n_groups</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sizes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Plot the benchmarks as a function of data size and number of groups&quot;&quot;&quot;</span>
+    <span class="sd">"""Plot the benchmarks as a function of data size and number of groups"""</span>
     <span class="k">if</span> <span class="n">n_groups</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">n_groups</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">sizes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">sizes</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-    <span class="n">timings_sizes</span> <span class="o">=</span> <span class="n">bench</span><span class="p">(</span><span class="n">funcs</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">sizes</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="s1">&#39;num_groups&#39;</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">timings_groups</span> <span class="o">=</span> <span class="n">bench</span><span class="p">(</span><span class="n">funcs</span><span class="p">,</span> <span class="n">n_groups</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="s1">&#39;size&#39;</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">timings_sizes</span> <span class="o">=</span> <span class="n">bench</span><span class="p">(</span><span class="n">funcs</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">sizes</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="s1">'num_groups'</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">timings_groups</span> <span class="o">=</span> <span class="n">bench</span><span class="p">(</span><span class="n">funcs</span><span class="p">,</span> <span class="n">n_groups</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="s1">'size'</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">timings_sizes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">logx</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;size of dataset&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;seconds&#39;</span><span class="p">,</span>
-              <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Varying dataset size with 10 groups&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">'size of dataset'</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">'seconds'</span><span class="p">,</span>
+              <span class="n">title</span><span class="o">=</span><span class="s1">'Varying dataset size with 10 groups'</span><span class="p">)</span>
     <span class="n">timings_groups</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">logx</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;number of groups&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;seconds&#39;</span><span class="p">,</span>
-              <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Varying number of groups with 10000 elements&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">'number of groups'</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">'seconds'</span><span class="p">,</span>
+              <span class="n">title</span><span class="o">=</span><span class="s1">'Varying number of groups with 10000 elements'</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">fig</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>With this setup in place, we can plot some benchmarks of the Pandas approach with a single concise command:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_benchmarks</span><span class="p">([</span><span class="n">pandas_groupby</span><span class="p">]);</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
-
-
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAm4AAAD5CAYAAACeVLnBAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XlYVGX/x/H3DDuoICAgirgiLrjvG7mluK+luLdYlvak
@@ -2032,15 +1988,11 @@ WrQIffr0aTFjly5dsHjxYty7dw9BQUHw9fXF7du3sXDhQjg7O8PJyQnjxo0z6TOh9mUjT+9DJSIi
 og7h/PnzqKmpwVtvvYWbN29i/vz5KCgoaPV45eXliI6ORk5OjhmrpPbGPW5EREQdkI+PD6Kjo7Fx
 40YYDAasWLFC6ZKoA+AeNyIiIiILwYsTiIiIiCwEGzciIiIiC8HGjYiIiMhCsHEjIiIishBs3IiI
 iIgsBBs3IiIiIgvxv0wBIWKyCrGCAAAAAElFTkSuQmCC
-"
->
-</div>
-
-</div>
-
+"/>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -2049,7 +2001,6 @@ iIgsBBs3IiIiIgvxv0wBIWKyCrGCAAAAAElFTkSuQmCC
 <p>For the Pandas Groupby operation, there is some non-trivial scaling for small datasets, and as data grows large it execution time is approximately linear in the number of data points.
 The pandas groupby is implemented in <a href="https://github.com/pandas-dev/pandas/blob/master/pandas/_libs/algos_groupby_helper.pxi.in">highly-optimized cython code</a>, and provides a nice baseline of comparison for our exploration.</p>
 <p>Let's now take a look at some approaches by which we can implement this operation from scratch.</p>
-
 </div>
 </div>
 </div>
@@ -2057,7 +2008,7 @@ The pandas groupby is implemented in <a href="https://github.com/pandas-dev/pand
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Group-by-with-Python-dicts">Group-by with Python dicts<a class="anchor-link" href="#Group-by-with-Python-dicts">&#182;</a></h2>
+<h2 id="Group-by-with-Python-dicts">Group-by with Python dicts<a class="anchor-link" href="#Group-by-with-Python-dicts">¶</a></h2>
 </div>
 </div>
 </div>
@@ -2066,15 +2017,14 @@ The pandas groupby is implemented in <a href="https://github.com/pandas-dev/pand
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>A simple Python implementation of this might use some straightforward loops over Python dictionaries:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">vals</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
@@ -2082,29 +2032,20 @@ The pandas groupby is implemented in <a href="https://github.com/pandas-dev/pand
     <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">+=</span> <span class="n">val</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>{&#39;A&#39;: 5, &#39;B&#39;: 7, &#39;C&#39;: 9}
+<pre>{'A': 5, 'B': 7, 'C': 9}
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -2112,15 +2053,14 @@ The pandas groupby is implemented in <a href="https://github.com/pandas-dev/pand
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This is simple enough, but we can remove the conditional by using the built-in <code>defaultdict</code> collection, which automatically initializes values when they are referenced.
 Wrapping this in a function gives:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
 
 <span class="k">def</span> <span class="nf">dict_groupby</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">vals</span><span class="p">):</span>
@@ -2131,64 +2071,42 @@ Wrapping this in a function gives:</p>
 
 <span class="n">dict_groupby</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">vals</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[7]:</div>
-
-
-
-
 <div class="output_text output_subarea output_execute_result">
-<pre>{&#39;A&#39;: 5, &#39;B&#39;: 7, &#39;C&#39;: 9}</pre>
-</div>
-
-</div>
-
+<pre>{'A': 5, 'B': 7, 'C': 9}</pre>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>With this function defined, we can compare the performance to the Pandas function:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_benchmarks</span><span class="p">([</span><span class="n">pandas_groupby</span><span class="p">,</span> <span class="n">dict_groupby</span><span class="p">]);</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
-
-
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAm8AAAD5CAYAAABxltL/AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3Xd4FNXXwPHvpieQACmE3kLvVXoH6dKVXqSJigo/EIKI
@@ -2594,15 +2512,11 @@ vmiZhx9+mLFjx/Loo49SVFTE0KFDadiwYaU91qpVi2HDhnHy5El69epFmzZt+P777xkyZAihoaGE
 hITQpUuXKn1PpPrZzIX7U0VERKRG2LlzJwUFBdxzzz0cPnyYQYMGkZ6efsnrO3r0KCkpKaxYscKN
 VYoVtOdNRESkBoqMjCQlJYXZs2fjcDgYN26c1SVJDaE9byIiIiJeRBcsiIiIiHgRhTcRERERL6Lw
 JiIiIuJFFN5EREREvIjCm4iIiIgXUXgTERER8SL/D14b9seF1p1XAAAAAElFTkSuQmCC
-"
->
-</div>
-
-</div>
-
+"/>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -2610,7 +2524,6 @@ JiIiIuJFFN5EREREvIjCm4iIiIgXUXgTERER8SL/D14b9seF1p1XAAAAAElFTkSuQmCC
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The dictionary implementation has very predictable linear scaling with the size of the data, because it relies on a single pass through the dataset.
 Evidently, up to a couple thousand elements, this simple Python approach can even out-perform the Pandas operation, but as the number of points grows, the dict-based implementation becomes far slower than the optimized Pandas code.</p>
-
 </div>
 </div>
 </div>
@@ -2618,7 +2531,7 @@ Evidently, up to a couple thousand elements, this simple Python approach can eve
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Itertools-approach">Itertools approach<a class="anchor-link" href="#Itertools-approach">&#182;</a></h2>
+<h2 id="Itertools-approach">Itertools approach<a class="anchor-link" href="#Itertools-approach">¶</a></h2>
 </div>
 </div>
 </div>
@@ -2629,15 +2542,14 @@ Evidently, up to a couple thousand elements, this simple Python approach can eve
 <p>As another approach to the pure-Python group-by, you might be tempted to turn to the <code>itertools.groupby</code> function that is included in the standard library.
 Upon further inspection, this is somewhat complicated by the fact that this operation requires groups to appear sequentially in the input, which necessitates a pre-sorting of the data in order to properly group all keys.</p>
 <p>Here's one possible implementation:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">groupby</span>
 <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
 
@@ -2649,64 +2561,42 @@ Upon further inspection, this is somewhat complicated by the fact that this oper
 
 <span class="n">itertools_groupby</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">vals</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[9]:</div>
-
-
-
-
 <div class="output_text output_subarea output_execute_result">
-<pre>{&#39;A&#39;: 5, &#39;B&#39;: 7, &#39;C&#39;: 9}</pre>
-</div>
-
-</div>
-
+<pre>{'A': 5, 'B': 7, 'C': 9}</pre>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let's see how this compares:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_benchmarks</span><span class="p">([</span><span class="n">pandas_groupby</span><span class="p">,</span> <span class="n">dict_groupby</span><span class="p">,</span> <span class="n">itertools_groupby</span><span class="p">]);</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
-
-
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAm8AAAD5CAYAAABxltL/AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3Xd4U1UDx/Fv0l1K92DvjWUPWS3TgoBsZVi28KKigkUo
@@ -3203,22 +3093,17 @@ Cy5evMioUaNwd3fHzc2Nxx57zKqfiah8GnXreKoQQgghqoTDhw+Tn5/Po48+SmJiIiNGjGDXrl33
 3F5qaipRUVFs2rSpHKsUtiAjb0IIIUQVFBQURFRUFEuWLMFoNDJlyhRblySqCBl5E0IIIYSoRuSC
 BSGEEEKIakTCmxBCCCFENSLhTQghhBCiGpHwJoQQQghRjUh4E0IIIYSoRiS8CSGEEEJUI/8Pz4hs
 FTQkdHMAAAAASUVORK5CYII=
-"
->
-</div>
-
-</div>
-
+"/>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We see that the itertools approach has similar scaling to the dict-based approach, but unsurprisingly is quite a bit slower due to the required multiple passes over the data, one of which is a relatively expensive sorting operation.</p>
-
 </div>
 </div>
 </div>
@@ -3226,7 +3111,7 @@ FTQkdHMAAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="NumPy-based-approaches">NumPy-based approaches<a class="anchor-link" href="#NumPy-based-approaches">&#182;</a></h2>
+<h2 id="NumPy-based-approaches">NumPy-based approaches<a class="anchor-link" href="#NumPy-based-approaches">¶</a></h2>
 </div>
 </div>
 </div>
@@ -3236,15 +3121,14 @@ FTQkdHMAAAAASUVORK5CYII=
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>When working with large arrays, one way to speed things up is to use NumPy's element-wise operations to push loops from the interpreted Python layer into the compiled C layer.
 For example, selections in Numpy are most often done via <a href="http://nbviewer.jupyter.org/github/lj020326/PythonDataScienceHandbook/blob/master/notebooks/02.06-Boolean-Arrays-and-Masks.ipynb">masking</a> operations, which can be combined with a Python dict comprehension for a nice concise implementation of the group-by:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="k">def</span> <span class="nf">masking_groupby</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">vals</span><span class="p">):</span>
@@ -3255,31 +3139,19 @@ For example, selections in Numpy are most often done via <a href="http://nbviewe
     
 <span class="n">masking_groupby</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">vals</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[11]:</div>
-
-
-
-
 <div class="output_text output_subarea output_execute_result">
-<pre>{&#39;A&#39;: 5, &#39;B&#39;: 7, &#39;C&#39;: 9}</pre>
-</div>
-
-</div>
-
+<pre>{'A': 5, 'B': 7, 'C': 9}</pre>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -3287,34 +3159,24 @@ For example, selections in Numpy are most often done via <a href="http://nbviewe
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Built-in to each masking operation is a full pass over the data, and the construction of an associated Boolean array.
 These passes happen within the compiled layer of NumPy, and so in practice end up being faster than the pure-Python loops we saw previously:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In [12]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_benchmarks</span><span class="p">([</span><span class="n">pandas_groupby</span><span class="p">,</span> <span class="n">dict_groupby</span><span class="p">,</span>
                  <span class="n">itertools_groupby</span><span class="p">,</span> <span class="n">masking_groupby</span><span class="p">]);</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
-
-
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAm8AAAD5CAYAAABxltL/AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XdcldUfwPEPl42DPRxoas4cuXPhDmfiKkfgTLOyfhqm
@@ -3927,15 +3789,11 @@ Pz+no6MDpVJJYmIi1dXVv/VMxP8vJvh+PlUIIYQQ34LH4+H+/p6qqiqOj49pa2vD7XZ/Ot7Z2Rm9
 vb24XK7/sJfiK8jMmxBCCPENZWVl0dvby/z8PC8vL4yOjn51l8Q3ITNvQgghhBBRRDYsCCGEEEJE
 ESnehBBCCCGiiBRvQgghhBBRRIo3IYQQQogoIsWbEEIIIUQUkeJNCCGEECKK/ARZ+W51FsJEugAA
 AABJRU5ErkJggg==
-"
->
-</div>
-
-</div>
-
+"/>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -3947,15 +3805,14 @@ Numpy will not be able to match the scaling of Pandas unless it can identify all
 <p>Single-pass identification of all groups is actually possible with the low-level routine <code>np.bincount</code>, which performs a weighted count of the number of occurrences of values in an array of integers.
 To use it, we must first map all our values to unique integers, which can be done with the <code>np.unique</code> function.
 The result is a concise and efficient two-pass group-by implementation:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="k">def</span> <span class="nf">bincount_groupby</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">vals</span><span class="p">):</span>
@@ -3965,65 +3822,43 @@ The result is a concise and efficient two-pass group-by implementation:</p>
 
 <span class="n">bincount_groupby</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">vals</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[13]:</div>
-
-
-
-
 <div class="output_text output_subarea output_execute_result">
-<pre>{&#39;A&#39;: 5.0, &#39;B&#39;: 7.0, &#39;C&#39;: 9.0}</pre>
-</div>
-
-</div>
-
+<pre>{'A': 5.0, 'B': 7.0, 'C': 9.0}</pre>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let's add this to the benchmark plot:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In [14]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_benchmarks</span><span class="p">([</span><span class="n">pandas_groupby</span><span class="p">,</span> <span class="n">dict_groupby</span><span class="p">,</span> <span class="n">itertools_groupby</span><span class="p">,</span>
                  <span class="n">masking_groupby</span><span class="p">,</span> <span class="n">bincount_groupby</span><span class="p">]);</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
-
-
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAm8AAAD5CAYAAABxltL/AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XVcVuf/+PEXjYikChZOsbudhWIMMWbPxJqx/RQdfnGI
@@ -4715,15 +4550,11 @@ Rdq3b99sjwEBAcycOZNLly4xatQo+vbty7fffsuMGTMIDQ1Fo9EwdOhQh34nou35qBv3pwohhBDi
 jlBYWIjBYOBXv/oVpaWlTJ8+nby8vBaPV1FRQWZmJrt27XJilcIVZM+bEEIIcQeKjY0lMzOTdevW
 0dTUxMKFC11dkrhDyJ43IYQQQgg3IhcsCCGEEEK4EQlvQgghhBBuRMKbEEIIIYQbkfAmhBBCCOFG
 JLwJIYQQQrgRCW9CCCGEEG7k/wGGHSv1+jJ/sAAAAABJRU5ErkJggg==
-"
->
-</div>
-
-</div>
-
+"/>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -4731,7 +4562,6 @@ JLwJIYQQQrgRCW9CCCGEEG7k/wGGHSv1+jJ/sAAAAABJRU5ErkJggg==
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Compared to our masking-based approach, the result has similar scaling with dataset size, while avoiding the poor behavior for large numbers of groups.</p>
 <p>While it is interesting that an implementation based on generic building blocks in NumPy can approach the performance of purpose-optimized code in Pandas, there remains the problem that the bincount approach is not particularly flexible: for example, a <code>min</code> or <code>max</code> aggregation cannot be implemented as a weighted sum.</p>
-
 </div>
 </div>
 </div>
@@ -4739,7 +4569,7 @@ JLwJIYQQQrgRCW9CCCGEEG7k/wGGHSv1+jJ/sAAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Sparse-matrix-approach">Sparse matrix approach<a class="anchor-link" href="#Sparse-matrix-approach">&#182;</a></h2>
+<h2 id="Sparse-matrix-approach">Sparse matrix approach<a class="anchor-link" href="#Sparse-matrix-approach">¶</a></h2>
 </div>
 </div>
 </div>
@@ -4751,15 +4581,14 @@ JLwJIYQQQrgRCW9CCCGEEG7k/wGGHSv1+jJ/sAAAAABJRU5ErkJggg==
 In my experience, some of the most useful low-level routines in the PyData stack are found within the SciPy sparse matrix module: while they are designed for fast manipulation of sparse matrices, they can often be re-purposed and used to solve conceptually distinct problems.</p>
 <p>In this case, we can leverage these tools by constructing a sparse matrix such that each group occupies a single row of the matrix, and then perform a standard aggregation over that matrix to find our desired result.
 We'll again take advantage of <code>np.unique</code> to identify the appropriate row/group for each value, and use this to build the matrix:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">sparse</span>
 
 <span class="k">def</span> <span class="nf">sparse_groupby</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">vals</span><span class="p">):</span>
@@ -4770,65 +4599,43 @@ We'll again take advantage of <code>np.unique</code> to identify the appropriate
 
 <span class="n">sparse_groupby</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">vals</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[15]:</div>
-
-
-
-
 <div class="output_text output_subarea output_execute_result">
-<pre>{&#39;A&#39;: 5, &#39;B&#39;: 7, &#39;C&#39;: 9}</pre>
-</div>
-
-</div>
-
+<pre>{'A': 5, 'B': 7, 'C': 9}</pre>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let's add this to our benchmarks:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_benchmarks</span><span class="p">([</span><span class="n">pandas_groupby</span><span class="p">,</span> <span class="n">dict_groupby</span><span class="p">,</span> <span class="n">itertools_groupby</span><span class="p">,</span>
                  <span class="n">masking_groupby</span><span class="p">,</span> <span class="n">bincount_groupby</span><span class="p">,</span> <span class="n">sparse_groupby</span><span class="p">]);</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
 <div class="prompt"></div>
-
-
-
-
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAm8AAAD5CAYAAABxltL/AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XdYVNfWwOEfHRGliWDDKIpYsJdYEdQglthjC/YSr0GD
@@ -5574,15 +5381,11 @@ iSeoqKjgb3/7G0FBQTX26OHhwZQpU8jLy2P48OF07NiR8+fPM2nSJHQ6HVqtlgEDBtj1PRENz0Vd
 eTxVCCGEELeF5ORkjEYj9957L2fPnmXixIns2LHjpsfLyspi2rRpbNy4sQ6rFI4gR96EEEKI21BU
 VBTTpk3j3XffpbKykldffdXRJYnbhBx5E0IIIYRoROSCBSGEEEKIRkTCmxBCCCFEIyLhTQghhBCi
 EZHwJoQQQgjRiEh4E0IIIYRoRCS8CSGEEEI0Iv8fuGQDZJ9XQscAAAAASUVORK5CYII=
-"
->
-</div>
-
-</div>
-
+"/>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -5591,7 +5394,6 @@ EZHwJoQQQgjRiEh4E0IIIYRoRCS8CSGEEEI0Iv8fuGQDZJ9XQscAAAAASUVORK5CYII=
 <p>Even for larger arrays, this sparse approach comes surprisingly close (within a factor of a few) to the purpose-built group-by implementation within Pandas, and also provides the wide range of efficient aggregation options available to sparse matrices.
 This exercise in repurposing the sparse matrix internals might seem a bit frivolous in this specific case, but in my own research work I've often found similar approaches useful in efficient implementation of algorithms that might otherwise necessitate writing a custom C extension.</p>
 <p>I hope you found this discussion useful, and please let me know in the comments if you can think of other clever ways to implement fast group-by functionality in Python!</p>
-
 </div>
 </div>
 </div>
@@ -5603,12 +5405,9 @@ This exercise in repurposing the sparse matrix internals might seem a bit frivol
 <a href="http://lj020326.github.io/downloads/notebooks/GroupBy.ipynb"><em>here</em></a>,
 <em>or viewed statically on</em>
 <a href="http://nbviewer.ipython.org/url/lj020326.github.io/downloads/notebooks/GroupBy.ipynb"><em>nbviewer</em></a>.</p>
-
 </div>
 </div>
 </div>
- 
-
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
