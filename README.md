@@ -16,7 +16,7 @@ $ git submodule update --init --recursive
 Install the required packages:
 
 ```
-$ virtualenv python=3.5 venv
+$ virtualenv --python=3.5 venv
 $ source activate venv
 $ pip install -r requirements.txt
 ```

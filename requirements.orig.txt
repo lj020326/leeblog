@@ -34,8 +34,7 @@ Pygments==2.2.0
 python-dateutil==2.7.2
 pytz==2018.4
 pywinpty==0.5.1
-#pyzmq==17.0.0
-pyzmq
+pyzmq==17.0.0
 qtconsole==4.3.1
 Send2Trash==1.5.0
 #setuptools==45
