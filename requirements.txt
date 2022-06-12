@@ -5,3 +5,5 @@ pelican-render-math
 Markdown
 ghp-import
 ipython
+## ref: https://pypi.org/project/minchin.pelican.plugins.summary/
+minchin.pelican.plugins.summary
