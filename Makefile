@@ -83,10 +83,8 @@ endif
 
 serve-global:
 ifdef SERVER
-# 	cd $(OUTPUTDIR) && $(PY) -m pelican.server 80 $(SERVER)
 	cd $(OUTPUTDIR) && pelican --listen -e PORT=80 BIND=$(SERVER)
 else
-# 	cd $(OUTPUTDIR) && $(PY) -m pelican.server 80 0.0.0.0
 	cd $(OUTPUTDIR) && pelican --listen -e PORT=80 BIND=0.0.0.0
 endif
 
