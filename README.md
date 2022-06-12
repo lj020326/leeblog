@@ -9,8 +9,6 @@ Clone the repository & make sure submodules are included
 ```
 $ git clone https://github.com/lj020326/leeblog.git
 $ git checkout src
-$ git submodule add https://github.com/getpelican/pelican-plugins.git plugins/pelican-plugins
-$ git submodule add git://github.com/danielfrg/pelican-ipynb.git plugins/ipynb
 $ git submodule update --init --recursive
 ```
 
