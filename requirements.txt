@@ -3,7 +3,7 @@ pelican-jupyter
 pelican-liquid-tags
 pelican-render-math
 Markdown
-Markup
+MarkupSafe
 ghp-import
 #ipython
 ipython==7.18.1
