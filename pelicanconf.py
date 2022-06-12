@@ -28,13 +28,14 @@ DEFAULT_PAGINATION = 10
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
 
-#MARKUP = ('md', 'ipynb')
-#PLUGINS = ['ipynb.markup']
+MARKUP = ('md', 'ipynb')
 
-MARKUP = ["md", "ipynb"]
+# MARKUP = ["md", "ipynb"]
 PLUGIN_PATHS = ['./plugins', './plugins/pelican-plugins']
+#PLUGINS = ['ipynb.markup']
 PLUGINS = [
     'render_math',
+    'nb_markup',
     'liquid_tags',
     # auto-summarizing articles
     'summary'
