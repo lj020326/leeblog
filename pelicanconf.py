@@ -32,7 +32,7 @@ DEFAULT_PAGINATION = 10
 #PLUGINS = ['ipynb.markup']
 
 MARKUP = ["md", "ipynb"]
-# PLUGIN_PATHS = ['./plugins', './plugins/pelican-plugins']
+PLUGIN_PATHS = ['./plugins', './plugins/pelican-plugins']
 PLUGINS = [
     'render_math',
     'liquid_tags',
