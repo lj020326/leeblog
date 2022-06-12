@@ -5,9 +5,9 @@ from __future__ import unicode_literals
 AUTHOR = 'Lee Johnson'
 SITENAME = 'Tech Journal'
 SITESUBTITLE = u'Journal on automation technology and beyond'
-#SITEURL = ''
+SITEURL = ''
 #SITEURL = 'http://localhost:8000'
-SITEURL = 'https://leeblog.org'
+# SITEURL = 'https://leeblog.org'
 
 PATH = 'content'
 TIMEZONE = 'America/New_York'
