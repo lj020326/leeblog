@@ -56,7 +56,7 @@ The image tag allows insertion of an image into the post with a specified size a
 
 Here is an example of the result of the image tag:
 
-![A Galaxy](http://jakevdp.github.io/images/galaxy.jpg "A Galaxy")
+![A Galaxy](./img/galaxy.jpg "A Galaxy")
 
 #### The Video Tag
 
