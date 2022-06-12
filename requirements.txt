@@ -4,3 +4,4 @@ pelican-liquid-tags
 pelican-render-math
 Markdown
 ghp-import
+ipython
