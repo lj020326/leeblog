@@ -32,8 +32,6 @@ MARKUP = ["md", "ipynb"]
 PLUGIN_PATHS = ['./plugins', './plugins/pelican-plugins']
 PLUGINS = [
     'summary',       # auto-summarizing articles
-    'feed_summary',  # use summaries for RSS, not full articles
-    # 'ipynb.liquid',  # for embedding notebooks
     'liquid_tags',   # for notebooks
     'render_math'
 ]
