@@ -7,7 +7,8 @@ ghp-import
 #ipython
 ipython==7.18.1
 beautifulsoup4
-## ref: https://pypi.org/project/minchin.pelican.plugins.summary/
-semantic-version
-minchin.pelican.plugins.summary
-minchin.pelican.plugins.autoloader
+### ref: https://pypi.org/project/minchin.pelican.plugins.summary/
+#semantic-version
+#minchin.pelican.plugins.summary
+#minchin.pelican.plugins.autoloader
+#
