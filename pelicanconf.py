@@ -36,11 +36,12 @@ MARKUP = ["md", "ipynb"]
 PLUGINS = [
     'render_math',
     'liquid_tags',
-    'minchin.pelican.plugins.summary'
+    'minchin.pelican.plugins.summary',
+    # use summaries for RSS, not full articles
+    'feed_summary'
     # 'summary'       # auto-summarizing articles
     # 'nb_markup',
     # 'ipynb.liquid',
-    # 'feed_summary',  # use summaries for RSS, not full articles
 ]
 IGNORE_FILES = ['.ipynb_checkpoints']
 
