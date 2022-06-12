@@ -36,7 +36,7 @@ MARKUP = ["md", "ipynb"]
 PLUGINS = [
     'render_math',
     'liquid_tags',
-    'summary',       # auto-summarizing articles
+    'summary'       # auto-summarizing articles
     # 'nb_markup',
     # 'ipynb.liquid',
     # 'feed_summary',  # use summaries for RSS, not full articles
