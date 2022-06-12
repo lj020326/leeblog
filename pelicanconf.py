@@ -51,7 +51,7 @@ LIQUID_TAGS = ["img", "literal", "video", "youtube", "vimeo", "include_code"]
 
 # for liquid tags
 CODE_DIR = 'downloads/code'
-NOTEBOOK_DIR = 'downloads/notebooks'
+NOTEBOOK_DIR = './downloads/notebooks'
 
 # THEME SETTINGS
 THEME = './theme/'
