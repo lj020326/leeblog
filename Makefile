@@ -81,9 +81,9 @@ endif
 
 serve-global:
 ifdef SERVER
-	cd $(OUTPUTDIR) && $(PELICAN) --listen -e PORT=80 BIND=$(SERVER)
+	cd $(OUTPUTDIR) && $(PELICAN) --listen -e PORT=80 BIND="$(SERVER)"
 else
-	cd $(OUTPUTDIR) && $(PELICAN) --listen -e PORT=80 BIND=0.0.0.0
+	cd $(OUTPUTDIR) && $(PELICAN) --listen -e PORT=80 BIND="0.0.0.0"
 endif
 
 
