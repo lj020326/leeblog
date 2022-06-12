@@ -4,4 +4,4 @@ comments: true
 slug: group-by-from-scratch
 tags: pandas, python, benchmarks
 
-{% notebook downloads/notebooks/GroupBy.ipynb cells[2:] %}
+{% notebook GroupBy.ipynb cells[2:] %}

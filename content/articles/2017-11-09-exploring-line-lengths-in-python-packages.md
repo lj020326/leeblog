@@ -4,4 +4,4 @@ comments: true
 slug: exploring-line-lengths-in-python-packages
 tags: python, data, statistics
 
-{% notebook downloads/notebooks/PEP8LineLengths.ipynb cells[2:] %}
+{% notebook PEP8LineLengths.ipynb cells[2:] %}

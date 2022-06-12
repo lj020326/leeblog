@@ -4,4 +4,4 @@ comments: true
 slug: installing-python-packages-from-jupyter
 tags: jupyter, conda, pip
 
-{% notebook downloads/notebooks/JupyterInstallation.ipynb cells[2:] %}
+{% notebook JupyterInstallation.ipynb cells[2:] %}

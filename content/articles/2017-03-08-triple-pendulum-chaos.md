@@ -4,4 +4,4 @@ comments: true
 slug: triple-pendulum-chaos
 tags: matplotlib, animation, simulation
 
-{% notebook downloads/notebooks/TriplePendulum.ipynb cells[2:] %}
+{% notebook TriplePendulum.ipynb cells[2:] %}

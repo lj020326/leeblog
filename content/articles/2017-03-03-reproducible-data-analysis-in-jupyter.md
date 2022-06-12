@@ -4,4 +4,4 @@ comments: true
 slug: reproducible-data-analysis-in-jupyter
 tags: data, pandas, jupyter
 
-{% notebook downloads/notebooks/JupyterWorkflow.ipynb cells[2:] %}
+{% notebook JupyterWorkflow.ipynb cells[2:] %}

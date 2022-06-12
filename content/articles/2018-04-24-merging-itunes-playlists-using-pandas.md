@@ -4,7 +4,7 @@ comments: true
 slug: merging-itunes-playlists-using-pandas
 tags: jupyter, pandas, itunes, merge, join
 
-{% notebook downloads/notebooks/MergeItunesPlaylists.ipynb cells[2:] %}
+{% notebook MergeItunesPlaylists.ipynb cells[2:] %}
 
 Related Reference:
 
