@@ -73,3 +73,7 @@ STATIC_PATHS = ['images', 'figures', 'videos', 'downloads', 'favicon.ico']
 
 LICENSE_URL = "https://github.com/lj020326/leeblog.org/blob/master/LICENSE"
 LICENSE = "MIT"
+
+## ref: https://github.com/pelican-plugins/liquid-tags
+from io import open
+EXTRA_HEADER = open('_nb_header.html', encoding='utf-8').read()
