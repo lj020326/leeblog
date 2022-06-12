@@ -36,9 +36,10 @@ PLUGIN_PATHS = ['./plugins', './plugins/pelican-plugins']
 PLUGINS = [
     'render_math',
     'liquid_tags',
+    # auto-summarizing articles
+    'summary'
     # use summaries for RSS, not full articles
-    'feed_summary'
-    # 'summary'       # auto-summarizing articles
+    'feed_summary',
     # 'nb_markup',
     # 'ipynb.liquid',
 ]
