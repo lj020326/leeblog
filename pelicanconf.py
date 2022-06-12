@@ -31,7 +31,7 @@ DEFAULT_PAGINATION = 10
 MARKUP = ('md', 'ipynb')
 
 # MARKUP = ["md", "ipynb"]
-PLUGIN_PATHS = ['./plugins', './plugins/pelican-plugins']
+PLUGIN_PATHS = ['./plugins', './plugins/pelican-plugins','./plugins/pelican-jupyter/pelican_jupyter']
 #PLUGINS = ['ipynb.markup']
 PLUGINS = [
     'render_math',
