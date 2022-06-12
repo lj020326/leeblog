@@ -37,11 +37,11 @@ PLUGINS = [
     'render_math',
     'nb_markup',
     'liquid_tags',
+    'ipynb.liquid',
     # auto-summarizing articles
     'summary',
     # use summaries for RSS, not full articles
-    'feed_summary',
-    # 'ipynb.liquid',
+    'feed_summary'
 ]
 IGNORE_FILES = ['.ipynb_checkpoints']
 
