@@ -74,16 +74,16 @@ regenerate:
 
 serve:
 ifdef PORT
-	cd $(OUTPUTDIR) && pelican --listen -e PORT=$(PORT)
+	cd $(OUTPUTDIR) && $(PELICAN) --listen -e PORT=$(PORT)
 else
-	cd $(OUTPUTDIR) && pelican --listen
+	cd $(OUTPUTDIR) && $(PELICAN) --listen
 endif
 
 serve-global:
 ifdef SERVER
-	cd $(OUTPUTDIR) && pelican --listen -e PORT=80 BIND=$(SERVER)
+	cd $(OUTPUTDIR) && $(PELICAN) --listen -e PORT=80 BIND=$(SERVER)
 else
-	cd $(OUTPUTDIR) && pelican --listen -e PORT=80 BIND=0.0.0.0
+	cd $(OUTPUTDIR) && $(PELICAN) --listen -e PORT=80 BIND=0.0.0.0
 endif
 
 
