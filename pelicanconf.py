@@ -47,7 +47,7 @@ PLUGINS = [
 ]
 IGNORE_FILES = ['.ipynb_checkpoints']
 
-LIQUID_TAGS = ["img", "literal", "video", "youtube", "vimeo", "include_code"]
+LIQUID_TAGS = ["img", "literal", "video", "youtube", "vimeo", "include_code", "notebook"]
 
 # for liquid tags
 CODE_DIR = 'downloads/code'
