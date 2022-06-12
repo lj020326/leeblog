@@ -44,6 +44,11 @@
         </script>
     	{% endif %}
 
+        <!-- ref: https://github.com/pelican-plugins/liquid-tags -->
+        {% if EXTRA_HEADER %}
+        {{ EXTRA_HEADER }}
+        {% endif %}
+
         {% block extra_head %}{%endblock%}
     </head>
 
