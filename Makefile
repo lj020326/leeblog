@@ -74,10 +74,8 @@ regenerate:
 
 serve:
 ifdef PORT
-# 	cd $(OUTPUTDIR) && $(PY) -m pelican.server $(PORT)
 	cd $(OUTPUTDIR) && pelican --listen -e PORT=$(PORT)
 else
-# 	cd $(OUTPUTDIR) && $(PY) -m pelican.server
 	cd $(OUTPUTDIR) && pelican --listen
 endif
 
