@@ -6,4 +6,6 @@ Markdown
 ghp-import
 ipython
 ## ref: https://pypi.org/project/minchin.pelican.plugins.summary/
+semantic-version
 minchin.pelican.plugins.summary
+minchin.pelican.plugins.autoloader
