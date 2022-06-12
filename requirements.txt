@@ -1,2 +1,3 @@
 pelican
 pelican-jupyter
+pelican-liquid-tags
