@@ -1,5 +1,6 @@
 pelican
 pelican-jupyter
 pelican-liquid-tags
+pelican-render-math
 Markdown
 ghp-import
