@@ -4,7 +4,8 @@ pelican-liquid-tags
 pelican-render-math
 Markdown
 ghp-import
-ipython
+#ipython
+ipython==7.18.1
 beautifulsoup4
 ## ref: https://pypi.org/project/minchin.pelican.plugins.summary/
 semantic-version
