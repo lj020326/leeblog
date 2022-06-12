@@ -35,7 +35,7 @@ PLUGIN_PATHS = ['./plugins', './plugins/pelican-plugins','./plugins/pelican-jupy
 #PLUGINS = ['ipynb.markup']
 PLUGINS = [
     'summary',       # auto-summarizing articles
-    'feed_summary'   # use summaries for RSS, not full articles
+    'feed_summary',  # use summaries for RSS, not full articles
     'ipynb.liquid',  # for embedded notebooks
     'liquid_tags',   # for notebooks
     'render_math'
