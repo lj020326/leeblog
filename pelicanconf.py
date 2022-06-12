@@ -34,7 +34,8 @@ DEFAULT_PAGINATION = 10
 MARKUP = ["md", "ipynb"]
 # PLUGIN_PATHS = ['./plugins', './plugins/pelican-plugins']
 PLUGINS = [
-    'liquid_tags'
+    'liquid_tags',
+    'render_math'
     # 'nb_markup'
     # 'summary',       # auto-summarizing articles
     # 'feed_summary',  # use summaries for RSS, not full articles
