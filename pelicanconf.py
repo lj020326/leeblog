@@ -36,7 +36,6 @@ MARKUP = ["md", "ipynb"]
 PLUGINS = [
     'render_math',
     'liquid_tags',
-    'minchin.pelican.plugins.summary',
     # use summaries for RSS, not full articles
     'feed_summary'
     # 'summary'       # auto-summarizing articles
