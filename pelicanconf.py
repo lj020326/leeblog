@@ -35,10 +35,10 @@ MARKUP = ["md", "ipynb"]
 # PLUGIN_PATHS = ['./plugins', './plugins/pelican-plugins']
 PLUGINS = [
     'render_math',
-    'liquid_tags'
+    'liquid_tags',
+    'summary',       # auto-summarizing articles
     # 'nb_markup',
     # 'ipynb.liquid',
-    # 'summary',       # auto-summarizing articles
     # 'feed_summary',  # use summaries for RSS, not full articles
     # 'liquid_tags.img',  # embedding images
     # 'liquid_tags.video',  # embedding videos
