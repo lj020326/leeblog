@@ -41,10 +41,6 @@ PLUGINS = [
     # 'nb_markup',
     # 'ipynb.liquid',
     # 'feed_summary',  # use summaries for RSS, not full articles
-    # 'liquid_tags.img',  # embedding images
-    # 'liquid_tags.video',  # embedding videos
-    # 'liquid_tags.include_code',  # including code blocks
-    # 'liquid_tags.literal'
 ]
 IGNORE_FILES = ['.ipynb_checkpoints']
 
