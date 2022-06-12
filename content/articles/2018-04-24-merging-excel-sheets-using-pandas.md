@@ -4,4 +4,4 @@ comments: true
 slug: merging-excel-sheets-using-pandas
 tags: jupyter, pandas, excel, merge, join
 
-{% notebook downloads/notebooks/MergeExcelUsingPandas.ipynb cells[2:] %}
+{% notebook MergeExcelUsingPandas.ipynb cells[2:] %}
