@@ -34,14 +34,12 @@ MARKUP = ('md', 'ipynb')
 PLUGIN_PATHS = ['./plugins', './plugins/pelican-plugins','./plugins/pelican-jupyter/pelican_jupyter']
 #PLUGINS = ['ipynb.markup']
 PLUGINS = [
-    'render_math',
+    'summary',       # auto-summarizing articles
+    'feed_summary'   # use summaries for RSS, not full articles
+    'ipynb.liquid',  # for embedded notebooks
     'nb_markup',
+    'render_math',
     'liquid_tags',
-    'ipynb.liquid',
-    # auto-summarizing articles
-    'summary',
-    # use summaries for RSS, not full articles
-    'feed_summary'
 ]
 IGNORE_FILES = ['.ipynb_checkpoints']
 
