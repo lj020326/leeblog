@@ -38,7 +38,7 @@ PLUGINS = [
     'nb_markup',
     'liquid_tags',
     # auto-summarizing articles
-    'summary'
+    'summary',
     # use summaries for RSS, not full articles
     'feed_summary',
     # 'ipynb.liquid',
