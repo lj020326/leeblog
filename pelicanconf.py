@@ -65,6 +65,7 @@ AUTHOR_BLOG = 'http://leeblog.org'
 AUTHOR_CV = "http://leeblog.org/downloads/docs/CV.pdf"
 SHOW_ARCHIVES = True
 SHOW_FEED = False  # Need to address large feeds
+FEED_USE_SUMMARY = True
 
 ENABLE_MATHJAX = True
 
