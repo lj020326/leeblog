@@ -1,6 +1,6 @@
-# Source for http://lj020326.github.io
+# Source for http://leeblog.org
 
-This repository contains the source for http://lj020326.github.io/.
+This repository contains the source for http://leeblog.org/.
 
 ## Building the Blog
 
