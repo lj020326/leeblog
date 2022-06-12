@@ -5,6 +5,7 @@ pelican-render-math
 Markdown
 ghp-import
 ipython
+beautifulsoup4
 ## ref: https://pypi.org/project/minchin.pelican.plugins.summary/
 semantic-version
 minchin.pelican.plugins.summary
