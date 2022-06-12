@@ -38,8 +38,7 @@ PLUGINS = [
     'feed_summary'   # use summaries for RSS, not full articles
     'ipynb.liquid',  # for embedded notebooks
     'liquid_tags',   # for notebooks
-    'nb_markup',
-    'render_math',
+    'render_math'
 ]
 IGNORE_FILES = ['.ipynb_checkpoints']
 
