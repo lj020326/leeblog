@@ -40,7 +40,6 @@ PLUGINS = [
     'summary'
     # use summaries for RSS, not full articles
     'feed_summary',
-    # 'nb_markup',
     # 'ipynb.liquid',
 ]
 IGNORE_FILES = ['.ipynb_checkpoints']
