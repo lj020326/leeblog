@@ -1,3 +1,5 @@
 pelican
 pelican-jupyter
 pelican-liquid-tags
+Markdown
+ghp-import

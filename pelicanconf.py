@@ -54,6 +54,7 @@ NOTEBOOK_DIR = 'downloads/notebooks'
 
 # THEME SETTINGS
 THEME = './theme/'
+# EXTRA_HEADER = open('_nb_header.html').read().decode('utf-8')
 
 ABOUT_PAGE = '/pages/about.html'
 TWITTER_USERNAME = 'lj020326'

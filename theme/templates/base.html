@@ -14,7 +14,6 @@
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="/theme/css/icons.css"/>
         <style>{% include 'pygments.css' %}</style>
         <style>{% include 'main.css' %}</style>
@@ -23,10 +22,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
         {% if ENABLE_MATHJAX %}
-        <!--<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>-->
-        <script type="text/javascript" async
-          src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
-        </script>
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
         <script type="text/javascript">
         init_mathjax = function() {
             if (window.MathJax) {
@@ -74,7 +70,7 @@
                             <li><a href="/archives.html" title="Archive">Archive</a></li>
                         {% endif %}
                         {% if SHOW_FEED %}
-                            <li><a class="nodec icon-rss" href="/{{ FEED_ALL_ATOM }}" title="lj020326.github.io RSS feed" rel="me"></a></li>
+                            <li><a class="nodec icon-rss" href="/{{ FEED_ALL_ATOM }}" title="jakevdp.github.io RSS feed" rel="me"></a></li>
                         {% endif %}
                     </ul>
                 </nav>
