@@ -36,14 +36,14 @@ MARKUP = ["md", "ipynb"]
 PLUGINS = [
     'render_math',
     'ipynb.liquid',
-    # 'liquid_tags',
+    'liquid_tags'
     # 'nb_markup'
     # 'summary',       # auto-summarizing articles
     # 'feed_summary',  # use summaries for RSS, not full articles
-    'liquid_tags.img',  # embedding images
-    'liquid_tags.video',  # embedding videos
-    'liquid_tags.include_code',  # including code blocks
-    'liquid_tags.literal'
+    # 'liquid_tags.img',  # embedding images
+    # 'liquid_tags.video',  # embedding videos
+    # 'liquid_tags.include_code',  # including code blocks
+    # 'liquid_tags.literal'
 ]
 IGNORE_FILES = ['.ipynb_checkpoints']
 
