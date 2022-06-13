@@ -49,17 +49,18 @@ LIQUID_TAGS = ["img", "literal", "video", "youtube", "vimeo", "include_code", "n
 LIQUID_CONFIGS = (
 ("IGNORE_FILES", ".ipynb_checkpoints", ""),
 ("CODE_DIR", "downloads/code", ""),
-("NOTEBOOK_DIR", "", "")
+("NOTEBOOK_DIR", "", ""),
+("IPYNB_SKIP_CSS", "True", ""),
 )
 
 # for liquid tags
 CODE_DIR = 'downloads/code'
 NOTEBOOK_DIR = 'downloads/notebooks'
+#IPYNB_FIX_CSS = True
+IPYNB_SKIP_CSS = False
 
 # THEME SETTINGS
 THEME = './theme/'
-#IPYNB_FIX_CSS = True
-#IPYNB_SKIP_CSS = False
 
 ABOUT_PAGE = '/pages/about.html'
 TWITTER_USERNAME = 'lj020326'
