@@ -9,6 +9,11 @@
 {% if 'jquery' in article.include %}
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 {% endif %}
+<!--https://pmbaumgartner.github.io/blog/jupyter-notebooks-for-pelican/ -->
+{% if article.bokehcss and article.bokehjs %}
+<link rel='stylesheet' href='{{ article.bokehcss }}'>
+<script src="{{ article.bokehjs }}"></script>
+{% endif %}
 {% endblock %}
 
 {% block content %}
