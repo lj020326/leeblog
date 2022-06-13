@@ -598,12 +598,3 @@ li:first-child .hentry, #content > .hentry {border: 0; margin: 0;}
     color: #f5f5f5;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    font: 15px 'Source Sans Pro', sans-serif;
-    line-height: 1.6em;
-    color: #222;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-}
