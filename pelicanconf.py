@@ -57,7 +57,7 @@ LIQUID_CONFIGS = (
 CODE_DIR = 'downloads/code'
 NOTEBOOK_DIR = 'downloads/notebooks'
 #IPYNB_FIX_CSS = True
-IPYNB_SKIP_CSS = False
+IPYNB_SKIP_CSS = True
 
 # THEME SETTINGS
 THEME = './theme/'
