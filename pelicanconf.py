@@ -48,7 +48,7 @@ LIQUID_TAGS = ["img", "literal", "video", "youtube", "vimeo", "include_code", "n
 
 LIQUID_CONFIGS = (
 ("IGNORE_FILES", ".ipynb_checkpoints", ""),
-("CODE_DIR", "features/code", ""),
+("CODE_DIR", "downloads/code", ""),
 ("NOTEBOOK_DIR", "", "")
 )
 
