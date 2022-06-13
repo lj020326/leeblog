@@ -63,6 +63,22 @@ ENABLE_MATHJAX = True
 
 STATIC_PATHS = ['images', 'figures', 'videos', 'downloads', 'favicon.ico']
 
+## Sitemap info
+SITEMAP = {
+    'format': 'xml',
+    'priorities': {
+        'articles': 1,
+        'indexes': 0.5,
+        'pages': 0.5,
+    },
+    'changefreqs': {
+        'articles': 'always',
+        'indexes': 'hourly',
+        'pages': 'monthly'
+    }
+}
+
+
 # Footer info
 
 LICENSE_URL = "https://github.com/lj020326/leeblog.org/blob/master/LICENSE"
