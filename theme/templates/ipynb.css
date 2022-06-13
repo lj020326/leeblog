@@ -2,6 +2,8 @@
     max-width: 700px;
 }
 
+strong { font-weight: bold; }
+
 .text_cell .prompt {
     display: none;
 }

@@ -13,24 +13,27 @@
           {% endif %}
 	  <div class="social-links">
 	    <ul>
-	      {% if AUTHOR_WEBSITE %}
-	      <li><a href="{{ AUTHOR_WEBSITE }}" rel="me">website</a></li>
-              {% endif %}
-	      {% if AUTHOR_BLOG %}
-	      <li><a href="{{ AUTHOR_BLOG }}" rel="me">blog</a></li>
-              {% endif %}
-	      {% if AUTHOR_CV %}
-	      <li><a href="{{ AUTHOR_CV }}" rel="me">CV</a></li>
-	      {% endif %}
-	      {% if TWITTER_USERNAME %}
-	      <li><a class="nodec icon-twitter" href="http://twitter.com/{{ TWITTER_USERNAME }}" rel="me"></a></li>
-              {% endif %}
-              {% if GITHUB_USERNAME %}
-	      <li><a class="nodec icon-github" href="http://github.com/{{ GITHUB_USERNAME }}" rel="me"></a></li>
-              {% endif %}
-              {% if STACKOVERFLOW_ADDRESS %}
-	      <li><a class="nodec icon-stackoverflow" href="{{ STACKOVERFLOW_ADDRESS }}" rel="me"></a></li>
-	      {% endif %}
+            {% if AUTHOR_WEBSITE %}
+            <li><a href="{{ AUTHOR_WEBSITE }}" rel="me">website</a></li>
+            {% endif %}
+            {% if AUTHOR_BLOG %}
+            <li><a href="{{ AUTHOR_BLOG }}" rel="me">blog</a></li>
+            {% endif %}
+            {% if AUTHOR_CV %}
+            <li><a href="{{ AUTHOR_CV }}" rel="me">CV</a></li>
+            {% endif %}
+            {% if TWITTER_USERNAME %}
+            <li><a class="nodec icon-twitter" href="http://twitter.com/{{ TWITTER_USERNAME }}" rel="me"></a></li>
+            {% endif %}
+            {% if GITHUB_USERNAME %}
+            <li><a class="nodec icon-github" href="http://github.com/{{ GITHUB_USERNAME }}" rel="me"></a></li>
+            {% endif %}
+            {% if LINKED_IN %}
+            <span>·</span><li><a class="fab fa-linkedin" href="{{ LINKED_IN }}" rel="me"></a></li>
+            {% endif %}
+            {% if STACKOVERFLOW_ADDRESS %}
+            <li><a class="nodec icon-stackoverflow" href="{{ STACKOVERFLOW_ADDRESS }}" rel="me"></a></li>
+            {% endif %}
 	    </ul>
         </header>
 

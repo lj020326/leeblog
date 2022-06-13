@@ -159,6 +159,14 @@ article .meta a.comments_btn:hover {
   margin-bottom: 2px;
   font-weight: 700;
 }
+h2 code {
+  font-size: 26px;
+  font-weight: 400;
+}
+h3 code {
+  font-size: 20px;
+  font-weight: 400;
+}
 .index article header h2 a {
   color: #000;
 }
@@ -297,4 +305,64 @@ article .meta a.comments_btn:hover {
 .col-lg-12 {
   padding-right: 0px;
   padding-left: 0px;
+}
+
+figure {
+  text-align: center;
+}
+
+td.code {
+  width: 100%;
+}
+
+figure.code {
+  text-align: left;
+}
+
+figure.styled {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-left: -2rem;
+  margin-right: -2rem;
+  background: repeating-linear-gradient(135deg, #dfdfdf 0, #dfdfdf 1%, #ffffff 0, #ffffff 50%) 0 / 20px 20px;
+  text-align: center;
+  img {
+      margin: 0 auto 0.2rem auto;
+      border: 1px solid #ddd;
+      box-shadow: none;
+      background-color: #fff;
+  }
+}
+figcaption {
+  text-align: center;
+  font-size: 1.2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  line-height: 1.6;
+  font-family: Consolas, monaco, monospace;
+  span {
+      background-color: #fff;
+      padding: 0.2rem 0.5rem;
+  }
+  a:hover {
+      cursor: pointer;
+  }
+}
+
+.vis-container {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-left: -2rem;
+  margin-right: -2rem;
+  background: repeating-linear-gradient(135deg, #dfdfdf 0, #dfdfdf 1%, #ffffff 0, #ffffff 50%) 0 / 20px 20px;
+  width: 100%;
+  margin:0 auto;
+}
+
+#cent {
+  text-align: center;
 }
