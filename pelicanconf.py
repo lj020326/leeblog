@@ -27,7 +27,7 @@ DEFAULT_PAGINATION = 10
 #RELATIVE_URLS = True
 
 MARKUP = ["md", "ipynb"]
-PLUGIN_PATHS = ['./plugins', './plugins/pelican-plugins']
+PLUGIN_PATHS = ['./plugins', './plugins/pelican-plugins', 'pelican-plotly']
 # PLUGIN_PATHS = ['./plugins', './pelican-plugins']
 # PLUGIN_PATHS = ['./pelican-plugins']
 PLUGINS = [
