@@ -86,9 +86,10 @@ function start_up(){
 #  MAIN
 ###
 [[ ($# -eq 0) || ($# -gt 2) ]] && usage
-port=''
+port='8000'
 [[ $# -eq 2 ]] && port=$2
 
+echo "PORT=${port}"
 if [[ $1 == "stop" ]]; then
   shut_down
 elif [[ $1 == "restart" ]]; then
