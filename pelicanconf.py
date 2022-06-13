@@ -23,6 +23,10 @@ ARTICLE_SAVE_AS = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html'
 
 DEFAULT_PAGINATION = 10
 
+# Social widget
+# SOCIAL = (('You can add links in your config file', '#'),
+#           ('Another social link', '#'),)
+
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
 
@@ -32,6 +36,7 @@ PLUGIN_PATHS = ['./plugins', './plugins/pelican-plugins', './plugins/pelican-plo
 # PLUGIN_PATHS = ['./pelican-plugins']
 PLUGINS = [
     'summary',       # auto-summarizing articles
+    'feed_summary',
     'liquid_tags',   # for notebooks
     'render_math',
     'pelican-plotly',
@@ -40,6 +45,12 @@ PLUGINS = [
 IGNORE_FILES = ['.ipynb_checkpoints']
 
 LIQUID_TAGS = ["img", "literal", "video", "youtube", "vimeo", "include_code", "notebook"]
+
+LIQUID_CONFIGS = (
+("IGNORE_FILES", ".ipynb_checkpoints", ""),
+("CODE_DIR", "features/code", ""),
+("NOTEBOOK_DIR", "", "")
+)
 
 # for liquid tags
 CODE_DIR = 'downloads/code'
