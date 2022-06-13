@@ -47,6 +47,7 @@ NOTEBOOK_DIR = 'downloads/notebooks'
 
 # THEME SETTINGS
 THEME = './theme/'
+IPYNB_FIX_CSS = True
 
 ABOUT_PAGE = '/pages/about.html'
 TWITTER_USERNAME = 'lj020326'
