@@ -27,11 +27,14 @@ DEFAULT_PAGINATION = 10
 #RELATIVE_URLS = True
 
 MARKUP = ["md", "ipynb"]
-PLUGIN_PATHS = ['./plugins', './plugins/pelican-plugins']
+# PLUGIN_PATHS = ['./plugins', './plugins/pelican-plugins']
+# PLUGIN_PATHS = ['./plugins', './pelican-plugins']
+PLUGIN_PATHS = ['./pelican-plugins']
 PLUGINS = [
     'summary',       # auto-summarizing articles
     'liquid_tags',   # for notebooks
-    'render_math'
+    'render_math',
+    'sitemap'
 ]
 IGNORE_FILES = ['.ipynb_checkpoints']
 

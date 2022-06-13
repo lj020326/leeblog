@@ -7,3 +7,6 @@
 [submodule "plugins/pelican-plotly"]
 	path = plugins/pelican-plotly
 	url = git://github.com/ran404/pelican-plotly.git
+[submodule "pelican-plugins"]
+	path = pelican-plugins
+	url = https://github.com/getpelican/pelican-plugins
