@@ -6,9 +6,6 @@ AUTHOR = 'Lee Johnson'
 SITENAME = 'Tech Journal'
 SITESUBTITLE = u'Journal on automation technology and beyond'
 SITEURL = ''
-#SITEURL = 'http://localhost:8000'
-# SITEURL = 'https://leeblog.org'
-
 PATH = 'content'
 TIMEZONE = 'America/New_York'
 DEFAULT_LANG = 'en'
@@ -33,6 +30,7 @@ MARKUP = ["md", "ipynb"]
 PLUGIN_PATHS = ['./plugins', './plugins/pelican-plugins']
 PLUGINS = [
     'summary',       # auto-summarizing articles
+    'feed_summary',  # use summaries for RSS, not full articles
     'liquid_tags',   # for notebooks
     'render_math'
 ]
