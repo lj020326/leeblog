@@ -66,7 +66,7 @@ html:
 	if test -d $(BASEDIR)/extra; then cp -r $(BASEDIR)/extra/* $(OUTPUTDIR)/; fi
 
 clean:
-	[ ! -d $(OUTPUTDIR) ] || rm -rf $(OUTPUTDIR)
+	[ ! -d $(OUTPUTDIR) ] || rm -rf $(OUTPUTDIR)/*
 	rm -fr cache/
 
 regenerate:
