@@ -69,7 +69,7 @@ function start_up(){
 #  mkdir -p $OUTPUTDIR && cd $OUTPUTDIR
 #  $PY -m pelican.server $port &
   mkdir -p $OUTPUTDIR && cd $BASEDIR
-	${PELICAN} --debug --autoreload -r ${INPUTDIR} -o ${OUTPUTDIR} -s ${CONFFILE} ${PELICANOPTS} $port &
+	${PELICAN} --debug --autoreload -r ${INPUTDIR} -o ${OUTPUTDIR} -s ${CONFFILE} ${PELICANOPTS} -p $port &
   srv_pid=$!
   echo $srv_pid > ${OUTPUTDIR}/${SRV_PID}
   sleep 1
