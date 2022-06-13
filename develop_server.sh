@@ -62,15 +62,16 @@ function shut_down(){
 function start_up(){
   local port=${1-"8000"}
   echo "Starting up Pelican and HTTP server"
-  shift
-  $PELICAN --debug --autoreload -r $INPUTDIR -o $OUTPUTDIR -s $CONFFILE $PELICANOPTS &
-  pelican_pid=$!
-  echo $pelican_pid > $PELICAN_PID
-  mkdir -p $OUTPUTDIR && cd $OUTPUTDIR
-  $PY -m pelican.server $port &
+#  shift
+#  $PELICAN --debug --autoreload -r $INPUTDIR -o $OUTPUTDIR -s $CONFFILE $PELICANOPTS &
+#  pelican_pid=$!
+#  echo $pelican_pid > $PELICAN_PID
+#  mkdir -p $OUTPUTDIR && cd $OUTPUTDIR
+#  $PY -m pelican.server $port &
+  mkdir -p $OUTPUTDIR && cd $BASEDIR
+	${PELICAN} --debug --autoreload -r ${INPUTDIR} -o ${OUTPUTDIR} -s ${CONFFILE} ${PELICANOPTS} $port &
   srv_pid=$!
-  echo $srv_pid > $SRV_PID
-  cd $BASEDIR
+  echo $srv_pid > ${OUTPUTDIR}/${SRV_PID}
   sleep 1
   if ! alive $pelican_pid ; then
     echo "Pelican didn't start. Is the Pelican package installed?"
