@@ -192,7 +192,7 @@ header, section, footer,
 aside, nav, article, figure {
     display: block;
     text-align: left;
-    font-weight: normal;
+    font-weight: 300;
 }
 
 /* Buttons */
