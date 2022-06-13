@@ -82,7 +82,6 @@ a {outline: 0;}
 a img {border: 0px; text-decoration: none;}
 a:link, a:visited {
     color: var(--accent-color);
-    padding: 0 1px;
     text-decoration: none;
 }
 a:hover, a:active {
