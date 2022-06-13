@@ -25,6 +25,7 @@
 	--weakened-main-color-2: #333;
 	--main-color: #000305;
 	--accent-color: hsl(354, 54%, 52%);
+	--jp-notebook-padding: 0;
 }
 :root.dark{
 	--strengthened-main-background: #111;
