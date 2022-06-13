@@ -190,8 +190,9 @@ table {margin: .5em auto 1.5em auto; width: 98%;}
 /* HTML5 tags */
 header, section, footer,
 aside, nav, article, figure {
-	display: block;
-	text-align: left;
+    display: block;
+    text-align: left;
+    font-weight: normal;
 }
 
 /* Buttons */
