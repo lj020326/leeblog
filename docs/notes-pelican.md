@@ -2,6 +2,7 @@
 Notebooks in pelican:                                                                                                                                                                                                                                                         
                
     https://pmbaumgartner.github.io/blog/jupyter-notebooks-for-pelican/                                                                                                                                                                                                                                                               
+    http://hernantz.github.io/how-to-publish-a-pelican-site-on-github.html
     https://janakiev.com/blog/pelican-jupyter/                                                                                                                                                                                                                                
     http://jakevdp.github.io/blog/2013/05/07/migrating-from-octopress-to-pelican/                                                                                                                                                                                             
     https://github.com/jakevdp/jakevdp.github.io-source                                                                                                                                                                                                                       
