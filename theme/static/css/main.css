@@ -9,10 +9,14 @@
 */
 
 /* Imports */
+/*
 @import url("reset.css");
 @import url("pygments.css");
 @import url("typogrify.css");
 @import url("fonts.css");
+*/
+
+@import url("pygments.css");
 
 /***** Global *****/
 /* Colors */
@@ -172,20 +176,20 @@ sup a.simple-footnote:link, sup a.simple-footnote:visited{
 /* Tables */
 table {margin: .5em auto 1.5em auto; width: 98%;}
 
-	/* Thead */
-	thead th {padding: .5em .4em; text-align: left;}
-	thead td {}
+/* Thead */
+thead th {padding: .5em .4em; text-align: left;}
+thead td {}
 
-	/* Tbody */
-	tbody td {padding: .5em .4em;}
-	tbody th {}
+/* Tbody */
+tbody td {padding: .5em .4em;}
+tbody th {}
 
-	tbody .alt td {}
-	tbody .alt th {}
+tbody .alt td {}
+tbody .alt th {}
 
-	/* Tfoot */
-	tfoot th {}
-	tfoot td {}
+/* Tfoot */
+tfoot th {}
+tfoot td {}
 
 /* HTML5 tags */
 header, section, footer,
@@ -255,63 +259,63 @@ div.dark-theme-toggle{
 	text-align: center;
 }
 
-	/* Sitename */
-	a:link#sitename, a:visited#sitename{
-		color: var(--main-color);
-		display: block;
-		font-weight: bold;
-		padding: 0 0 .6em .2em;
-		margin: 0 auto;
-		text-decoration: none;
-		width: 800px;
-		max-width: 100%;
-		text-align: left;
-	}
-	a:hover#sitename, a:active#sitename {
-		background: none;
-		color: var(--accent-color);
-		text-shadow: none;
-		width: 800px;
-		max-width: 100%;
-	}
-	#sitename img {height: 5em; margin-right: 0.4em}
-	#sitename div {display: inline-block;}
-	#sitename h1 {font-size: 3.571em;}
-	#sitename h1, #sitename h3 {margin: initial;}
+/* Sitename */
+a:link#sitename, a:visited#sitename{
+    color: var(--main-color);
+    display: block;
+    font-weight: bold;
+    padding: 0 0 .6em .2em;
+    margin: 0 auto;
+    text-decoration: none;
+    width: 800px;
+    max-width: 100%;
+    text-align: left;
+}
+a:hover#sitename, a:active#sitename {
+    background: none;
+    color: var(--accent-color);
+    text-shadow: none;
+    width: 800px;
+    max-width: 100%;
+}
+#sitename img {height: 5em; margin-right: 0.4em}
+#sitename div {display: inline-block;}
+#sitename h1 {font-size: 3.571em;}
+#sitename h1, #sitename h3 {margin: initial;}
 
-	/* Main Nav */
-	#banner nav {
-		background: var(--accent-color);
-		font-size: 1.143em;
-		/* height: 40px; */
-		font-family: 'Trebuchet MS';
-		line-height: 30px;
-		padding: 0;
-		text-align: center;
-	}
+/* Main Nav */
+#banner nav {
+    background: var(--accent-color);
+    font-size: 1.143em;
+    /* height: 40px; */
+    font-family: 'Trebuchet MS';
+    line-height: 30px;
+    padding: 0;
+    text-align: center;
+}
 
-	#banner nav ul {
-		list-style: none; 
-		margin: 0 auto;
-	}
-	#banner nav li {
-		display: inline-block; 
-		margin: 0;
-	}
+#banner nav ul {
+    list-style: none;
+    margin: 0 auto;
+}
+#banner nav li {
+    display: inline-block;
+    margin: 0;
+}
 
-	#banner nav a:link, #banner nav a:visited {
-		color: var(--strengthened-main-background);
-		display: inline-block;
-		height: 30px;
-		padding: 0.3em 1.5em;
-		text-decoration: none;
-	}
-	#banner nav a:hover, #banner nav a:active,
-	#banner nav .active a:link, #banner nav .active a:visited {
-		background: var(--weakened-main-color-2);
-		color: var(--strengthened-main-background);
-		text-shadow: none !important;
-	}
+#banner nav a:link, #banner nav a:visited {
+    color: var(--strengthened-main-background);
+    display: inline-block;
+    height: 30px;
+    padding: 0.3em 1.5em;
+    text-decoration: none;
+}
+#banner nav a:hover, #banner nav a:active,
+#banner nav .active a:link, #banner nav .active a:visited {
+    background: var(--weakened-main-color-2);
+    color: var(--strengthened-main-background);
+    text-shadow: none !important;
+}
 
 
 /*
