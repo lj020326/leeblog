@@ -32,11 +32,11 @@ function alive() {
 }
 
 function shut_down(){
-  PID=$(cat $SRV_PID)
+  PID=$(cat ${OUTPUTDIR}/$SRV_PID)
   if [[ $? -eq 0 ]]; then
     if alive $PID; then
       echo "Stopping HTTP server"
-      kill $PID
+      kill -9 $PID
     else
       echo "Stale PID, deleting"
     fi
