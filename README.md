@@ -10,6 +10,8 @@ Clone the repository & make sure submodules are included
 $ git clone https://github.com/lj020326/leeblog.git
 $ git checkout src
 $ git submodule update --init --recursive
+## Update all submodules to latest commit on origin
+$ git submodule update --remote --merge --recursive
 ```
 
 Install the required packages:
