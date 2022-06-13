@@ -18,7 +18,7 @@
 /* Colors */
 :root.light{ /* we could use the functions from https://una.im/css-color-theming/ to automatically derive the intermediate colors. */
 	--strengthened-main-background: #fff;
-	--main-background: #222;
+	--main-background: #F5F4EF;
 	--weakened-main-background: #F4E3E3;
 	--weakened-main-background-2: #EEEEEE;
 	--weakened-main-color: #444;
