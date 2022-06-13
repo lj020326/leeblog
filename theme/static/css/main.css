@@ -533,63 +533,67 @@ li:first-child .hentry, #content > .hentry {border: 0; margin: 0;}
 
 .hentry .post-info * {font-style: normal;}
 
-	/* Content */
-	.hentry footer {margin-bottom: 2em;}
-	.hentry footer address {display: inline;}
-	#posts-list footer address {display: block;}
+/* Content */
+.hentry footer {margin-bottom: 2em;}
+.hentry footer address {display: inline;}
+#posts-list footer address {display: block;}
 
-	/* Blog Index */
-	#posts-list {list-style: none; margin: 0;}
-	#posts-list .hentry {padding-left: 10px; position: relative;}
+/* Blog Index */
+#posts-list {list-style: none; margin: 0;}
+#posts-list .hentry {padding-left: 10px; position: relative;}
 
-	/* About the Author */
-	#about-author {
-		background: var(--strengthened-main-background);
-		clear: both;
-		font-style: normal;
-		margin: 2em 0;
-		padding: 10px 20px 15px 20px;
+/* About the Author */
+#about-author {
+    background: var(--strengthened-main-background);
+    clear: both;
+    font-style: normal;
+    margin: 2em 0;
+    padding: 10px 20px 15px 20px;
 
-		border-radius:0.3em;
-		-moz-border-radius:0.3em;
-		-webkit-border-radius:0.3em;
-	}
+    border-radius:0.3em;
+    -moz-border-radius:0.3em;
+    -webkit-border-radius:0.3em;
+}
 
-	#about-author strong {
-		color: var(--accent-color);
-		clear: both;
-		display: block;
-		font-size: 1.429em;
-	}
+#about-author strong {
+    color: var(--accent-color);
+    clear: both;
+    display: block;
+    font-size: 1.429em;
+}
 
-	#about-author .photo {border: 1px solid #ddd; float: left; margin:0.3em 1em 0 0;}
+#about-author .photo {border: 1px solid #ddd; float: left; margin:0.3em 1em 0 0;}
 
-	/* Comments */
-	#comments-list {list-style: none; margin: 0 1em;}
-	#comments-list blockquote {
-		background: #f8f8f8;
-		clear: both;
-		font-style: normal;
-		margin: 0;
-		padding: 15px 20px;
+/* Comments */
+#comments-list {list-style: none; margin: 0 1em;}
+#comments-list blockquote {
+    background: #f8f8f8;
+    clear: both;
+    font-style: normal;
+    margin: 0;
+    padding: 15px 20px;
 
-		border-radius:0.3em;
-		-moz-border-radius:0.3em;
-		-webkit-border-radius:0.3em;
-	}
-	#comments-list footer {color: #888; padding: .5em 1em 0 0; text-align: right;}
+    border-radius:0.3em;
+    -moz-border-radius:0.3em;
+    -webkit-border-radius:0.3em;
+}
+#comments-list footer {color: #888; padding: .5em 1em 0 0; text-align: right;}
 
-	#comments-list li:nth-child(2n) blockquote {background: #F5f5f5;}
+#comments-list li:nth-child(2n) blockquote {background: #F5f5f5;}
 
-	/* Add a Comment */
-	#add-comment label {clear: left; float: left; text-align: left; width: 150px;}
-	#add-comment input[type='text'],
-	#add-comment input[type='email'],
-	#add-comment input[type='url'] {float: left; width: 200px;}
+/* Add a Comment */
+#add-comment label {clear: left; float: left; text-align: left; width: 150px;}
+#add-comment input[type='text'],
+#add-comment input[type='email'],
+#add-comment input[type='url'] {float: left; width: 200px;}
 
-	#add-comment textarea {float: left; height: 150px; width: 495px;}
+#add-comment textarea {float: left; height: 150px; width: 495px;}
 
-	#add-comment p.req {clear: both; margin: 0 .5em 1em 0; text-align: right;}
+#add-comment p.req {clear: both; margin: 0 .5em 1em 0; text-align: right;}
 
-	#add-comment input[type='submit'] {float: right; margin: 0 .5em;}
-	#add-comment * {margin-bottom: .5em;}
+#add-comment input[type='submit'] {float: right; margin: 0 .5em;}
+#add-comment * {margin-bottom: .5em;}
+
+.navbar-inverse .navbar-brand {
+    color: #f5f5f5;
+}
