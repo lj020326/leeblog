@@ -36,7 +36,6 @@ PLUGIN_PATHS = ['./plugins', './plugins/pelican-plugins', './plugins/pelican-plo
 # PLUGIN_PATHS = ['./pelican-plugins']
 PLUGINS = [
     'summary',       # auto-summarizing articles
-    'feed_summary',
     'liquid_tags',   # for notebooks
     'render_math',
     'pelican-plotly',
