@@ -1,9 +1,9 @@
 [submodule "plugins/pelican-plugins"]
 	path = plugins/pelican-plugins
 	url = https://github.com/getpelican/pelican-plugins.git
-# [submodule "plugins/ipynb"]
-# 	path = plugins/ipynb
-# 	url = git://github.com/danielfrg/pelican-ipynb.git
 [submodule "plugins/pelican-plotly"]
 	path = plugins/pelican-plotly
 	url = git://github.com/ran404/pelican-plotly.git
+# [submodule "plugins/ipynb"]
+# 	path = plugins/ipynb
+# 	url = git://github.com/danielfrg/pelican-ipynb.git
