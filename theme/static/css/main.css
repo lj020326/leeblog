@@ -27,6 +27,7 @@
 	--accent-color: hsl(354, 54%, 52%);
 	--jp-notebook-padding: 0;
 	--jp-layout-color0: #F5F4EF;
+	--jp-ui-font-family: 'Roboto', sans-serif;
 }
 :root.dark{
 	--strengthened-main-background: #111;
