@@ -50,17 +50,19 @@ LIQUID_CONFIGS = (
 ("IGNORE_FILES", ".ipynb_checkpoints", ""),
 ("CODE_DIR", "downloads/code", ""),
 ("NOTEBOOK_DIR", "", ""),
-("IPYNB_SKIP_CSS", "True", ""),
+("IPYNB_FIX_CSS", "True", ""),
 )
 
 # for liquid tags
 CODE_DIR = 'downloads/code'
 NOTEBOOK_DIR = 'downloads/notebooks'
-#IPYNB_FIX_CSS = True
-IPYNB_SKIP_CSS = True
+IPYNB_FIX_CSS = True
+#IPYNB_SKIP_CSS = True
 
 # THEME SETTINGS
 THEME = './theme/'
+
+#CUSTOM_CSS="main.css"
 
 ABOUT_PAGE = '/pages/about.html'
 TWITTER_USERNAME = 'lj020326'
