@@ -14,6 +14,12 @@ $ git submodule update --init --recursive
 $ git submodule update --remote --merge --recursive
 ```
 
+If starting with new repo.
+
+```shell
+git submodule add https://github.com/getpelican/pelican-plugins.git
+```
+
 Install the required packages:
 
 ```
