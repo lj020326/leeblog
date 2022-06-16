@@ -38,7 +38,6 @@ PLUGINS = [
     'summary',       # auto-summarizing articles
     'liquid_tags',   # for notebooks
     'render_math',
-    'pelican-plotly',
     'sitemap'
 ]
 IGNORE_FILES = ['.ipynb_checkpoints']
