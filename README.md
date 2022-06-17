@@ -9,14 +9,23 @@ Clone the repository & make sure submodules are included
 ```
 $ git clone https://github.com/lj020326/leeblog.git
 $ git checkout src
-$ git clone --recursive https://github.com/getpelican/pelican-plugins plugins/pelican-plugins
+$ git submodule add https://github.com/getpelican/pelican-plugins.git
 $ git submodule update --init --recursive
+```
+
+```
 ## Update all submodules to latest commit on origin
 $ git submodule update --remote --merge --recursive
 ```
 
-If starting with new repo.
 
+If simply adding a plugin repo (not as a submodule):
+```
+$ git clone --recursive https://github.com/getpelican/pelican-plugins plugins/pelican-plugins
+```
+
+
+If adding with new plugin submodule:
 ```shell
 git submodule add https://github.com/getpelican/pelican-plugins.git
 ```
