@@ -21,7 +21,7 @@ $ git submodule update --remote --merge --recursive
 
 If simply adding a plugin repo (not as a submodule):
 ```
-$ git clone --recursive https://github.com/getpelican/pelican-plugins plugins/pelican-plugins
+$ git clone --recursive https://github.com/getpelican/pelican-plugins plugins/pelican-plugins git submodule add https://github.com/getpelican/pelican-plugins.git plugins/pelican-plugins
 ```
 
 
