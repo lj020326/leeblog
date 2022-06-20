@@ -1,5 +1,5 @@
 pelican
-pelican-jupyter
+#pelican-jupyter
 pelican-liquid-tags
 pelican-render-math
 Markdown
